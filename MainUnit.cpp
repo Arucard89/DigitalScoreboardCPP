@@ -1,0 +1,217 @@
+//---------------------------------------------------------------------------
+
+#include <vcl.h>
+#pragma hdrstop
+
+#include "MainUnit.h"
+
+
+//---------------------------------------------------------------------------
+#pragma package(smart_init)
+#pragma link "CSPIN"
+#pragma resource "*.dfm"
+TMainForm *MainForm;
+//---------------------------------------------------------------------------
+__fastcall TMainForm::TMainForm(TComponent* Owner)
+        : TForm(Owner)
+{
+        DisplayForm = new TDisplayForm(this);
+        TimeOfFight = new TTimeOfFight();
+}
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
+{
+        int res;
+        ConfigurationForm = new TConfigurationForm(this);
+        res = ConfigurationForm->ShowModal();
+
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::FormResize(TObject *Sender)
+{
+        PageControl1->Height = MainForm->Height - 100;  //100 пикселей под кнопочки
+        Player1GroupBox->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) * 0.85 / 2; //учитываем рамку
+        InformationPanel->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) *0.05;
+        TimePanel->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) *0.1;
+
+        Player1ScoresGroupBox->Width = Player1GroupBox->Width / 2;
+        Player1AdvantageGroupBox->Width = Player1GroupBox->Width / 4;
+
+        Player2ScoresGroupBox->Width = Player2GroupBox->Width / 2;
+        Player2AdvantageGroupBox->Width = Player2GroupBox->Width / 4;
+
+//панели очков
+        Player1ScoresPanel->Height = Player1ScoresGroupBox->Height / 3;
+        Player1AdvantagePanel->Height = Player1ScoresGroupBox->Height / 3;
+        Player1PenaltyPanel->Height = Player1ScoresGroupBox->Height / 3;
+
+        Player2ScoresPanel->Height = Player1ScoresGroupBox->Height / 3;
+        Player2AdvantagePanel->Height = Player1ScoresGroupBox->Height / 3;
+        Player2PenaltyPanel->Height = Player1ScoresGroupBox->Height / 3;
+
+//панели кнопок
+        Player1OneScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player1TwoScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player1ThreeScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player1FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+
+        Player2OneScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player2TwoScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player2ThreeScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player2FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+
+//меняем кнопки
+        ConfigureScoresButtons();
+
+//
+
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::FormCreate(TObject *Sender)
+{
+    //    this->DoubleBuffered = true;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Player1OneScorePanelResize(TObject *Sender)
+{
+       // dynamic_cast<TPanel *>(Sender)->Width = Player1ScoresGroupBox->Width / 4;
+}
+//---------------------------------------------------------------------------
+void __fastcall TMainForm::ConfigureScoresButtons ()
+{
+        const float bm = 2; //множитель для отступа
+        const int b = 15; //отступ от краев
+        int ph = Player1OneScorePanel->Height;
+        int h = (ph - 2 * b)/2.2;
+        int w = (Player1OneScorePanel->Width - 2 * bm *  b);
+        int w1 = (Player1ChangeAdvantagePanel->Width - 2 * bm * b);
+ //высота и ширина кнопок
+        Player1OneScorePlusBitBtn->Height = h;
+        Player1TwoScorePlusBitBtn->Height = h;
+        Player1ThreeScorePlusBitBtn->Height = h;
+        Player1FourScorePlusBitBtn->Height = h;
+        Player1AdvantagePlusBitBtn->Height = h;
+        Player1PenaltyPlusBitBtn->Height = h;
+
+        Player1OneScorePlusBitBtn->Width = w;
+        Player1TwoScorePlusBitBtn->Width = w;
+        Player1ThreeScorePlusBitBtn->Width = w;
+        Player1FourScorePlusBitBtn->Width = Player1FourScorePanel->Width - 2 * bm * b;        //Потому что последняя панель меньше
+        Player1AdvantagePlusBitBtn->Width = w1;
+        Player1PenaltyPlusBitBtn->Width = Player1ChangePenaltyPanel->Width - 2 * bm * b;
+
+
+        Player1OneScoreMinusBitBtn->Height = h;
+        Player1TwoScoreMinusBitBtn->Height = h;
+        Player1ThreeScoreMinusBitBtn->Height = h;
+        Player1FourScoreMinusBitBtn->Height = h;
+        Player1AdvantageMinusBitBtn->Height = h;
+        Player1PenaltyMinusBitBtn->Height = h;
+
+        Player1OneScoreMinusBitBtn->Width = w;
+        Player1TwoScoreMinusBitBtn->Width = w;
+        Player1ThreeScoreMinusBitBtn->Width = w;
+        Player1FourScoreMinusBitBtn->Width = Player1FourScorePanel->Width - 2 * bm * b;
+        Player1AdvantageMinusBitBtn->Width = w1;
+        Player1PenaltyMinusBitBtn->Width = Player1ChangePenaltyPanel->Width - 2 * bm * b;
+
+
+        Player2OneScorePlusBitBtn->Height = h;
+        Player2TwoScorePlusBitBtn->Height = h;
+        Player2ThreeScorePlusBitBtn->Height = h;
+        Player2FourScorePlusBitBtn->Height = h;
+        Player2AdvantagePlusBitBtn->Height = h;
+        Player2PenaltyPlusBitBtn->Height = h;
+
+        Player2OneScorePlusBitBtn->Width = w;
+        Player2TwoScorePlusBitBtn->Width = w;
+        Player2ThreeScorePlusBitBtn->Width = w;
+        Player2FourScorePlusBitBtn->Width = Player2FourScorePanel->Width - 2 * bm * b;
+        Player2AdvantagePlusBitBtn->Width = w1;
+        Player2PenaltyPlusBitBtn->Width = Player1ChangePenaltyPanel->Width - 2 * bm * b;
+
+
+        Player2OneScoreMinusBitBtn->Height = h;
+        Player2TwoScoreMinusBitBtn->Height = h;
+        Player2ThreeScoreMinusBitBtn->Height = h;
+        Player2FourScoreMinusBitBtn->Height = h;
+        Player2AdvantageMinusBitBtn->Height = h;
+        Player2PenaltyMinusBitBtn->Height = h;
+
+        Player2OneScoreMinusBitBtn->Width = w;
+        Player2TwoScoreMinusBitBtn->Width = w;
+        Player2ThreeScoreMinusBitBtn->Width = w;
+        Player2FourScoreMinusBitBtn->Width = Player2FourScorePanel->Width - 2 * bm * b;
+        Player2AdvantageMinusBitBtn->Width = w1;
+        Player2PenaltyMinusBitBtn->Width = Player1ChangePenaltyPanel->Width - 2 * bm * b;
+
+// расположение кнопок
+        int top1 = b;
+        int top2 = ph - b - h;
+        int left1 = b * bm;
+        //int left2 = b * bm / 2;
+        Player1OneScorePlusBitBtn->Top = top1;
+        Player1TwoScorePlusBitBtn->Top = top1;
+        Player1ThreeScorePlusBitBtn->Top = top1;
+        Player1FourScorePlusBitBtn->Top = top1;
+        Player1AdvantagePlusBitBtn->Top = top1;
+        Player1PenaltyPlusBitBtn->Top = top1;
+
+        Player1OneScorePlusBitBtn->Left = left1;
+        Player1TwoScorePlusBitBtn->Left = left1;
+        Player1ThreeScorePlusBitBtn->Left = left1;
+        Player1FourScorePlusBitBtn->Left = left1;
+        Player1AdvantagePlusBitBtn->Left = left1;
+        Player1PenaltyPlusBitBtn->Left = left1;
+
+
+        Player1OneScoreMinusBitBtn->Top = top2;
+        Player1TwoScoreMinusBitBtn->Top = top2;
+        Player1ThreeScoreMinusBitBtn->Top = top2;
+        Player1FourScoreMinusBitBtn->Top = top2;
+        Player1AdvantageMinusBitBtn->Top = top2;
+        Player1PenaltyMinusBitBtn->Top = top2;
+
+        Player1OneScoreMinusBitBtn->Left = left1;
+        Player1TwoScoreMinusBitBtn->Left = left1;
+        Player1ThreeScoreMinusBitBtn->Left = left1;
+        Player1FourScoreMinusBitBtn->Left = left1;
+        Player1AdvantageMinusBitBtn->Left = left1;
+        Player1PenaltyMinusBitBtn->Left = left1;
+
+
+        Player2OneScorePlusBitBtn->Top = top1;
+        Player2TwoScorePlusBitBtn->Top = top1;
+        Player2ThreeScorePlusBitBtn->Top = top1;
+        Player2FourScorePlusBitBtn->Top = top1;
+        Player2AdvantagePlusBitBtn->Top = top1;
+        Player2PenaltyPlusBitBtn->Top = top1;
+
+        Player2OneScorePlusBitBtn->Left = left1;
+        Player2TwoScorePlusBitBtn->Left = left1;
+        Player2ThreeScorePlusBitBtn->Left = left1;
+        Player2FourScorePlusBitBtn->Left = left1;
+        Player2AdvantagePlusBitBtn->Left = left1;
+        Player2PenaltyPlusBitBtn->Left = left1;
+
+
+        Player2OneScoreMinusBitBtn->Top = top2;
+        Player2TwoScoreMinusBitBtn->Top = top2;
+        Player2ThreeScoreMinusBitBtn->Top = top2;
+        Player2FourScoreMinusBitBtn->Top = top2;
+        Player2AdvantageMinusBitBtn->Top = top2;
+        Player2PenaltyMinusBitBtn->Top = top2;
+
+        Player2OneScoreMinusBitBtn->Left = left1;
+        Player2TwoScoreMinusBitBtn->Left = left1;
+        Player2ThreeScoreMinusBitBtn->Left = left1;
+        Player2FourScoreMinusBitBtn->Left = left1;
+        Player2AdvantageMinusBitBtn->Left = left1;
+        Player2PenaltyMinusBitBtn->Left = left1;
+
+}
+
