@@ -68,7 +68,7 @@ int TTimeOfFight::minusSecond()
 
 AnsiString TTimeOfFight::getTime(bool showDoublePoint)
 {
-        if (f == true)
+        if (showDoublePoint == true)
         {
                 return IntToStr(minutes) + ':' + IntToStr(seconds);
         }

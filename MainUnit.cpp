@@ -32,15 +32,40 @@ void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
 void __fastcall TMainForm::FormResize(TObject *Sender)
 {
         PageControl1->Height = MainForm->Height - 100;  //100 пикселей под кнопочки
-        Player1GroupBox->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) * 0.85 / 2; //учитываем рамку
-        InformationPanel->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) *0.05;
-        TimePanel->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) *0.1;
+      //  Player1GroupBox->Height = (TabSheet1->Height - TabSheet1->BorderWidth * 2) * 0.75; //учитываем рамку
+        InformationPanel->Height = (FightingControls->Height - FightingControls->BorderWidth * 2) *0.05;
+        TimePanel->Height = (FightingControls->Height - FightingControls->BorderWidth * 2) *0.1;
+        FightControlsPanel->Height = (FightingControls->Height - FightingControls->BorderWidth * 2) *0.15;
+        Player1GroupBox->Width = (FightingControls->Width - FightingControls->BorderWidth * 2) / 2;
 
-        Player1ScoresGroupBox->Width = Player1GroupBox->Width / 2;
-        Player1AdvantageGroupBox->Width = Player1GroupBox->Width / 4;
+        //панель имен
+        Player1NameLabel->Height = Player1GroupBox->Height * 0.05;
+        Player2NameLabel->Height = Player2GroupBox->Height * 0.05;
 
-        Player2ScoresGroupBox->Width = Player2GroupBox->Width / 2;
-        Player2AdvantageGroupBox->Width = Player2GroupBox->Width / 4;
+        //панель очков
+        Player1ScoresPanel->Height = Player1GroupBox->Height * 0.15;
+        Player2ScoresPanel->Height = Player2GroupBox->Height * 0.15;
+        //панель преимуществ
+        Player1AdvantagePanel->Width = Player1GroupBox->Width / 2;
+        Player2AdvantagePanel->Width = Player2GroupBox->Width / 2;
+
+        //панель кнопок
+        Player1ScoresButtonsPanel->Height = Player1GroupBox->Height - (Player1NameLabel->Height + Player1ScoresPanel->Height * 2);
+        Player2ScoresButtonsPanel->Height = Player2GroupBox->Height - (Player2NameLabel->Height + Player2ScoresPanel->Height * 2);
+        //Player2ScoresButtonsPanel->Height = Player2GroupBox->Height * 0.65;
+        //кнопки очков
+        Player1ScoresGroupBox->Height = Player1ScoresButtonsPanel->Height / 2;
+        Player2ScoresGroupBox->Height = Player2ScoresButtonsPanel->Height / 2;
+        //ширина панели кнопок преимуществ
+        Player1AdvantageGroupBox->Width = Player1ScoresButtonsPanel->Width / 2;
+        Player2AdvantageGroupBox->Width = Player2ScoresButtonsPanel->Width / 2;
+
+      /*  Player1AdvantageGroupBox->Height = Player1ScoresGroupBox->Height;
+        Player1AdvantageGroupBox->Width = Player1GroupBox->Width / 2;
+
+        Player2ScoresGroupBox->Height = Player2GroupBox->Height * 0.15;
+        Player2AdvantageGroupBox->Height = Player2ScoresGroupBox->Height;
+        Player2AdvantageGroupBox->Width = Player2GroupBox->Width / 2;  */
 
 //панели очков
         Player1ScoresPanel->Height = Player1ScoresGroupBox->Height / 3;
@@ -55,15 +80,17 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         Player1OneScorePanel->Width = Player1ScoresGroupBox->Width / 4;
         Player1TwoScorePanel->Width = Player1ScoresGroupBox->Width / 4;
         Player1ThreeScorePanel->Width = Player1ScoresGroupBox->Width / 4;
-        Player1FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        //Player1FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
 
-        Player2OneScorePanel->Width = Player1ScoresGroupBox->Width / 4;
-        Player2TwoScorePanel->Width = Player1ScoresGroupBox->Width / 4;
-        Player2ThreeScorePanel->Width = Player1ScoresGroupBox->Width / 4;
-        Player2FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player2OneScorePanel->Width = Player2ScoresGroupBox->Width / 4;
+        Player2TwoScorePanel->Width = Player2ScoresGroupBox->Width / 4;
+        Player2ThreeScorePanel->Width = Player2ScoresGroupBox->Width / 4;
+        //Player2FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
 
 //меняем кнопки
         ConfigureScoresButtons();
+//главные кнопки
+        ConfigureFightButtons();
 
 //
 
@@ -214,4 +241,34 @@ void __fastcall TMainForm::ConfigureScoresButtons ()
         Player2PenaltyMinusBitBtn->Left = left1;
 
 }
+
+void TMainForm::ConfigureFightButtons()
+{
+        int b = 10; //отступ от границы панели
+        int hb = FightControlsPanel->Height - 2 * b; // высота кнопки
+        int wb = (FightControlsPanel->Width - 2 * b) * 0.2; // рассчитываем ширину кнопки
+        int ws = ((FightControlsPanel->Width - 2 * b) - 4 * wb)/3 ;//ширина расстояния между кнопками
+        //устанавливаем высоту кнопок
+        StartFightBtn->Height = hb;
+        PauseFightBtn->Height = hb;
+        StopFightBtn->Height = hb;
+        ResetBtn->Height = hb;
+        //выставляем по высоте
+        StartFightBtn->Top = b;
+        PauseFightBtn->Top = b;
+        StopFightBtn->Top = b;
+        ResetBtn->Top = b;
+        //по ширине
+        StartFightBtn->Left = b;
+        StartFightBtn->Width = wb;
+        PauseFightBtn->Left = StartFightBtn->Left + wb + ws;
+        PauseFightBtn->Width = wb;
+        StopFightBtn->Left = PauseFightBtn->Left + wb + ws;
+        StopFightBtn->Width = wb;
+        ResetBtn->Left = StopFightBtn->Left + wb + ws;
+        ResetBtn->Width = wb;
+}
+
+
+
 
