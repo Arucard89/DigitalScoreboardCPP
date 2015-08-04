@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 1993
-  Top = 105
+  Left = 462
+  Top = 125
   Width = 1237
   Height = 703
   Caption = 'MainForm'
@@ -20,7 +20,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 633
-    ActivePage = FightingControls
+    ActivePage = FightSettings
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -29,7 +29,7 @@ object MainForm: TMainForm
     Font.Style = [fsBold, fsItalic]
     MultiLine = True
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -76,6 +76,12 @@ object MainForm: TMainForm
           Height = 74
           Align = alTop
           Caption = 'Player1ScoresPanel'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 0
           OnResize = FormCreate
         end
@@ -86,6 +92,12 @@ object MainForm: TMainForm
           Height = 38
           Align = alLeft
           Caption = 'Player1AdvantagePanel'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 1
         end
         object Player1PenaltyPanel: TPanel
@@ -95,6 +107,12 @@ object MainForm: TMainForm
           Height = 38
           Align = alClient
           Caption = 'Player1PenaltyPanel'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 2
         end
         object Player1ScoresButtonsPanel: TPanel
@@ -401,6 +419,12 @@ object MainForm: TMainForm
           Height = 74
           Align = alTop
           Caption = 'Player2ScoresPanel'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 0
         end
         object Player2AdvantagePanel: TPanel
@@ -410,6 +434,12 @@ object MainForm: TMainForm
           Height = 34
           Align = alLeft
           Caption = 'Player2AdvantagePanel'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 1
         end
         object Player2PenaltyPanel: TPanel
@@ -419,6 +449,12 @@ object MainForm: TMainForm
           Height = 34
           Align = alClient
           Caption = 'Player2PenaltyPanel'
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -29
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
           TabOrder = 2
         end
         object Player2ScoresButtonsPanel: TPanel
@@ -727,19 +763,6 @@ object MainForm: TMainForm
         Align = alTop
         Caption = 'FightControlsPanel'
         TabOrder = 4
-        object ResetBtn: TSpeedButton
-          Left = 304
-          Top = 8
-          Width = 113
-          Height = 41
-          Caption = #1057#1041#1056#1054#1057
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clRed
-          Font.Height = -21
-          Font.Name = 'Arial'
-          Font.Style = [fsBold]
-          ParentFont = False
-        end
         object StartFightBtn: TBitBtn
           Left = 8
           Top = 8
@@ -753,6 +776,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          Style = bsWin31
         end
         object PauseFightBtn: TBitBtn
           Left = 104
@@ -782,6 +806,20 @@ object MainForm: TMainForm
           ParentFont = False
           TabOrder = 2
         end
+        object ResetBtn: TBitBtn
+          Left = 328
+          Top = 8
+          Width = 75
+          Height = 41
+          Caption = #1057#1041#1056#1054#1057
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clRed
+          Font.Height = -21
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          TabOrder = 3
+        end
       end
     end
     object FightSettings: TTabSheet
@@ -790,196 +828,232 @@ object MainForm: TMainForm
       ImageIndex = 1
       object InformationGroupBox: TGroupBox
         Left = 0
-        Top = 193
+        Top = 201
         Width = 1173
         Height = 136
         Align = alTop
         Caption = 'InformationGroupBox'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 0
-        object Label1: TLabel
-          Left = 8
-          Top = 32
-          Width = 87
-          Height = 23
-          Caption = #1042#1086#1079#1088#1072#1089#1090
-        end
-        object Label2: TLabel
-          Left = 264
-          Top = 32
-          Width = 48
-          Height = 23
-          Caption = #1055#1086#1103#1089
-        end
-        object Label3: TLabel
-          Left = 528
-          Top = 32
-          Width = 35
-          Height = 23
-          Caption = #1042#1077#1089
-        end
         object CurrentInfoSetupLabel: TLabel
           Left = 2
-          Top = 25
+          Top = 21
           Width = 1169
-          Height = 23
+          Height = 19
           Align = alTop
           Alignment = taCenter
           Caption = 'CurrentInfoSetupLabel'
         end
-        object ComboBox1: TComboBox
-          Left = 8
-          Top = 48
-          Width = 225
-          Height = 31
-          ItemHeight = 23
-          Sorted = True
-          TabOrder = 0
-          Text = 'ComboBox1'
-        end
-        object ComboBox2: TComboBox
-          Left = 264
-          Top = 48
-          Width = 233
-          Height = 31
-          ItemHeight = 23
-          Sorted = True
-          TabOrder = 1
-          Text = 'ComboBox2'
-        end
-        object ComboBox3: TComboBox
-          Left = 528
-          Top = 48
-          Width = 249
-          Height = 31
-          ItemHeight = 23
-          Sorted = True
-          TabOrder = 2
-          Text = 'ComboBox3'
-        end
-        object BitBtn2: TBitBtn
-          Left = 480
-          Top = 80
+        object AcceptInformationBtn: TBitBtn
+          Left = 872
+          Top = 88
           Width = 297
           Height = 41
-          Caption = 'BitBtn2'
+          TabOrder = 0
+          Kind = bkOK
+        end
+        object AgeGroupBox: TGroupBox
+          Left = 2
+          Top = 40
+          Width = 185
+          Height = 94
+          Align = alLeft
+          Caption = #1042#1086#1079#1088#1072#1089#1090
+          TabOrder = 1
+          object ComboBox1: TComboBox
+            Left = 8
+            Top = 48
+            Width = 153
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            Text = 'AgeComboBox'
+          end
+        end
+        object BeltGroupBox: TGroupBox
+          Left = 187
+          Top = 40
+          Width = 185
+          Height = 94
+          Align = alLeft
+          Caption = #1055#1086#1103#1089
+          TabOrder = 2
+          object ComboBox2: TComboBox
+            Left = 8
+            Top = 48
+            Width = 137
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            Text = 'BeltComboBox'
+          end
+        end
+        object WeightGroupBox: TGroupBox
+          Left = 372
+          Top = 40
+          Width = 185
+          Height = 94
+          Align = alLeft
+          Caption = #1042#1077#1089
           TabOrder = 3
+          object ComboBox3: TComboBox
+            Left = 24
+            Top = 48
+            Width = 153
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            Text = 'WeightComboBox'
+          end
         end
       end
       object FightTimeGroupBox: TGroupBox
         Left = 0
-        Top = 329
+        Top = 337
         Width = 1173
         Height = 112
         Align = alTop
         Caption = 'FightTimeGroupBox'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 1
         object CurrentTimeSetupLabel: TLabel
           Left = 2
-          Top = 25
+          Top = 21
           Width = 1169
-          Height = 23
+          Height = 19
           Align = alTop
           Alignment = taCenter
           Caption = 'CurrentTimeSetupLabel'
         end
         object MinutesGroupBox: TGroupBox
-          Left = 16
+          Left = 2
           Top = 40
           Width = 153
-          Height = 57
+          Height = 70
+          Align = alLeft
           Caption = 'MinutesGroupBox'
           TabOrder = 0
-          object CSpinEdit1: TCSpinEdit
+          object MinutesSpinEdit: TCSpinEdit
             Left = 16
-            Top = 16
+            Top = 32
             Width = 121
-            Height = 33
+            Height = 29
             TabOrder = 0
           end
         end
         object SecondsGroupBox: TGroupBox
-          Left = 176
+          Left = 155
           Top = 40
           Width = 159
-          Height = 57
+          Height = 70
+          Align = alLeft
           Caption = 'SecondsGroupBox'
           TabOrder = 1
-          object CSpinEdit2: TCSpinEdit
-            Left = 24
-            Top = 16
+          object SecondsSpinEdit: TCSpinEdit
+            Left = 16
+            Top = 32
             Width = 121
-            Height = 33
+            Height = 29
             MaxValue = 59
             TabOrder = 0
           end
         end
-        object BitBtn1: TBitBtn
-          Left = 480
-          Top = 56
+        object AcceptTimeBtn: TBitBtn
+          Left = 872
+          Top = 64
           Width = 297
           Height = 41
-          Caption = 'BitBtn1'
           TabOrder = 2
+          Kind = bkOK
         end
       end
       object PlayersNamesGroupBox: TGroupBox
         Left = 0
         Top = 0
         Width = 1173
-        Height = 193
+        Height = 201
         Align = alTop
-        Caption = 'PlayersNamesGroupBox'
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086#1073' '#1080#1084#1077#1085#1072#1093' '#1089#1087#1086#1088#1089#1084#1077#1085#1086#1074
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 2
-        object Label4: TLabel
-          Left = 16
-          Top = 24
-          Width = 211
-          Height = 23
-          Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#8470'1('#1073#1077#1083#1099#1081')'
-        end
-        object Label5: TLabel
-          Left = 16
-          Top = 76
-          Width = 236
-          Height = 23
-          Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#8470'2('#1094#1074#1077#1090#1085#1086#1081')'
-        end
-        object ComboBox5: TComboBox
-          Left = 16
-          Top = 40
-          Width = 769
-          Height = 31
-          ItemHeight = 23
-          Sorted = True
-          TabOrder = 0
-          Text = 'ComboBox5'
-        end
-        object ComboBox4: TComboBox
-          Left = 16
-          Top = 92
-          Width = 769
-          Height = 31
-          ItemHeight = 23
-          Sorted = True
-          TabOrder = 1
-          Text = 'ComboBox4'
-        end
-        object BitBtn27: TBitBtn
-          Left = 488
-          Top = 128
+        object AcceptPlayersNamesBtn: TBitBtn
+          Left = 872
+          Top = 152
           Width = 297
           Height = 41
-          Caption = 'BitBtn27'
+          TabOrder = 0
+          Kind = bkOK
+        end
+        object Player1NameGroupBox: TGroupBox
+          Left = 2
+          Top = 21
+          Width = 1169
+          Height = 60
+          Align = alTop
+          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
+          TabOrder = 1
+          object Player1ComboBox: TComboBox
+            Left = 8
+            Top = 24
+            Width = 1137
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            Text = 'Player1ComboBox'
+          end
+        end
+        object Player2NameGroupBox: TGroupBox
+          Left = 2
+          Top = 81
+          Width = 1169
+          Height = 60
+          Align = alTop
+          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
           TabOrder = 2
+          object Player2ComboBox: TComboBox
+            Left = 8
+            Top = 24
+            Width = 1137
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            Text = 'Player2ComboBox'
+          end
         end
       end
-      object BitBtn28: TBitBtn
-        Left = 480
-        Top = 448
-        Width = 537
+      object AcceptAllConfigurationBtn: TBitBtn
+        Left = 816
+        Top = 512
+        Width = 353
         Height = 41
-        Caption = 'BitBtn28'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 3
+        Kind = bkAll
       end
       object OpenConfigurationButton: TButton
         Left = 80
@@ -987,6 +1061,12 @@ object MainForm: TMainForm
         Width = 337
         Height = 25
         Caption = 'OpenConfigurationButton'
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
         TabOrder = 4
         OnClick = OpenConfigurationButtonClick
       end

@@ -22,32 +22,22 @@ __published:	// IDE-managed Components
         TTabSheet *FightingControls;
         TTabSheet *FightSettings;
         TGroupBox *InformationGroupBox;
-        TLabel *Label1;
-        TLabel *Label2;
-        TLabel *Label3;
         TLabel *CurrentInfoSetupLabel;
-        TComboBox *ComboBox1;
-        TComboBox *ComboBox2;
-        TComboBox *ComboBox3;
-        TBitBtn *BitBtn2;
+        TBitBtn *AcceptInformationBtn;
         TGroupBox *FightTimeGroupBox;
         TLabel *CurrentTimeSetupLabel;
         TGroupBox *MinutesGroupBox;
-        TCSpinEdit *CSpinEdit1;
+        TCSpinEdit *MinutesSpinEdit;
         TGroupBox *SecondsGroupBox;
-        TCSpinEdit *CSpinEdit2;
-        TBitBtn *BitBtn1;
+        TCSpinEdit *SecondsSpinEdit;
+        TBitBtn *AcceptTimeBtn;
         TGroupBox *Player1GroupBox;
         TLabel *Player1NameLabel;
         TGroupBox *Player2GroupBox;
         TLabel *Player2NameLabel;
         TGroupBox *PlayersNamesGroupBox;
-        TComboBox *ComboBox5;
-        TLabel *Label4;
-        TLabel *Label5;
-        TComboBox *ComboBox4;
-        TBitBtn *BitBtn27;
-        TBitBtn *BitBtn28;
+        TBitBtn *AcceptPlayersNamesBtn;
+        TBitBtn *AcceptAllConfigurationBtn;
         TButton *OpenConfigurationButton;
         TPanel *TimePanel;
         TPanel *InformationPanel;
@@ -105,7 +95,17 @@ __published:	// IDE-managed Components
         TBitBtn *StartFightBtn;
         TBitBtn *PauseFightBtn;
         TBitBtn *StopFightBtn;
-        TSpeedButton *ResetBtn;
+        TBitBtn *ResetBtn;
+        TGroupBox *Player1NameGroupBox;
+        TComboBox *Player1ComboBox;
+        TGroupBox *Player2NameGroupBox;
+        TComboBox *Player2ComboBox;
+        TGroupBox *AgeGroupBox;
+        TComboBox *ComboBox1;
+        TGroupBox *BeltGroupBox;
+        TComboBox *ComboBox2;
+        TGroupBox *WeightGroupBox;
+        TComboBox *ComboBox3;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
@@ -113,9 +113,13 @@ __published:	// IDE-managed Components
 private:	// User declarations
         void __fastcall ConfigureScoresButtons ();
         void ConfigureFightButtons(); //настройка расположения кнопок старт/пауза/стоп/сброс
+        void ResizeFightSettings(); //управение вкладкой настройки представления при изменении размера
+        void ResizePlayersNamesGroupBox();//настройка панельки установки имен
+        void PutButtonInCorner(TButton *btn, TControl *cont, int b);//помещаем кнопку в угол. б - отступ от края ,TComponent *cont - контейнер в котором кнопка
         TDisplayForm *DisplayForm;
         TConfigurationForm *ConfigurationForm;
         TTimeOfFight *TimeOfFight;
+
 
 public:		// User declarations
         __fastcall TMainForm(TComponent* Owner);

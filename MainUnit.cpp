@@ -91,6 +91,8 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         ConfigureScoresButtons();
 //главные кнопки
         ConfigureFightButtons();
+//вкладка настроек схватки
+        ResizeFightSettings();
 
 //
 
@@ -269,6 +271,26 @@ void TMainForm::ConfigureFightButtons()
         ResetBtn->Width = wb;
 }
 
+void TMainForm::ResizeFightSettings()
+{
+        ResizePlayersNamesGroupBox();
 
+}
+
+void TMainForm::ResizePlayersNamesGroupBox()
+{
+        Player1ComboBox->Width = Player1NameGroupBox->Width - 2 * Player1ComboBox->Left; //делаем одинаковые отступы слева и справа
+        Player2ComboBox->Width = Player2NameGroupBox->Width - 2 * Player2ComboBox->Left; //делаем одинаковые отступы слева и справа
+        //прив€зываем кнопку к углу
+        PutButtonInCorner(AcceptPlayersNamesBtn, PlayersNamesGroupBox, 5);
+       // AcceptPlayersNamesBtn->Left = PlayersNamesGroupBox->Width - AcceptPlayersNamesBtn->Width - 5; //последн€€ цифра-отступ
+       // AcceptPlayersNamesBtn->Top = PlayersNamesGroupBox->Height - AcceptPlayersNamesBtn->Height - 5; //последн€€ цифра-отступ
+}
+
+void TMainForm::PutButtonInCorner(TButton *btn, TControl *cont, int b)
+{
+        btn->Left = cont->Width - btn->Width - b;
+        btn->Top = cont->Height - btn->Height - b;
+}
 
 
