@@ -9,34 +9,34 @@
 
 #pragma package(smart_init)
 
-TTimeOfFight::TTimeOfFight()
+CTimeOfFight::CTimeOfFight()
 {
         minutes = 0;
         seconds = 0;
         zero = 1;
 }
 
-void TTimeOfFight::setMinutes(int m)
+void CTimeOfFight::setMinutes(int m)
 {
         minutes = m;
 }
 
-void TTimeOfFight::setSeconds(int s)
+void CTimeOfFight::setSeconds(int s)
 {
         seconds = s;
 }
 
-int TTimeOfFight::getMinutes()
+int CTimeOfFight::getMinutes()
 {
         return minutes;
 }
 
-int TTimeOfFight::getSeconds()
+int CTimeOfFight::getSeconds()
 {
         return seconds;
 }
 
-int TTimeOfFight::setTime(AnsiString* m, AnsiString* s) //если подсунули не строку, то выставляются 0
+int CTimeOfFight::setTime(AnsiString* m, AnsiString* s) //если подсунули не строку, то выставляются 0
 {
         minutes = m->ToIntDef(0);
         seconds = s->ToIntDef(0);
@@ -44,7 +44,7 @@ int TTimeOfFight::setTime(AnsiString* m, AnsiString* s) //если подсунули не стро
         return zero;
 }
 
-int TTimeOfFight::minusSecond()
+int CTimeOfFight::minusSecond()
 {
         seconds--;
         if ( seconds < 0)
@@ -66,7 +66,7 @@ int TTimeOfFight::minusSecond()
 
 }
 
-AnsiString TTimeOfFight::getTime(bool showDoublePoint)
+AnsiString CTimeOfFight::getTime(bool showDoublePoint)
 {
         if (showDoublePoint == true)
         {

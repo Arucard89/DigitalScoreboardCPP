@@ -1,8 +1,8 @@
 object DisplayForm: TDisplayForm
-  Left = 174
-  Top = 81
-  Width = 1738
-  Height = 950
+  Left = 1959
+  Top = 58
+  Width = 1539
+  Height = 736
   BorderWidth = 10
   Caption = 'DisplayForm'
   Color = clWhite
@@ -18,7 +18,7 @@ object DisplayForm: TDisplayForm
   object TopPanel: TPanel
     Left = 0
     Top = 0
-    Width = 1722
+    Width = 1523
     Height = 209
     Align = alTop
     BevelOuter = bvNone
@@ -46,7 +46,7 @@ object DisplayForm: TDisplayForm
       WordWrap = True
     end
     object Player2Label: TLabel
-      Left = 1103
+      Left = 904
       Top = 57
       Width = 619
       Height = 152
@@ -68,7 +68,7 @@ object DisplayForm: TDisplayForm
     object TimePanel: TPanel
       Left = 617
       Top = 57
-      Width = 486
+      Width = 287
       Height = 152
       Align = alClient
       BevelOuter = bvNone
@@ -86,7 +86,7 @@ object DisplayForm: TDisplayForm
     object CategoryPanel: TPanel
       Left = 0
       Top = 0
-      Width = 1722
+      Width = 1523
       Height = 57
       Align = alTop
       Caption = 'CategoryPanel'
@@ -103,7 +103,7 @@ object DisplayForm: TDisplayForm
     Left = 0
     Top = 209
     Width = 689
-    Height = 703
+    Height = 489
     Align = alLeft
     BevelOuter = bvNone
     Caption = 'LeftPanel'
@@ -142,7 +142,7 @@ object DisplayForm: TDisplayForm
       Left = 0
       Top = 305
       Width = 305
-      Height = 398
+      Height = 184
       Align = alLeft
       Caption = 'Player1Advantage'
       Font.Charset = RUSSIAN_CHARSET
@@ -171,7 +171,7 @@ object DisplayForm: TDisplayForm
       Left = 305
       Top = 305
       Width = 384
-      Height = 398
+      Height = 184
       Align = alClient
       Caption = 'Player1Penalty'
       Font.Charset = RUSSIAN_CHARSET
@@ -198,10 +198,10 @@ object DisplayForm: TDisplayForm
     end
   end
   object RightPanel: TPanel
-    Left = 1071
+    Left = 872
     Top = 209
     Width = 651
-    Height = 703
+    Height = 489
     Align = alRight
     BevelOuter = bvNone
     Caption = 'RightPanel'
@@ -241,7 +241,7 @@ object DisplayForm: TDisplayForm
       Left = 0
       Top = 305
       Width = 297
-      Height = 398
+      Height = 184
       Align = alLeft
       Caption = 'Player2Advantage'
       Font.Charset = RUSSIAN_CHARSET
@@ -271,7 +271,7 @@ object DisplayForm: TDisplayForm
       Left = 297
       Top = 305
       Width = 354
-      Height = 398
+      Height = 184
       Align = alClient
       Caption = 'Player2Penalty'
       Font.Charset = RUSSIAN_CHARSET
@@ -301,8 +301,8 @@ object DisplayForm: TDisplayForm
   object CentralPanel: TPanel
     Left = 689
     Top = 209
-    Width = 382
-    Height = 703
+    Width = 183
+    Height = 489
     Align = alClient
     BevelOuter = bvNone
     Caption = 'CentralPanel'
@@ -311,7 +311,7 @@ object DisplayForm: TDisplayForm
     object CentralTopPanel: TPanel
       Left = 0
       Top = 0
-      Width = 382
+      Width = 183
       Height = 280
       Align = alTop
       BevelInner = bvLowered
@@ -320,8 +320,8 @@ object DisplayForm: TDisplayForm
     end
     object CentralBottomPanel: TPanel
       Left = 0
-      Top = 409
-      Width = 382
+      Top = 195
+      Width = 183
       Height = 294
       Align = alBottom
       BevelInner = bvLowered

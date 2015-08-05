@@ -15,8 +15,10 @@ TMainForm *MainForm;
 __fastcall TMainForm::TMainForm(TComponent* Owner)
         : TForm(Owner)
 {
+        //одновременно запускаем форму дисплея
         DisplayForm = new TDisplayForm(this);
-        TimeOfFight = new TTimeOfFight();
+        
+        TimeOfFight = new CTimeOfFight();
 }
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
@@ -274,7 +276,10 @@ void TMainForm::ConfigureFightButtons()
 void TMainForm::ResizeFightSettings()
 {
         ResizePlayersNamesGroupBox();
-
+        ResizeInformationGroupBox();
+        ResizeFightTimeGroupBox();
+        AcceptAllConfigurationBtn->Left = FightSettings->Width - AcceptAllConfigurationBtn->Width - FightSettings->BorderWidth - 5;
+        AcceptAllConfigurationBtn->Top = FightSettings->Height - AcceptAllConfigurationBtn->Height - FightSettings->BorderWidth - 5;
 }
 
 void TMainForm::ResizePlayersNamesGroupBox()
@@ -293,4 +298,29 @@ void TMainForm::PutButtonInCorner(TButton *btn, TControl *cont, int b)
         btn->Top = cont->Height - btn->Height - b;
 }
 
+void TMainForm::ResizeInformationGroupBox()
+{
+        int b = 5;//отступ
+        int w  = (InformationGroupBox->Width - 2 * b - AcceptInformationBtn->Width)/3;
+        //устанавливаем ширину ячеек
+        AgeGroupBox->Width = w;
+        BeltGroupBox->Width = w;
+        WeightGroupBox->Width = w;
+        //кстанавливаем ширину комбобоксов
+        AgeComboBox->Width = AgeGroupBox->Width - 2 * AgeComboBox->Left;
+        BeltComboBox->Width = BeltGroupBox->Width - 2 * BeltComboBox->Left;
+        WeightComboBox->Width = WeightGroupBox->Width - 2 * WeightComboBox->Left;
+        PutButtonInCorner(AcceptInformationBtn, InformationGroupBox, b);
+}
+
+void TMainForm::ResizeFightTimeGroupBox()
+{
+        int b = 5;//отступ
+        int w  = (FightTimeGroupBox->Width - 2 * b - AcceptTimeBtn->Width) / 2;
+        MinutesGroupBox->Width = w;
+        SecondsGroupBox->Width = w;
+        MinutesSpinEdit->Width = MinutesGroupBox->Width - 2 * MinutesSpinEdit->Left;
+        SecondsSpinEdit->Width = SecondsGroupBox->Width - 2 * SecondsSpinEdit->Left;
+        PutButtonInCorner(AcceptTimeBtn, FightTimeGroupBox, b);
+}
 

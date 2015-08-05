@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 462
-  Top = 125
+  Left = 322
+  Top = 141
   Width = 1237
   Height = 703
   Caption = 'MainForm'
@@ -832,7 +832,7 @@ object MainForm: TMainForm
         Width = 1173
         Height = 136
         Align = alTop
-        Caption = 'InformationGroupBox'
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086' '#1089#1093#1074#1072#1090#1082#1077
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -865,7 +865,7 @@ object MainForm: TMainForm
           Align = alLeft
           Caption = #1042#1086#1079#1088#1072#1089#1090
           TabOrder = 1
-          object ComboBox1: TComboBox
+          object AgeComboBox: TComboBox
             Left = 8
             Top = 48
             Width = 153
@@ -884,7 +884,7 @@ object MainForm: TMainForm
           Align = alLeft
           Caption = #1055#1086#1103#1089
           TabOrder = 2
-          object ComboBox2: TComboBox
+          object BeltComboBox: TComboBox
             Left = 8
             Top = 48
             Width = 137
@@ -903,8 +903,8 @@ object MainForm: TMainForm
           Align = alLeft
           Caption = #1042#1077#1089
           TabOrder = 3
-          object ComboBox3: TComboBox
-            Left = 24
+          object WeightComboBox: TComboBox
+            Left = 8
             Top = 48
             Width = 153
             Height = 27
@@ -921,7 +921,7 @@ object MainForm: TMainForm
         Width = 1173
         Height = 112
         Align = alTop
-        Caption = 'FightTimeGroupBox'
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086' '#1074#1088#1077#1084#1077#1085#1080' '#1087#1086#1077#1076#1080#1085#1082#1072
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -947,7 +947,7 @@ object MainForm: TMainForm
           Caption = 'MinutesGroupBox'
           TabOrder = 0
           object MinutesSpinEdit: TCSpinEdit
-            Left = 16
+            Left = 8
             Top = 32
             Width = 121
             Height = 29
@@ -963,7 +963,7 @@ object MainForm: TMainForm
           Caption = 'SecondsGroupBox'
           TabOrder = 1
           object SecondsSpinEdit: TCSpinEdit
-            Left = 16
+            Left = 5
             Top = 32
             Width = 121
             Height = 29

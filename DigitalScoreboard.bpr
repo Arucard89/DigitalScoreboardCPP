@@ -5,7 +5,7 @@
     <VERSION value="BCB.06.00"/>
     <PROJECT value="DigitalScoreboard.exe"/>
     <OBJFILES value="DigitalScoreboard.obj DisplayUnit.obj ConfigurationUnit.obj MainUnit.obj 
-      TimeUnit.obj"/>
+      TimeUnit.obj PlayerUnit.obj"/>
     <RESFILES value="DigitalScoreboard.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
@@ -59,6 +59,7 @@
       <FILE FILENAME="ConfigurationUnit.cpp" FORMNAME="ConfigurationForm" UNITNAME="ConfigurationUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="MainUnit.cpp" FORMNAME="MainForm" UNITNAME="MainUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="TimeUnit.cpp" FORMNAME="" UNITNAME="TimeUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="PlayerUnit.cpp" FORMNAME="" UNITNAME="PlayerUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

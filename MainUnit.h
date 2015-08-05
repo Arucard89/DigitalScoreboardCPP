@@ -101,11 +101,11 @@ __published:	// IDE-managed Components
         TGroupBox *Player2NameGroupBox;
         TComboBox *Player2ComboBox;
         TGroupBox *AgeGroupBox;
-        TComboBox *ComboBox1;
+        TComboBox *AgeComboBox;
         TGroupBox *BeltGroupBox;
-        TComboBox *ComboBox2;
+        TComboBox *BeltComboBox;
         TGroupBox *WeightGroupBox;
-        TComboBox *ComboBox3;
+        TComboBox *WeightComboBox;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
@@ -115,10 +115,12 @@ private:	// User declarations
         void ConfigureFightButtons(); //настройка расположения кнопок старт/пауза/стоп/сброс
         void ResizeFightSettings(); //управение вкладкой настройки представления при изменении размера
         void ResizePlayersNamesGroupBox();//настройка панельки установки имен
+        void ResizeInformationGroupBox();//настройка панельки установки информации
+        void ResizeFightTimeGroupBox();//настройка панельки установки времени
         void PutButtonInCorner(TButton *btn, TControl *cont, int b);//помещаем кнопку в угол. б - отступ от края ,TComponent *cont - контейнер в котором кнопка
         TDisplayForm *DisplayForm;
         TConfigurationForm *ConfigurationForm;
-        TTimeOfFight *TimeOfFight;
+        CTimeOfFight *TimeOfFight;
 
 
 public:		// User declarations
