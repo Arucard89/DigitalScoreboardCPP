@@ -14,6 +14,8 @@ private:
         int Penalty;
 public:
         CPlayer();
+        void SetName(AnsiString n);
+        AnsiString GetName();
 
         void SetScore (int s);
         int GetScore();
@@ -31,5 +33,6 @@ public:
         void MinusScore(int s);
         void MinusAdvantage(int a);
         void MinusPenalty(int p);
+
 
 };

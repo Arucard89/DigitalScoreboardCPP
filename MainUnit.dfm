@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 322
-  Top = 141
+  Left = 357
+  Top = 245
   Width = 1237
   Height = 703
   Caption = 'MainForm'
@@ -57,7 +57,7 @@ object MainForm: TMainForm
         object Player1NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 541
+          Width = 173
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -142,6 +142,7 @@ object MainForm: TMainForm
               TabOrder = 0
               OnResize = Player1OneScorePanelResize
               object Player1OneScorePlusBitBtn: TBitBtn
+                Tag = 1
                 Left = 5
                 Top = 5
                 Width = 75
@@ -156,6 +157,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player1OneScoreMinusBitBtn: TBitBtn
+                Tag = -1
                 Left = 8
                 Top = 56
                 Width = 75
@@ -180,6 +182,7 @@ object MainForm: TMainForm
               Caption = 'Player1FourScorePanel'
               TabOrder = 1
               object Player1FourScorePlusBitBtn: TBitBtn
+                Tag = 4
                 Left = 5
                 Top = 5
                 Width = 75
@@ -194,6 +197,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player1FourScoreMinusBitBtn: TBitBtn
+                Tag = -4
                 Left = 24
                 Top = 48
                 Width = 75
@@ -219,6 +223,7 @@ object MainForm: TMainForm
               TabOrder = 2
               OnResize = Player1OneScorePanelResize
               object Player1TwoScorePlusBitBtn: TBitBtn
+                Tag = 2
                 Left = 5
                 Top = 5
                 Width = 75
@@ -233,6 +238,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player1TwoScoreMinusBitBtn: TBitBtn
+                Tag = -2
                 Left = 8
                 Top = 64
                 Width = 75
@@ -258,6 +264,7 @@ object MainForm: TMainForm
               TabOrder = 3
               OnResize = Player1OneScorePanelResize
               object Player1ThreeScorePlusBitBtn: TBitBtn
+                Tag = 3
                 Left = 5
                 Top = 5
                 Width = 75
@@ -272,6 +279,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player1ThreeScoreMinusBitBtn: TBitBtn
+                Tag = -3
                 Left = 8
                 Top = 64
                 Width = 75
@@ -305,6 +313,7 @@ object MainForm: TMainForm
               Caption = 'Player1ChangeAdvantagePanel'
               TabOrder = 0
               object Player1AdvantagePlusBitBtn: TBitBtn
+                Tag = 1
                 Left = 5
                 Top = 5
                 Width = 75
@@ -319,6 +328,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player1AdvantageMinusBitBtn: TBitBtn
+                Tag = -1
                 Left = 8
                 Top = 40
                 Width = 75
@@ -352,6 +362,7 @@ object MainForm: TMainForm
               Caption = 'Player1ChangePenaltyPanel'
               TabOrder = 0
               object Player1PenaltyPlusBitBtn: TBitBtn
+                Tag = 1
                 Left = 5
                 Top = 5
                 Width = 75
@@ -366,6 +377,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player1PenaltyMinusBitBtn: TBitBtn
+                Tag = -1
                 Left = 8
                 Top = 40
                 Width = 75
@@ -400,7 +412,7 @@ object MainForm: TMainForm
         object Player2NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 624
+          Width = 173
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -484,6 +496,7 @@ object MainForm: TMainForm
               TabOrder = 0
               OnResize = Player1OneScorePanelResize
               object Player2OneScorePlusBitBtn: TBitBtn
+                Tag = 1
                 Left = 5
                 Top = 5
                 Width = 75
@@ -498,6 +511,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player2OneScoreMinusBitBtn: TBitBtn
+                Tag = -1
                 Left = 8
                 Top = 64
                 Width = 75
@@ -523,6 +537,7 @@ object MainForm: TMainForm
               TabOrder = 1
               OnResize = Player1OneScorePanelResize
               object Player2TwoScorePlusBitBtn: TBitBtn
+                Tag = 2
                 Left = 5
                 Top = 5
                 Width = 75
@@ -537,6 +552,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player2TwoScoreMinusBitBtn: TBitBtn
+                Tag = -2
                 Left = 16
                 Top = 56
                 Width = 75
@@ -561,6 +577,7 @@ object MainForm: TMainForm
               Caption = 'Player2FourScorePanel'
               TabOrder = 2
               object Player2FourScorePlusBitBtn: TBitBtn
+                Tag = 4
                 Left = 5
                 Top = 5
                 Width = 75
@@ -575,6 +592,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player2FourScoreMinusBitBtn: TBitBtn
+                Tag = -4
                 Left = 24
                 Top = 64
                 Width = 75
@@ -600,6 +618,7 @@ object MainForm: TMainForm
               TabOrder = 3
               OnResize = Player1OneScorePanelResize
               object Player2ThreeScorePlusBitBtn: TBitBtn
+                Tag = 3
                 Left = 5
                 Top = 5
                 Width = 75
@@ -614,6 +633,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player2ThreeScoreMinusBitBtn: TBitBtn
+                Tag = -3
                 Left = 8
                 Top = 64
                 Width = 75
@@ -647,6 +667,7 @@ object MainForm: TMainForm
               Caption = 'Player2ChangeAdvantagePanel'
               TabOrder = 0
               object Player2AdvantagePlusBitBtn: TBitBtn
+                Tag = 1
                 Left = 5
                 Top = 5
                 Width = 75
@@ -661,6 +682,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player2AdvantageMinusBitBtn: TBitBtn
+                Tag = -1
                 Left = 8
                 Top = 48
                 Width = 75
@@ -694,6 +716,7 @@ object MainForm: TMainForm
               Caption = 'Player2ChangePenaltyPanel'
               TabOrder = 0
               object Player2PenaltyPlusBitBtn: TBitBtn
+                Tag = 1
                 Left = 5
                 Top = 5
                 Width = 75
@@ -708,6 +731,7 @@ object MainForm: TMainForm
                 TabOrder = 0
               end
               object Player2PenaltyMinusBitBtn: TBitBtn
+                Tag = -1
                 Left = 8
                 Top = 40
                 Width = 75
@@ -855,6 +879,7 @@ object MainForm: TMainForm
           Width = 297
           Height = 41
           TabOrder = 0
+          OnClick = AcceptInformationBtnClick
           Kind = bkOK
         end
         object AgeGroupBox: TGroupBox
@@ -874,6 +899,7 @@ object MainForm: TMainForm
             Sorted = True
             TabOrder = 0
             Text = 'AgeComboBox'
+            OnChange = AgeComboBoxChange
           end
         end
         object BeltGroupBox: TGroupBox
@@ -893,6 +919,7 @@ object MainForm: TMainForm
             Sorted = True
             TabOrder = 0
             Text = 'BeltComboBox'
+            OnChange = AgeComboBoxChange
           end
         end
         object WeightGroupBox: TGroupBox
@@ -912,6 +939,7 @@ object MainForm: TMainForm
             Sorted = True
             TabOrder = 0
             Text = 'WeightComboBox'
+            OnChange = AgeComboBoxChange
           end
         end
       end
@@ -951,7 +979,9 @@ object MainForm: TMainForm
             Top = 32
             Width = 121
             Height = 29
+            MaxValue = 99
             TabOrder = 0
+            OnChange = MinutesSpinEditChange
           end
         end
         object SecondsGroupBox: TGroupBox
@@ -963,12 +993,13 @@ object MainForm: TMainForm
           Caption = 'SecondsGroupBox'
           TabOrder = 1
           object SecondsSpinEdit: TCSpinEdit
-            Left = 5
+            Left = 8
             Top = 32
             Width = 121
             Height = 29
             MaxValue = 59
             TabOrder = 0
+            OnChange = MinutesSpinEditChange
           end
         end
         object AcceptTimeBtn: TBitBtn
@@ -977,6 +1008,7 @@ object MainForm: TMainForm
           Width = 297
           Height = 41
           TabOrder = 2
+          OnClick = AcceptTimeBtnClick
           Kind = bkOK
         end
       end
@@ -1000,6 +1032,7 @@ object MainForm: TMainForm
           Width = 297
           Height = 41
           TabOrder = 0
+          OnClick = AcceptPlayersNamesBtnClick
           Kind = bkOK
         end
         object Player1NameGroupBox: TGroupBox
@@ -1019,6 +1052,7 @@ object MainForm: TMainForm
             Sorted = True
             TabOrder = 0
             Text = 'Player1ComboBox'
+            OnChange = Player1ComboBoxChange
           end
         end
         object Player2NameGroupBox: TGroupBox
@@ -1038,6 +1072,7 @@ object MainForm: TMainForm
             Sorted = True
             TabOrder = 0
             Text = 'Player2ComboBox'
+            OnChange = Player1ComboBoxChange
           end
         end
       end
@@ -1053,6 +1088,7 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 3
+        OnClick = AcceptAllConfigurationBtnClick
         Kind = bkAll
       end
       object OpenConfigurationButton: TButton

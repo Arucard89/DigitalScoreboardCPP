@@ -14,6 +14,7 @@ CTimeOfFight::CTimeOfFight()
         minutes = 0;
         seconds = 0;
         zero = 1;
+        timeSetup = getTime(true);
 }
 
 void CTimeOfFight::setMinutes(int m)
@@ -68,16 +69,29 @@ int CTimeOfFight::minusSecond()
 
 AnsiString CTimeOfFight::getTime(bool showDoublePoint)
 {
+        AnsiString s1 = IntToStr(minutes);
+        if (s1.Length()<2)
+        {
+                s1 = '0' + s1;
+        }
+        int s2 = IntToStr(seconds);
+        if (s2.Length()<2)
+        {
+                s2 = '0' + s2;
+        }
         if (showDoublePoint == true)
         {
-                return IntToStr(minutes) + ':' + IntToStr(seconds);
+                return s1 + ':' + s2;
         }
         else
         {
-                return IntToStr(minutes) + ' ' + IntToStr(seconds);
+                return s1 + ' ' + s2;
         }
 }
-
+void CTimeOfFight::setTimeSetup(Ansistring* str)
+{
+        
+}
 
 
 

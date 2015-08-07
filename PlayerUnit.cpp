@@ -17,6 +17,16 @@ CPlayer::CPlayer()
         Penalty = 0;
 }
 
+void CPlayer::SetName(AnsiString n)
+{
+        CPlayer::Name = n;
+}
+
+AnsiString CPlayer::GetName()
+{
+        return CPlayer::Name;
+}
+
 void CPlayer::SetScore(int s)
 {
         Score = s;
@@ -76,7 +86,6 @@ void CPlayer::MinusPenalty(int p)
 {
         ((Penalty - p) < 0) ? Penalty = 0 : Penalty -= p;
 }
-
 
 
 

@@ -1,6 +1,6 @@
 object DisplayForm: TDisplayForm
-  Left = 1959
-  Top = 58
+  Left = 180
+  Top = 122
   Width = 1539
   Height = 736
   BorderWidth = 10
@@ -26,11 +26,11 @@ object DisplayForm: TDisplayForm
     Color = clWhite
     TabOrder = 0
     object Player1Label: TLabel
-      Left = 0
+      Left = 828
       Top = 57
-      Width = 617
+      Width = 695
       Height = 152
-      Align = alLeft
+      Align = alRight
       Alignment = taCenter
       AutoSize = False
       Caption = 'Player1Label'
@@ -46,11 +46,11 @@ object DisplayForm: TDisplayForm
       WordWrap = True
     end
     object Player2Label: TLabel
-      Left = 904
+      Left = 0
       Top = 57
       Width = 619
       Height = 152
-      Align = alRight
+      Align = alLeft
       Alignment = taCenter
       AutoSize = False
       Caption = 'Player2Label'
@@ -66,9 +66,9 @@ object DisplayForm: TDisplayForm
       WordWrap = True
     end
     object TimePanel: TPanel
-      Left = 617
+      Left = 619
       Top = 57
-      Width = 287
+      Width = 209
       Height = 152
       Align = alClient
       BevelOuter = bvNone
@@ -100,11 +100,11 @@ object DisplayForm: TDisplayForm
     end
   end
   object LeftPanel: TPanel
-    Left = 0
+    Left = 834
     Top = 209
     Width = 689
     Height = 489
-    Align = alLeft
+    Align = alRight
     BevelOuter = bvNone
     Caption = 'LeftPanel'
     Color = clWhite
@@ -198,11 +198,11 @@ object DisplayForm: TDisplayForm
     end
   end
   object RightPanel: TPanel
-    Left = 872
+    Left = 0
     Top = 209
-    Width = 651
+    Width = 617
     Height = 489
-    Align = alRight
+    Align = alLeft
     BevelOuter = bvNone
     Caption = 'RightPanel'
     Color = clWhite
@@ -210,7 +210,7 @@ object DisplayForm: TDisplayForm
     object Player2Scores: TPanel
       Left = 0
       Top = 0
-      Width = 651
+      Width = 617
       Height = 305
       Align = alTop
       Caption = 'Player2Scores'
@@ -224,7 +224,7 @@ object DisplayForm: TDisplayForm
       object Player2ScoresLabel: TLabel
         Left = 1
         Top = 1
-        Width = 649
+        Width = 615
         Height = 32
         Align = alTop
         Alignment = taRightJustify
@@ -270,7 +270,7 @@ object DisplayForm: TDisplayForm
     object Player2Penalty: TPanel
       Left = 297
       Top = 305
-      Width = 354
+      Width = 320
       Height = 184
       Align = alClient
       Caption = 'Player2Penalty'
@@ -284,7 +284,7 @@ object DisplayForm: TDisplayForm
       object Player2PenaltyLabel: TLabel
         Left = 1
         Top = 1
-        Width = 352
+        Width = 318
         Height = 32
         Align = alTop
         Alignment = taRightJustify
@@ -299,9 +299,9 @@ object DisplayForm: TDisplayForm
     end
   end
   object CentralPanel: TPanel
-    Left = 689
+    Left = 617
     Top = 209
-    Width = 183
+    Width = 217
     Height = 489
     Align = alClient
     BevelOuter = bvNone
@@ -311,7 +311,7 @@ object DisplayForm: TDisplayForm
     object CentralTopPanel: TPanel
       Left = 0
       Top = 0
-      Width = 183
+      Width = 217
       Height = 280
       Align = alTop
       BevelInner = bvLowered
@@ -321,7 +321,7 @@ object DisplayForm: TDisplayForm
     object CentralBottomPanel: TPanel
       Left = 0
       Top = 195
-      Width = 183
+      Width = 217
       Height = 294
       Align = alBottom
       BevelInner = bvLowered

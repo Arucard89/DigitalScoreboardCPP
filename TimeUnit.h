@@ -21,8 +21,6 @@ public:
         void setMinutes(int m);
         int getSeconds();
         void setSeconds(int s);
-
-
 } ;
 
 #endif

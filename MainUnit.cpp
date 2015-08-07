@@ -17,8 +17,11 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
 {
         //одновременно запускаем форму дисплея
         DisplayForm = new TDisplayForm(this);
+        DisplayForm->Show();
         
         TimeOfFight = new CTimeOfFight();
+        Player1 = new CPlayer();
+        Player2 = new CPlayer();
 }
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
@@ -322,5 +325,95 @@ void TMainForm::ResizeFightTimeGroupBox()
         MinutesSpinEdit->Width = MinutesGroupBox->Width - 2 * MinutesSpinEdit->Left;
         SecondsSpinEdit->Width = SecondsGroupBox->Width - 2 * SecondsSpinEdit->Left;
         PutButtonInCorner(AcceptTimeBtn, FightTimeGroupBox, b);
+}
+
+void __fastcall TMainForm::AcceptPlayersNamesBtnClick(TObject *Sender)
+{
+        Player1->SetName(Player1ComboBox->Text);
+        Player2->SetName(Player2ComboBox->Text);
+        SetPlayersNames();
+        InformationIsChanged(false, PlayersNamesGroupBox);
+}
+//---------------------------------------------------------------------------
+void TMainForm::SetPlayersNames()
+{
+        Player1NameLabel->Caption = Player1->GetName();
+        DisplayForm->Player1Label->Caption = Player1->GetName();
+
+        Player2NameLabel->Caption = Player2->GetName();
+        DisplayForm->Player2Label->Caption = Player2->GetName();
+}
+
+void TMainForm::InformationIsChanged(bool isChanged,TGroupBox* cont)
+{
+        if (isChanged == true)
+        {
+                if (cont->Caption.Pos("*") == 0)
+                {
+                        cont->Caption = cont->Caption + "*";
+                };
+        }
+        else
+        {
+                cont->Caption = StringReplace(cont->Caption, "*", "", TReplaceFlags() << rfReplaceAll << rfIgnoreCase);
+        }
+}
+
+void __fastcall TMainForm::Player1ComboBoxChange(TObject *Sender)
+{
+        InformationIsChanged(true, PlayersNamesGroupBox);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::AgeComboBoxChange(TObject *Sender)
+{
+        InformationIsChanged(true, InformationGroupBox);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::MinutesSpinEditChange(TObject *Sender)
+{
+        InformationIsChanged(true, FightTimeGroupBox);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::AcceptInformationBtnClick(TObject *Sender)
+{
+        FulfillFightInfo();
+        InformationIsChanged(false, InformationGroupBox);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::AcceptTimeBtnClick(TObject *Sender)
+{
+        InformationIsChanged(false, FightTimeGroupBox);
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::AcceptAllConfigurationBtnClick(TObject *Sender)
+{
+        AcceptPlayersNamesBtnClick(0);
+        AcceptInformationBtnClick(0);
+        AcceptTimeBtnClick(0);
+
+}
+//---------------------------------------------------------------------------
+
+void TMainForm::FulfillFightInfo()
+{
+        FightInfo.age = AgeComboBox->Text;
+        FightInfo.age = BeltComboBox->Text;
+        FightInfo.weight = WeightComboBox->Text;
+        AnsiString s = "Возраст: " + FightInfo.age + " Пояс: " + FightInfo.belt + " Вес: " + FightInfo.weight;
+        CurrentInfoSetupLabel->Caption = s;
+        InformationPanel->Caption = s;
+        DisplayForm->CategoryPanel->Caption = s;
+}
+
+void TMainForm::FulfillTime()
+{
+        TimeOfFight->setMinutes(MinutesSpinEdit->Value);
+        TimeOfFight->setSeconds(SecondsSpinEdit->Value);
+        TimeOfFight->
 }
 

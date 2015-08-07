@@ -14,7 +14,15 @@
 #include <ComCtrls.hpp>
 #include <ExtCtrls.hpp>
 #include "TimeUnit.h"
+#include "PlayerUnit.h"
 //---------------------------------------------------------------------------
+struct SFightInfo
+{
+        AnsiString age;
+        AnsiString belt;
+        AnsiString weight;
+};
+
 class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
@@ -110,7 +118,25 @@ __published:	// IDE-managed Components
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
+        void __fastcall AcceptPlayersNamesBtnClick(TObject *Sender);
+        void __fastcall Player1ComboBoxChange(TObject *Sender);
+        void __fastcall AgeComboBoxChange(TObject *Sender);
+        void __fastcall MinutesSpinEditChange(TObject *Sender);
+        void __fastcall AcceptInformationBtnClick(TObject *Sender);
+        void __fastcall AcceptTimeBtnClick(TObject *Sender);
+        void __fastcall AcceptAllConfigurationBtnClick(TObject *Sender);
 private:	// User declarations
+
+        TDisplayForm *DisplayForm;
+        TConfigurationForm *ConfigurationForm;
+        CTimeOfFight *TimeOfFight;
+        CPlayer* Player1;
+        CPlayer* Player2;
+        SFightInfo FightInfo;
+
+
+public:		// User declarations
+        __fastcall TMainForm(TComponent* Owner);
         void __fastcall ConfigureScoresButtons ();
         void ConfigureFightButtons(); //настройка расположения кнопок старт/пауза/стоп/сброс
         void ResizeFightSettings(); //управение вкладкой настройки представления при изменении размера
@@ -118,13 +144,11 @@ private:	// User declarations
         void ResizeInformationGroupBox();//настройка панельки установки информации
         void ResizeFightTimeGroupBox();//настройка панельки установки времени
         void PutButtonInCorner(TButton *btn, TControl *cont, int b);//помещаем кнопку в угол. б - отступ от края ,TComponent *cont - контейнер в котором кнопка
-        TDisplayForm *DisplayForm;
-        TConfigurationForm *ConfigurationForm;
-        CTimeOfFight *TimeOfFight;
+        void SetPlayersNames(); //применение имен к табло
+        void InformationIsChanged(bool isChanged,TGroupBox* cont); //добавляет звездочку к названию контейнера
+        void FulfillFightInfo(); //заполняем инфомацию о схватке
+        void FulfillTime(); //заполняем время
 
-
-public:		// User declarations
-        __fastcall TMainForm(TComponent* Owner);
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMainForm *MainForm;
