@@ -1,8 +1,8 @@
 object MainForm: TMainForm
   Left = 357
-  Top = 245
+  Top = 246
   Width = 1237
-  Height = 703
+  Height = 702
   Caption = 'MainForm'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -20,7 +20,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 633
-    ActivePage = FightSettings
+    ActivePage = FightingControls
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -29,7 +29,7 @@ object MainForm: TMainForm
     Font.Style = [fsBold, fsItalic]
     MultiLine = True
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -40,6 +40,7 @@ object MainForm: TMainForm
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
+      OnShow = FormResize
       object Player1GroupBox: TGroupBox
         Left = 0
         Top = 113
@@ -57,7 +58,7 @@ object MainForm: TMainForm
         object Player1NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 173
+          Width = 541
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -155,6 +156,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
               object Player1OneScoreMinusBitBtn: TBitBtn
                 Tag = -1
@@ -170,6 +172,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
             end
             object Player1FourScorePanel: TPanel
@@ -195,6 +198,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
               object Player1FourScoreMinusBitBtn: TBitBtn
                 Tag = -4
@@ -210,6 +214,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
             end
             object Player1TwoScorePanel: TPanel
@@ -236,6 +241,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
               object Player1TwoScoreMinusBitBtn: TBitBtn
                 Tag = -2
@@ -251,6 +257,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
             end
             object Player1ThreeScorePanel: TPanel
@@ -277,6 +284,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
               object Player1ThreeScoreMinusBitBtn: TBitBtn
                 Tag = -3
@@ -292,6 +300,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player1ThreeScorePlusBitBtnClick
               end
             end
           end
@@ -326,6 +335,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player1AdvantagePlusBitBtnClick
               end
               object Player1AdvantageMinusBitBtn: TBitBtn
                 Tag = -1
@@ -390,6 +400,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player1PenaltyMinusBitBtnClick
               end
             end
           end
@@ -412,7 +423,7 @@ object MainForm: TMainForm
         object Player2NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 173
+          Width = 624
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -509,6 +520,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player2OneScorePlusBitBtnClick
               end
               object Player2OneScoreMinusBitBtn: TBitBtn
                 Tag = -1
@@ -524,6 +536,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player2OneScorePlusBitBtnClick
               end
             end
             object Player2TwoScorePanel: TPanel
@@ -550,6 +563,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player2OneScorePlusBitBtnClick
               end
               object Player2TwoScoreMinusBitBtn: TBitBtn
                 Tag = -2
@@ -565,6 +579,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player2OneScorePlusBitBtnClick
               end
             end
             object Player2FourScorePanel: TPanel
@@ -590,6 +605,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player2OneScorePlusBitBtnClick
               end
               object Player2FourScoreMinusBitBtn: TBitBtn
                 Tag = -4
@@ -605,6 +621,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player2OneScorePlusBitBtnClick
               end
             end
             object Player2ThreeScorePanel: TPanel
@@ -631,6 +648,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player2OneScorePlusBitBtnClick
               end
               object Player2ThreeScoreMinusBitBtn: TBitBtn
                 Tag = -3
@@ -646,6 +664,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player2OneScorePlusBitBtnClick
               end
             end
           end
@@ -680,6 +699,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player2AdvantagePlusBitBtnClick
               end
               object Player2AdvantageMinusBitBtn: TBitBtn
                 Tag = -1
@@ -744,6 +764,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player2PenaltyMinusBitBtnClick
               end
             end
           end

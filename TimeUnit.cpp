@@ -12,19 +12,22 @@
 CTimeOfFight::CTimeOfFight()
 {
         minutes = 0;
+        minutes_start = minutes;
         seconds = 0;
+        seconds_start = seconds;
         zero = 1;
-        timeSetup = getTime(true);
 }
 
 void CTimeOfFight::setMinutes(int m)
 {
         minutes = m;
+        minutes_start = minutes;
 }
 
 void CTimeOfFight::setSeconds(int s)
 {
         seconds = s;
+        seconds_start = seconds;
 }
 
 int CTimeOfFight::getMinutes()
@@ -40,7 +43,9 @@ int CTimeOfFight::getSeconds()
 int CTimeOfFight::setTime(AnsiString* m, AnsiString* s) //если подсунули не строку, то выставляются 0
 {
         minutes = m->ToIntDef(0);
+        minutes_start = minutes;
         seconds = s->ToIntDef(0);
+        seconds_start = seconds;
         zero = (minutes == 0) && (seconds == 0);
         return zero;
 }
@@ -72,12 +77,12 @@ AnsiString CTimeOfFight::getTime(bool showDoublePoint)
         AnsiString s1 = IntToStr(minutes);
         if (s1.Length()<2)
         {
-                s1 = '0' + s1;
+                s1 = "0" + s1;
         }
-        int s2 = IntToStr(seconds);
+        AnsiString s2 = IntToStr(seconds);
         if (s2.Length()<2)
         {
-                s2 = '0' + s2;
+                s2 = "0" + s2;
         }
         if (showDoublePoint == true)
         {
@@ -88,10 +93,7 @@ AnsiString CTimeOfFight::getTime(bool showDoublePoint)
                 return s1 + ' ' + s2;
         }
 }
-void CTimeOfFight::setTimeSetup(Ansistring* str)
-{
-        
-}
+
 
 
 

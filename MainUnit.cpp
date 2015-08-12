@@ -22,6 +22,7 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
         TimeOfFight = new CTimeOfFight();
         Player1 = new CPlayer();
         Player2 = new CPlayer();
+        UpdateScores();
 }
 //---------------------------------------------------------------------------
 void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
@@ -65,13 +66,6 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         Player1AdvantageGroupBox->Width = Player1ScoresButtonsPanel->Width / 2;
         Player2AdvantageGroupBox->Width = Player2ScoresButtonsPanel->Width / 2;
 
-      /*  Player1AdvantageGroupBox->Height = Player1ScoresGroupBox->Height;
-        Player1AdvantageGroupBox->Width = Player1GroupBox->Width / 2;
-
-        Player2ScoresGroupBox->Height = Player2GroupBox->Height * 0.15;
-        Player2AdvantageGroupBox->Height = Player2ScoresGroupBox->Height;
-        Player2AdvantageGroupBox->Width = Player2GroupBox->Width / 2;  */
-
 //панели очков
         Player1ScoresPanel->Height = Player1ScoresGroupBox->Height / 3;
         Player1AdvantagePanel->Height = Player1ScoresGroupBox->Height / 3;
@@ -85,12 +79,12 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         Player1OneScorePanel->Width = Player1ScoresGroupBox->Width / 4;
         Player1TwoScorePanel->Width = Player1ScoresGroupBox->Width / 4;
         Player1ThreeScorePanel->Width = Player1ScoresGroupBox->Width / 4;
-        //Player1FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player1FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
 
         Player2OneScorePanel->Width = Player2ScoresGroupBox->Width / 4;
         Player2TwoScorePanel->Width = Player2ScoresGroupBox->Width / 4;
         Player2ThreeScorePanel->Width = Player2ScoresGroupBox->Width / 4;
-        //Player2FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
+        Player2FourScorePanel->Width = Player1ScoresGroupBox->Width / 4;
 
 //меняем кнопки
         ConfigureScoresButtons();
@@ -106,7 +100,9 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
 
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
-    //    this->DoubleBuffered = true;
+
+       // Player1 = new CPlayer;
+       // Player1 = new CPlayer;
 }
 //---------------------------------------------------------------------------
 
@@ -332,7 +328,7 @@ void __fastcall TMainForm::AcceptPlayersNamesBtnClick(TObject *Sender)
         Player1->SetName(Player1ComboBox->Text);
         Player2->SetName(Player2ComboBox->Text);
         SetPlayersNames();
-        InformationIsChanged(false, PlayersNamesGroupBox);
+        InformationIsChanged(false, PlayersNamesGroupBox);  //сбрасываем флаг измененности инфы
 }
 //---------------------------------------------------------------------------
 void TMainForm::SetPlayersNames()
@@ -386,7 +382,8 @@ void __fastcall TMainForm::AcceptInformationBtnClick(TObject *Sender)
 
 void __fastcall TMainForm::AcceptTimeBtnClick(TObject *Sender)
 {
-        InformationIsChanged(false, FightTimeGroupBox);
+        FulfillTime();
+        InformationIsChanged(false, FightTimeGroupBox);//сбрасываем флаг измененности информации
 }
 //---------------------------------------------------------------------------
 
@@ -402,7 +399,7 @@ void __fastcall TMainForm::AcceptAllConfigurationBtnClick(TObject *Sender)
 void TMainForm::FulfillFightInfo()
 {
         FightInfo.age = AgeComboBox->Text;
-        FightInfo.age = BeltComboBox->Text;
+        FightInfo.belt = BeltComboBox->Text;
         FightInfo.weight = WeightComboBox->Text;
         AnsiString s = "Возраст: " + FightInfo.age + " Пояс: " + FightInfo.belt + " Вес: " + FightInfo.weight;
         CurrentInfoSetupLabel->Caption = s;
@@ -414,6 +411,79 @@ void TMainForm::FulfillTime()
 {
         TimeOfFight->setMinutes(MinutesSpinEdit->Value);
         TimeOfFight->setSeconds(SecondsSpinEdit->Value);
-        TimeOfFight->
+        TimePanel->Caption = TimeOfFight->getTime(true);
+        DisplayForm->TimePanel->Caption = TimePanel->Caption;
+       // TimeOfFight->
+
 }
+
+void __fastcall TMainForm::Player1ThreeScorePlusBitBtnClick(
+      TObject *Sender)
+{
+        Player1->PlusScore(((TPanel *)Sender)->Tag);
+        UpdateScores();
+        //здесь добавить логирование
+}
+
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Player2OneScorePlusBitBtnClick(TObject *Sender)
+{
+        Player2->PlusScore(((TPanel *)Sender)->Tag);
+        UpdateScores();
+        //здесь добавить логирование
+}
+//---------------------------------------------------------------------------
+
+void TMainForm::UpdateScores()
+{
+        //ОБНОВЛЯЕМ ОЧКИ
+        Player1ScoresPanel->Caption = IntToStr(Player1->GetScore());
+        DisplayForm->Player1Scores->Caption = Player1ScoresPanel->Caption;
+        Player2ScoresPanel->Caption = IntToStr(Player2->GetScore());
+        DisplayForm->Player2Scores->Caption = Player2ScoresPanel->Caption;
+
+       //преимущества
+        Player1AdvantagePanel->Caption = IntToStr(Player1->GetAdvantage());
+        DisplayForm->Player1Advantage->Caption = Player1AdvantagePanel->Caption;
+        Player2AdvantagePanel->Caption = IntToStr(Player2->GetAdvantage());
+        DisplayForm->Player2Advantage->Caption = Player2AdvantagePanel->Caption;
+
+        //штрафы
+        Player1PenaltyPanel->Caption = IntToStr(Player1->GetPenalty());
+        DisplayForm->Player1Penalty->Caption = Player1PenaltyPanel->Caption;
+        Player2PenaltyPanel->Caption = IntToStr(Player2->GetPenalty());
+        DisplayForm->Player2Penalty->Caption = Player2PenaltyPanel->Caption;
+}
+void __fastcall TMainForm::Player1AdvantagePlusBitBtnClick(TObject *Sender)
+{
+        Player1->PlusAdvantage(((TPanel *)Sender)->Tag);
+        UpdateScores();
+        //добавить логирование изменения очков
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Player2AdvantagePlusBitBtnClick(TObject *Sender)
+{
+        Player2->PlusAdvantage(((TPanel *)Sender)->Tag);
+        UpdateScores();
+         //добавить логирование изменения очков
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Player1PenaltyMinusBitBtnClick(TObject *Sender)
+{
+        Player1->PlusPenalty(((TPanel *)Sender)->Tag);
+        UpdateScores();
+         //добавить логирование изменения очков
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Player2PenaltyMinusBitBtnClick(TObject *Sender)
+{
+        Player2->PlusPenalty(((TPanel *)Sender)->Tag);
+        UpdateScores();
+         //добавить логирование изменения очков
+}
+//---------------------------------------------------------------------------
 

@@ -125,6 +125,12 @@ __published:	// IDE-managed Components
         void __fastcall AcceptInformationBtnClick(TObject *Sender);
         void __fastcall AcceptTimeBtnClick(TObject *Sender);
         void __fastcall AcceptAllConfigurationBtnClick(TObject *Sender);
+        void __fastcall Player1ThreeScorePlusBitBtnClick(TObject *Sender);
+        void __fastcall Player2OneScorePlusBitBtnClick(TObject *Sender);
+        void __fastcall Player1AdvantagePlusBitBtnClick(TObject *Sender);
+        void __fastcall Player2AdvantagePlusBitBtnClick(TObject *Sender);
+        void __fastcall Player1PenaltyMinusBitBtnClick(TObject *Sender);
+        void __fastcall Player2PenaltyMinusBitBtnClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
 
         TDisplayForm *DisplayForm;
@@ -148,6 +154,7 @@ public:		// User declarations
         void InformationIsChanged(bool isChanged,TGroupBox* cont); //добавляет звездочку к названию контейнера
         void FulfillFightInfo(); //заполняем инфомацию о схватке
         void FulfillTime(); //заполняем время
+        void UpdateScores(); //обновляем информацию об очках борцов
 
 };
 //---------------------------------------------------------------------------

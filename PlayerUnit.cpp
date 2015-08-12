@@ -59,17 +59,17 @@ int CPlayer::GetPenalty()
 
 void CPlayer::PlusScore(int s)
 {
-        Score += s;
+        ((Score + s) < 0) ? Score = 0 : Score += s;
 }
 
 void CPlayer::PlusAdvantage(int a)
 {
-        Advantage += a;
+        ((Advantage + a) < 0) ? Advantage = 0 : Advantage += a;
 }
 
 void CPlayer::PlusPenalty(int p)
 {
-        Penalty += p;
+        ((Penalty + p) < 0) ? Penalty = 0 : Penalty += p;
 }
 
 void CPlayer::MinusScore(int s)

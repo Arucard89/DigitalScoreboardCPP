@@ -8,9 +8,12 @@
 class CTimeOfFight: public TObject  //класс для управления временем схватки
 {
 private:
-        int minutes;
-        int seconds;
+        int minutes; //текущее время
+        int seconds; //текущее время
+        int minutes_start;  // начальные установки времени
+        int seconds_start;   //начальные установки времени
         int zero; //время истекло(0 - не истекло, остальное - истекло)
+        //AnsiString timeSetup; //начальная установка времени
 
 public:
         CTimeOfFight();
