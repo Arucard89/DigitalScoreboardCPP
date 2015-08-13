@@ -19,8 +19,10 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
         DisplayForm = new TDisplayForm(this);
         DisplayForm->Show();
         Timer1->Enabled = false; //таймер не нужен (при запуске программы он неактивен)
-        Timer1->Interval = 1000; //1000 = 1 сек. при уменьшении интервала, будет уменьшаться погрешность, возникаемая при пауза-продолжить, но придется ввести дополнительную переменную для отсчета
+        Timer1->Interval = 100; //1000 = 1 сек. gполсекунды-период мигания точек времени(обязательно чтобы 1000 нацело делилась)
+        defaultInterval = 1000 / Timer1->Interval; //вычисляем значение интервала
         fightState = 0; //схватка "остановлена"
+        dots = false; // необходимо для первого срабатывания
 
         TimeOfFight = new CTimeOfFight();
         Player1 = new CPlayer();
@@ -280,8 +282,8 @@ void TMainForm::ResizeFightSettings()
         ResizePlayersNamesGroupBox();
         ResizeInformationGroupBox();
         ResizeFightTimeGroupBox();
-        AcceptAllConfigurationBtn->Left = FightSettings->Width - AcceptAllConfigurationBtn->Width - FightSettings->BorderWidth - 5;
-        AcceptAllConfigurationBtn->Top = FightSettings->Height - AcceptAllConfigurationBtn->Height - FightSettings->BorderWidth - 5;
+        AcceptAllConfigurationBtn->Left = FightSettings->Width - AcceptAllConfigurationBtn->Width - 2*FightSettings->BorderWidth - 5; //множитель 2 нужен обязательно
+        AcceptAllConfigurationBtn->Top = FightSettings->Height - AcceptAllConfigurationBtn->Height - 2*FightSettings->BorderWidth - 5;
 }
 
 void TMainForm::ResizePlayersNamesGroupBox()
@@ -414,6 +416,7 @@ void TMainForm::FulfillTime()
 {
         TimeOfFight->setMinutes(MinutesSpinEdit->Value);
         TimeOfFight->setSeconds(SecondsSpinEdit->Value);
+        CurrentTimeSetupLabel->Caption = "Текущая установка времени: " + TimeOfFight->getTime(true);
         ShowTime();
        // TimeOfFight->
 
@@ -491,22 +494,37 @@ void __fastcall TMainForm::Player2PenaltyMinusBitBtnClick(TObject *Sender)
 
 void __fastcall TMainForm::Timer1Timer(TObject *Sender)
 {
-        if (fightState == 1)
+        if (fightState == 1) //если схватка идет
         {
-                TimeOfFight->minusSecond();
-                ShowTime();
-                if (TimeOfFight->getZero() == 1)
+
+                if (timerInterval == defaultInterval)         //от 10,9,8,7,6,5,4,3,2,1
                 {
-                        fightState = 0;
-                        Timer1->Enabled = false;
+                        TimeOfFight->minusSecond();
+                        if (TimeOfFight->getZero() == 1) //если закончилось время
+                        {
+                                fightState = 0;
+                                Timer1->Enabled = false;
+                        }
                 }
+                if ((timerInterval == (defaultInterval / 2))||(timerInterval == defaultInterval)) //гасим точки посреди секунды  и зажигаем вначале интервала
+                {
+                        dots = !dots;
+                }
+                ShowTime(dots);
+                minusInterval(); //отнимаем один интервал отсчета
         }
+        //если таймер закончился, то вывести окно установки результатов, но при этом дать возможность вернуться к результатам проведения поединка, чтобы изменить очки(если присудили баллы в последний момент)
+
 }
 //---------------------------------------------------------------------------
 
 
 void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
 {
+        if (fightState == 0)
+        {
+                timerInterval = defaultInterval; //выставляем счетчик
+        }
         StartFightBtn->Caption = "СТАРТ"; //кнопка возвращает свое название(если после паузы)
         fightState = 1; //ставим состояние схватки в положение "идет"
       //  StartFightBtn->Caption = 'ПРОДОЛЖИТЬ';
@@ -516,9 +534,9 @@ void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
-void TMainForm::ShowTime()
+void TMainForm::ShowTime(bool doubleDot)
 {
-        TimePanel->Caption = TimeOfFight->getTime(true);
+        TimePanel->Caption = TimeOfFight->getTime(doubleDot);
         DisplayForm->TimePanel->Caption = TimePanel->Caption;
 }
 void __fastcall TMainForm::PauseFightBtnClick(TObject *Sender)
@@ -538,7 +556,7 @@ void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
         PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
         Timer1->Enabled = false;
         //тут вызываем модальную форму с причинами победы(подгрузка причин либо из БД, либо из ини файла)
-        //с вожможностью отмены нажатия кнопки
+        //с вожможностью отмены нажатия кнопки (для продолжения схватки или корректировки результатов)
 }
 //---------------------------------------------------------------------------
 
@@ -563,3 +581,8 @@ void __fastcall TMainForm::ResetBtnClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+int  TMainForm::minusInterval()
+{
+        ((timerInterval-1) < 1) ? timerInterval = defaultInterval : timerInterval--;
+        return timerInterval;
+}

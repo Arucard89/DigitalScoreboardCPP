@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 268
-  Top = 131
+  Left = 1988
+  Top = 121
   Width = 1237
   Height = 702
   Caption = 'MainForm'
@@ -782,7 +782,7 @@ object MainForm: TMainForm
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -48
-        Font.Name = 'Arial'
+        Font.Name = 'Comic Sans MS'
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
@@ -1064,7 +1064,7 @@ object MainForm: TMainForm
         end
         object Player1NameGroupBox: TGroupBox
           Left = 2
-          Top = 21
+          Top = 81
           Width = 1169
           Height = 60
           Align = alTop
@@ -1084,7 +1084,7 @@ object MainForm: TMainForm
         end
         object Player2NameGroupBox: TGroupBox
           Left = 2
-          Top = 81
+          Top = 21
           Width = 1169
           Height = 60
           Align = alTop

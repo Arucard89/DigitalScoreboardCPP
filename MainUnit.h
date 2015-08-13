@@ -23,6 +23,8 @@ struct SFightInfo
         AnsiString weight;
 };
 
+//const int INTERVAL_FOR_TIMER = 10;
+
 class TMainForm : public TForm
 {
 __published:	// IDE-managed Components
@@ -146,8 +148,9 @@ private:	// User declarations
         CPlayer* Player2;
         SFightInfo FightInfo;
         int fightState; //состояние схватки 1 - идет, 0 - остановлена(окончена), 2 - пауза
-
-
+        int timerInterval; //отсчет для таймера
+        bool dots; //показывать точки во времени или нет
+        int defaultInterval; //занчение для интервала по умолчанию
 
 public:		// User declarations
         __fastcall TMainForm(TComponent* Owner);
@@ -162,8 +165,9 @@ public:		// User declarations
         void InformationIsChanged(bool isChanged,TGroupBox* cont); //добавляет звездочку к названию контейнера
         void FulfillFightInfo(); //заполняем инфомацию о схватке
         void FulfillTime(); //заполняем время из установок
-        void ShowTime(); //выводим время на панельки
+        void ShowTime(bool doubleDot = true); //выводим время на панельки
         void UpdateScores(); //обновляем информацию об очках борцов
+        int minusInterval(); //используется в счетчике времени
 
         //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.
 };
