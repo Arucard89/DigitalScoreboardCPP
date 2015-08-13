@@ -24,6 +24,8 @@ public:
         void setMinutes(int m);
         int getSeconds();
         void setSeconds(int s);
+        int getZero();
+        void ResetTime(); //сбрасываем настройки на начальные.
 } ;
 
 #endif

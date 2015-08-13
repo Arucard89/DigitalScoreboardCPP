@@ -114,6 +114,7 @@ __published:	// IDE-managed Components
         TComboBox *BeltComboBox;
         TGroupBox *WeightGroupBox;
         TComboBox *WeightComboBox;
+        TTimer *Timer1;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall FormCreate(TObject *Sender);
@@ -130,7 +131,12 @@ __published:	// IDE-managed Components
         void __fastcall Player1AdvantagePlusBitBtnClick(TObject *Sender);
         void __fastcall Player2AdvantagePlusBitBtnClick(TObject *Sender);
         void __fastcall Player1PenaltyMinusBitBtnClick(TObject *Sender);
-        void __fastcall Player2PenaltyMinusBitBtnClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall Player2PenaltyMinusBitBtnClick(TObject *Sender);
+        void __fastcall Timer1Timer(TObject *Sender);
+        void __fastcall StartFightBtnClick(TObject *Sender);
+        void __fastcall PauseFightBtnClick(TObject *Sender);
+        void __fastcall StopFightBtnClick(TObject *Sender);
+        void __fastcall ResetBtnClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
 
         TDisplayForm *DisplayForm;
@@ -139,6 +145,8 @@ private:	// User declarations
         CPlayer* Player1;
         CPlayer* Player2;
         SFightInfo FightInfo;
+        int fightState; //состояние схватки 1 - идет, 0 - остановлена(окончена), 2 - пауза
+
 
 
 public:		// User declarations
@@ -153,9 +161,11 @@ public:		// User declarations
         void SetPlayersNames(); //применение имен к табло
         void InformationIsChanged(bool isChanged,TGroupBox* cont); //добавляет звездочку к названию контейнера
         void FulfillFightInfo(); //заполняем инфомацию о схватке
-        void FulfillTime(); //заполняем время
+        void FulfillTime(); //заполняем время из установок
+        void ShowTime(); //выводим время на панельки
         void UpdateScores(); //обновляем информацию об очках борцов
 
+        //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMainForm *MainForm;

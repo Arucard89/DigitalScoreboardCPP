@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 357
-  Top = 246
+  Left = 268
+  Top = 131
   Width = 1237
   Height = 702
   Caption = 'MainForm'
@@ -33,7 +33,7 @@ object MainForm: TMainForm
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
-      Caption = #1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1089#1093#1074#1072#1090#1082#1086#1081
+      Caption = '    '#1059#1087#1088#1072#1074#1083#1077#1085#1080#1077' '#1089#1093#1074#1072#1090#1082#1086#1081'     '
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -385,6 +385,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player1PenaltyMinusBitBtnClick
               end
               object Player1PenaltyMinusBitBtn: TBitBtn
                 Tag = -1
@@ -749,6 +750,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 0
+                OnClick = Player2PenaltyMinusBitBtnClick
               end
               object Player2PenaltyMinusBitBtn: TBitBtn
                 Tag = -1
@@ -821,6 +823,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
+          OnClick = StartFightBtnClick
           Style = bsWin31
         end
         object PauseFightBtn: TBitBtn
@@ -836,6 +839,7 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 1
+          OnClick = PauseFightBtnClick
         end
         object StopFightBtn: TBitBtn
           Left = 208
@@ -850,9 +854,10 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 2
+          OnClick = StopFightBtnClick
         end
         object ResetBtn: TBitBtn
-          Left = 328
+          Left = 320
           Top = 8
           Width = 75
           Height = 41
@@ -864,12 +869,13 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 3
+          OnClick = ResetBtnClick
         end
       end
     end
     object FightSettings: TTabSheet
       BorderWidth = 20
-      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080
+      Caption = '    '#1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080'   '
       ImageIndex = 1
       object InformationGroupBox: TGroupBox
         Left = 0
@@ -1128,5 +1134,9 @@ object MainForm: TMainForm
         OnClick = OpenConfigurationButtonClick
       end
     end
+  end
+  object Timer1: TTimer
+    OnTimer = Timer1Timer
+    Left = 1024
   end
 end

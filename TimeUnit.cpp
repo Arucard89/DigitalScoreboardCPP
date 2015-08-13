@@ -52,6 +52,7 @@ int CTimeOfFight::setTime(AnsiString* m, AnsiString* s) //если подсунули не стро
 
 int CTimeOfFight::minusSecond()
 {
+        zero = 0;
         seconds--;
         if ( seconds < 0)
         {
@@ -94,7 +95,16 @@ AnsiString CTimeOfFight::getTime(bool showDoublePoint)
         }
 }
 
+int CTimeOfFight::getZero()
+{
+        return zero;
+}
 
+void CTimeOfFight::ResetTime()
+{
+        minutes = minutes_start;
+        seconds = seconds_start;
+}
 
 
 

@@ -18,7 +18,10 @@ __fastcall TMainForm::TMainForm(TComponent* Owner)
         //одновременно запускаем форму дисплея
         DisplayForm = new TDisplayForm(this);
         DisplayForm->Show();
-        
+        Timer1->Enabled = false; //таймер не нужен (при запуске программы он неактивен)
+        Timer1->Interval = 1000; //1000 = 1 сек. при уменьшении интервала, будет уменьшаться погрешность, возникаемая при пауза-продолжить, но придется ввести дополнительную переменную для отсчета
+        fightState = 0; //схватка "остановлена"
+
         TimeOfFight = new CTimeOfFight();
         Player1 = new CPlayer();
         Player2 = new CPlayer();
@@ -411,8 +414,7 @@ void TMainForm::FulfillTime()
 {
         TimeOfFight->setMinutes(MinutesSpinEdit->Value);
         TimeOfFight->setSeconds(SecondsSpinEdit->Value);
-        TimePanel->Caption = TimeOfFight->getTime(true);
-        DisplayForm->TimePanel->Caption = TimePanel->Caption;
+        ShowTime();
        // TimeOfFight->
 
 }
@@ -484,6 +486,80 @@ void __fastcall TMainForm::Player2PenaltyMinusBitBtnClick(TObject *Sender)
         Player2->PlusPenalty(((TPanel *)Sender)->Tag);
         UpdateScores();
          //добавить логирование изменения очков
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Timer1Timer(TObject *Sender)
+{
+        if (fightState == 1)
+        {
+                TimeOfFight->minusSecond();
+                ShowTime();
+                if (TimeOfFight->getZero() == 1)
+                {
+                        fightState = 0;
+                        Timer1->Enabled = false;
+                }
+        }
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
+{
+        StartFightBtn->Caption = "СТАРТ"; //кнопка возвращает свое название(если после паузы)
+        fightState = 1; //ставим состояние схватки в положение "идет"
+      //  StartFightBtn->Caption = 'ПРОДОЛЖИТЬ';
+        PauseFightBtn->Enabled = true; //делаем возможным приостановку схватки на паузу
+        StartFightBtn->Enabled = false;//внопку старт отключаем(чтобы не тыкали)
+        Timer1->Enabled = true;
+}
+//---------------------------------------------------------------------------
+
+void TMainForm::ShowTime()
+{
+        TimePanel->Caption = TimeOfFight->getTime(true);
+        DisplayForm->TimePanel->Caption = TimePanel->Caption;
+}
+void __fastcall TMainForm::PauseFightBtnClick(TObject *Sender)
+{
+        fightState = 2; //ставим состояние схватки в положение "пауза"
+        StartFightBtn->Caption = "ПРОДОЛЖИТЬ";//кнопка старт переименовывается в более правильное название(т.к. она будет продолжать схватку после паузы)
+        StartFightBtn->Enabled = true;//включаем кнопку продолжения.
+        PauseFightBtn->Enabled = false; //уже нажали, больше не надо
+        Timer1->Enabled = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
+{
+        fightState = 0;
+        StartFightBtn->Enabled = true;//включаем кнопку
+        PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
+        Timer1->Enabled = false;
+        //тут вызываем модальную форму с причинами победы(подгрузка причин либо из БД, либо из ини файла)
+        //с вожможностью отмены нажатия кнопки
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::ResetBtnClick(TObject *Sender)
+{
+        fightState = 0;
+        StartFightBtn->Caption = "СТАРТ";
+        StartFightBtn->Enabled = true;//включаем кнопку .
+        PauseFightBtn->Enabled = false; //еще старт не нажат
+        Timer1->Enabled = false;
+
+        //сбрасываем очки и время
+        Player1->ResetScores();
+        Player2->ResetScores();
+        TimeOfFight->ResetTime();
+
+        //отображаем информацию
+        UpdateScores();
+        ShowTime();
+
+        //добавить лог о действии сброса
 }
 //---------------------------------------------------------------------------
 

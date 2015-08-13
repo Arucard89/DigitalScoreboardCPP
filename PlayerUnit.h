@@ -34,5 +34,7 @@ public:
         void MinusAdvantage(int a);
         void MinusPenalty(int p);
 
+        void ResetScores();//сброс очков спортсмена 
+
 
 };
