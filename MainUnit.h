@@ -15,6 +15,7 @@
 #include <ExtCtrls.hpp>
 #include "TimeUnit.h"
 #include "PlayerUnit.h"
+#include <MPlayer.hpp>
 //---------------------------------------------------------------------------
 struct SFightInfo
 {

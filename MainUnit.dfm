@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 1988
-  Top = 121
+  Left = 619
+  Top = 412
   Width = 1237
   Height = 702
   Caption = 'MainForm'
@@ -20,7 +20,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 633
-    ActivePage = FightingControls
+    ActivePage = FightSettings
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -29,7 +29,7 @@ object MainForm: TMainForm
     Font.Style = [fsBold, fsItalic]
     MultiLine = True
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -47,7 +47,7 @@ object MainForm: TMainForm
         Width = 545
         Height = 442
         Align = alLeft
-        Caption = 'Player1GroupBox'
+        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -139,7 +139,6 @@ object MainForm: TMainForm
               Height = 114
               Align = alLeft
               BorderWidth = 20
-              Caption = 'Player1OneScorePanel'
               TabOrder = 0
               OnResize = Player1OneScorePanelResize
               object Player1OneScorePlusBitBtn: TBitBtn
@@ -182,7 +181,6 @@ object MainForm: TMainForm
               Height = 114
               Align = alClient
               BorderWidth = 20
-              Caption = 'Player1FourScorePanel'
               TabOrder = 1
               object Player1FourScorePlusBitBtn: TBitBtn
                 Tag = 4
@@ -224,7 +222,6 @@ object MainForm: TMainForm
               Height = 114
               Align = alLeft
               BorderWidth = 20
-              Caption = 'Player1TwoScorePanel'
               TabOrder = 2
               OnResize = Player1OneScorePanelResize
               object Player1TwoScorePlusBitBtn: TBitBtn
@@ -267,7 +264,6 @@ object MainForm: TMainForm
               Height = 114
               Align = alLeft
               BorderWidth = 20
-              Caption = 'Player1ThreeScorePanel'
               TabOrder = 3
               OnResize = Player1OneScorePanelResize
               object Player1ThreeScorePlusBitBtn: TBitBtn
@@ -319,7 +315,6 @@ object MainForm: TMainForm
               Height = 123
               Align = alClient
               BorderWidth = 20
-              Caption = 'Player1ChangeAdvantagePanel'
               TabOrder = 0
               object Player1AdvantagePlusBitBtn: TBitBtn
                 Tag = 1
@@ -369,7 +364,6 @@ object MainForm: TMainForm
               Height = 123
               Align = alClient
               BorderWidth = 20
-              Caption = 'Player1ChangePenaltyPanel'
               TabOrder = 0
               object Player1PenaltyPlusBitBtn: TBitBtn
                 Tag = 1
@@ -413,7 +407,7 @@ object MainForm: TMainForm
         Width = 628
         Height = 442
         Align = alClient
-        Caption = 'Player2GroupBox'
+        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -504,7 +498,6 @@ object MainForm: TMainForm
               Height = 103
               Align = alLeft
               BorderWidth = 20
-              Caption = 'Player2OneScorePanel'
               TabOrder = 0
               OnResize = Player1OneScorePanelResize
               object Player2OneScorePlusBitBtn: TBitBtn
@@ -547,7 +540,6 @@ object MainForm: TMainForm
               Height = 103
               Align = alLeft
               BorderWidth = 20
-              Caption = 'Player2TwoScorePanel'
               TabOrder = 1
               OnResize = Player1OneScorePanelResize
               object Player2TwoScorePlusBitBtn: TBitBtn
@@ -590,7 +582,6 @@ object MainForm: TMainForm
               Height = 103
               Align = alClient
               BorderWidth = 20
-              Caption = 'Player2FourScorePanel'
               TabOrder = 2
               object Player2FourScorePlusBitBtn: TBitBtn
                 Tag = 4
@@ -632,7 +623,6 @@ object MainForm: TMainForm
               Height = 103
               Align = alLeft
               BorderWidth = 20
-              Caption = 'Player2ThreeScorePanel'
               TabOrder = 3
               OnResize = Player1OneScorePanelResize
               object Player2ThreeScorePlusBitBtn: TBitBtn
@@ -684,7 +674,6 @@ object MainForm: TMainForm
               Height = 138
               Align = alClient
               BorderWidth = 20
-              Caption = 'Player2ChangeAdvantagePanel'
               TabOrder = 0
               object Player2AdvantagePlusBitBtn: TBitBtn
                 Tag = 1
@@ -734,7 +723,6 @@ object MainForm: TMainForm
               Height = 138
               Align = alClient
               BorderWidth = 20
-              Caption = 'Player2ChangePenaltyPanel'
               TabOrder = 0
               object Player2PenaltyPlusBitBtn: TBitBtn
                 Tag = 1
@@ -808,7 +796,6 @@ object MainForm: TMainForm
         Width = 1173
         Height = 55
         Align = alTop
-        Caption = 'FightControlsPanel'
         TabOrder = 4
         object StartFightBtn: TBitBtn
           Left = 8
@@ -905,9 +892,29 @@ object MainForm: TMainForm
           Top = 88
           Width = 297
           Height = 41
+          Caption = 'OK'
+          Default = True
+          ModalResult = 1
           TabOrder = 0
           OnClick = AcceptInformationBtnClick
-          Kind = bkOK
+          Glyph.Data = {
+            DE010000424DDE01000000000000760000002800000024000000120000000100
+            0400000000006801000000000000000000001000000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            3333333333333333333333330000333333333333333333333333F33333333333
+            00003333344333333333333333388F3333333333000033334224333333333333
+            338338F3333333330000333422224333333333333833338F3333333300003342
+            222224333333333383333338F3333333000034222A22224333333338F338F333
+            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+            0000333333333A222433333333333338F338F33300003333333333A222433333
+            333333338F338F33000033333333333A222433333333333338F338F300003333
+            33333333A222433333333333338F338F00003333333333333A22433333333333
+            3338F38F000033333333333333A223333333333333338F830000333333333333
+            333A333333333333333338330000333333333333333333333333333333333333
+            0000}
+          NumGlyphs = 2
         end
         object AgeGroupBox: TGroupBox
           Left = 2
@@ -1034,9 +1041,29 @@ object MainForm: TMainForm
           Top = 64
           Width = 297
           Height = 41
+          Caption = 'OK'
+          Default = True
+          ModalResult = 1
           TabOrder = 2
           OnClick = AcceptTimeBtnClick
-          Kind = bkOK
+          Glyph.Data = {
+            DE010000424DDE01000000000000760000002800000024000000120000000100
+            0400000000006801000000000000000000001000000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            3333333333333333333333330000333333333333333333333333F33333333333
+            00003333344333333333333333388F3333333333000033334224333333333333
+            338338F3333333330000333422224333333333333833338F3333333300003342
+            222224333333333383333338F3333333000034222A22224333333338F338F333
+            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+            0000333333333A222433333333333338F338F33300003333333333A222433333
+            333333338F338F33000033333333333A222433333333333338F338F300003333
+            33333333A222433333333333338F338F00003333333333333A22433333333333
+            3338F38F000033333333333333A223333333333333338F830000333333333333
+            333A333333333333333338330000333333333333333333333333333333333333
+            0000}
+          NumGlyphs = 2
         end
       end
       object PlayersNamesGroupBox: TGroupBox
@@ -1058,9 +1085,29 @@ object MainForm: TMainForm
           Top = 152
           Width = 297
           Height = 41
+          Caption = 'OK'
+          Default = True
+          ModalResult = 1
           TabOrder = 0
           OnClick = AcceptPlayersNamesBtnClick
-          Kind = bkOK
+          Glyph.Data = {
+            DE010000424DDE01000000000000760000002800000024000000120000000100
+            0400000000006801000000000000000000001000000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            3333333333333333333333330000333333333333333333333333F33333333333
+            00003333344333333333333333388F3333333333000033334224333333333333
+            338338F3333333330000333422224333333333333833338F3333333300003342
+            222224333333333383333338F3333333000034222A22224333333338F338F333
+            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+            0000333333333A222433333333333338F338F33300003333333333A222433333
+            333333338F338F33000033333333333A222433333333333338F338F300003333
+            33333333A222433333333333338F338F00003333333333333A22433333333333
+            3338F38F000033333333333333A223333333333333338F830000333333333333
+            333A333333333333333338330000333333333333333333333333333333333333
+            0000}
+          NumGlyphs = 2
         end
         object Player1NameGroupBox: TGroupBox
           Left = 2
