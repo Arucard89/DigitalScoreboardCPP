@@ -34,6 +34,8 @@ __published:	// IDE-managed Components
         TLabel *Player2ScoresLabel;
         TLabel *Player2AdvantageLabel;
         TLabel *Player2PenaltyLabel;
+        TImage *TopPicture;
+        TImage *BottomPicture;
         void __fastcall FormResize(TObject *Sender);
 private:	// User declarations
 public:		// User declarations

@@ -20,8 +20,8 @@ class TConfigurationForm : public TForm
 __published:	// IDE-managed Components
         TPageControl *PageControl1;
         TTabSheet *InfoLabelsSheet;
-        TTabSheet *TabSheet2;
-        TTabSheet *TabSheet3;
+        TTabSheet *PanelsColorTabSheet;
+        TTabSheet *PanelsFontTabSheet;
         TBitBtn *BitBtn1;
         TBitBtn *BitBtn2;
         TGroupBox *GroupBox1;
@@ -33,19 +33,85 @@ __published:	// IDE-managed Components
         TLabeledEdit *Player2PenaltyLabelText;
         TLabeledEdit *Player2AdvantageLabelText;
         TLabeledEdit *Player2ScoresLabelText;
-        TBitBtn *Player1ScoresLabelTextFontBitBtn;
-        TBitBtn *Player1AdvantageLabelTextFontBitBtn;
-        TBitBtn *Player1PenaltyLabelTextFontBitBtn;
-        TBitBtn *Player2ScoresLabelTextFontBitBtn;
-        TBitBtn *Player2AdvantageLabelTextFontBitBtn;
-        TBitBtn *Player2PenaltyLabelTextFontBitBtn;
         TFontDialog *Player1AdvantageLabelTextFontDialog;
         TFontDialog *Player1PenaltyLabelTextFontDialog;
         TFontDialog *Player2ScoresLabelTextFontDialog;
         TFontDialog *Player2AdvantageLabelTextFontDialog;
-        TFontDialog *Player2PenaltyLabelTextFontDialog;
         TBitBtn *Player2ScoresLabelsBtn;
         TBitBtn *Player1ScoresLabelsBtn;
+        TGroupBox *GroupBox3;
+        TBitBtn *Player2ScoresLabelTextFontBitBtn;
+        TBitBtn *Player2AdvantageLabelTextFontBitBtn;
+        TBitBtn *Player2PenaltyLabelTextFontBitBtn;
+        TGroupBox *GroupBox4;
+        TBitBtn *Player1ScoresLabelTextFontBitBtn;
+        TBitBtn *Player1AdvantageLabelTextFontBitBtn;
+        TBitBtn *Player1PenaltyLabelTextFontBitBtn;
+        TGroupBox *GroupBox7;
+        TBitBtn *SetPlayer2PanelColorBitBtn;
+        TGroupBox *GroupBox9;
+        TColorBox *CategoryPanelColorBox;
+        TLabel *Label1;
+        TLabel *Label2;
+        TColorBox *TimePanelColorBox;
+        TGroupBox *GroupBox5;
+        TBitBtn *SetPlayer1PanelColorBitBtn;
+        TFontDialog *Player2PenaltyLabelTextFontDialog;
+        TColorBox *Player1ScoresPanelColorBox;
+        TColorBox *Player1PenaltyPanelColorBox;
+        TColorBox *Player1AdvantagePanelColorBox;
+        TColorBox *Player1NamePanelColorBox;
+        TColorBox *Player2NamePanelColorBox;
+        TColorBox *Player2ScoresPanelColorBox;
+        TColorBox *Player2AdvantagePanelColorBox;
+        TColorBox *Player2PenaltyPanelColorBox;
+        TBitBtn *SetCentralPanelColorBitBtn;
+        TLabel *Label11;
+        TMemo *ChangeLogMemo;
+        TBitBtn *ResetToDefaultBitBtn;
+        TLabel *Label4;
+        TLabel *Label3;
+        TLabel *Label5;
+        TLabel *Label6;
+        TLabel *Label7;
+        TLabel *Label8;
+        TLabel *Label9;
+        TLabel *Label10;
+        TGroupBox *GroupBox6;
+        TBitBtn *SetCentralPanelFontBitBtn;
+        TGroupBox *GroupBox8;
+        TBitBtn *SetPlayer2PanelFontBitBtn;
+        TGroupBox *GroupBox10;
+        TBitBtn *SetPlayer1PanelFontBitBtn;
+        TButton *CategoryPanelFontBtn;
+        TButton *TimePanelFontBtn;
+        TButton *Player2NamePanelFontBtn;
+        TButton *Player2ScoresPanelFontBtn;
+        TButton *Player2AdvantagePanelFontBtn;
+        TButton *Player2PenaltyPanelFontBtn;
+        TButton *Player1NamePanelFontBtn;
+        TButton *Player1ScoresPanelFontBtn;
+        TButton *Player1AdvantagePanelFontBtn;
+        TButton *Player1PenaltyPanelFontBtn;
+        TFontDialog *Player2NamePanelFontDialog;
+        TFontDialog *Player1NamePanelFontDialog;
+        TFontDialog *CategoryPanelFontDialog;
+        TFontDialog *Player2ScoresPanelFontDialog;
+        TFontDialog *Player1AdvantagePanelFontDialog;
+        TFontDialog *Player2AdvantagePanelFontDialog;
+        TFontDialog *TimePanelFontDialog;
+        TFontDialog *Player2PenaltyPanelFontDialog;
+        TFontDialog *Player1PenaltyPanelFontDialog;
+        TFontDialog *Player1ScoresPanelFontDialog;
+        TTabSheet *PictureSelectTab;
+        TLabeledEdit *Picture1Edit;
+        TLabeledEdit *Picture2Edit;
+        TBitBtn *Picture1BitBtn;
+        TBitBtn *Picture2BitBtn;
+        TImage *Image1;
+        TImage *Image2;
+        TBitBtn *BitBtn3;
+        TBitBtn *BitBtn4;
         void __fastcall Player1ScoresLabelTextChange(TObject *Sender);
         void __fastcall BitBtn3Click(TObject *Sender);
         //void __fastcall Player1PenaltyLabelTextChange(TObject *Sender);
@@ -57,18 +123,72 @@ __published:	// IDE-managed Components
           TObject *Sender);
         void __fastcall Player2PenaltyLabelTextFontBitBtnClick(
           TObject *Sender);
+        void __fastcall Player1ScoresLabelTextFontBitBtnClick(
+          TObject *Sender);
+        void __fastcall Player1AdvantageLabelTextFontBitBtnClick(
+          TObject *Sender);
+        void __fastcall Player1PenaltyLabelTextFontBitBtnClick(
+          TObject *Sender);
+        void __fastcall Player2ScoresLabelsBtnClick(TObject *Sender);
+        void __fastcall Player1ScoresLabelsBtnClick(TObject *Sender);
+        void __fastcall BitBtn2Click(TObject *Sender);
+        void __fastcall SetPlayer2PanelColorBitBtnClick(TObject *Sender);
+        void __fastcall CategoryPanelColorBoxChange(TObject *Sender);
+        void __fastcall SetPlayer1PanelColorBitBtnClick(TObject *Sender);
+        void __fastcall SetCentralPanelColorBitBtnClick(TObject *Sender);
+        void __fastcall Player1NamePanelColorBoxChange(TObject *Sender);
+        void __fastcall Player2NamePanelColorBoxChange(TObject *Sender);
+        void __fastcall ResetToDefaultBitBtnClick(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);
+        void __fastcall CategoryPanelFontBtnClick(TObject *Sender);
+        void __fastcall SetCentralPanelFontBitBtnClick(TObject *Sender);
+        void __fastcall SetPlayer2PanelFontBitBtnClick(TObject *Sender);
+        void __fastcall SetPlayer1PanelFontBitBtnClick(TObject *Sender);
+        void __fastcall Player2NamePanelFontBtnClick(TObject *Sender);
+        void __fastcall TimePanelFontBtnClick(TObject *Sender);
+        void __fastcall Player2ScoresPanelFontBtnClick(TObject *Sender);
+        void __fastcall Player2AdvantagePanelFontBtnClick(TObject *Sender);
+        void __fastcall Player2PenaltyPanelFontBtnClick(TObject *Sender);
+        void __fastcall Player1NamePanelFontBtnClick(TObject *Sender);
+        void __fastcall Player1ScoresPanelFontBtnClick(TObject *Sender);
+        void __fastcall Player1AdvantagePanelFontBtnClick(TObject *Sender);
+        void __fastcall Player1PenaltyPanelFontBtnClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
-        bool Player1PointsLabelsCanged;
-        bool Player2PointsLabelsCanged;
+        bool Player1PointsLabelsChanged; //изменены подписи лейблов правого
+        bool Player2PointsLabelsChanged; //изменены подписи лейблов левого
+
+        bool Player1PanelColorChanged; //флаги изменения цвета панелей
+        bool Player2PanelColorChanged;  //
+
+        bool CentralPanelsColorChanged; //флаг изменения подложек центральных панелей
+
+        bool Player1PanelFontChanged; //флаги изменения шрифтов панелей
+        bool Player2PanelFontChanged;  //
+
+        bool CentralPanelsFontChanged; //флаг шрифтов центральных панелей
+
         __fastcall TConfigurationForm(TComponent* Owner);
 
         bool InfoLabelsFlag; //флаг изменения информации на вкладке изменения информационных лейблов
         void AddAsteriskToTabName(bool needAsterisk,TTabSheet* tab); //добасляем к имени вкладки звездочку, если были изменения
         //int __fastcall WriteInfoLabelsConfigToFile();
         int WriteFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
-        int WritePlayer1ScoresLabelsConfigToFile();
+
+        int WritePlayer1ScoresLabelsConfigToFile(); //записываем в файл информацию о шрифтах лейблов подписей панелей
         int WritePlayer2ScoresLabelsConfigToFile();
+
+        int WritePlayer1PanelColorToFile(); //записываем в файл информацию о цветах панелей спорстменов
+        int WritePlayer2PanelColorToFile();
+
+        int WriteCentralPanelColorToFile();//записываем в файл информацию о цвете центральных панелей
+
+        int WriteCentralPanelFontToFile();//аписываем в файл информациб о шрифтах центральной панели
+
+        int WritePlayer1PanelFontToFile(); //записываем в файл информацию о шрифтах панелей спорстменов
+        int WritePlayer2PanelFontToFile();
+
+
 
 };
 //---------------------------------------------------------------------------
