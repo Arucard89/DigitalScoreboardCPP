@@ -35,8 +35,6 @@ void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
         int res;
         ConfigurationForm = new TConfigurationForm(this);
         res = ConfigurationForm->ShowModal();
-
-
 }
 //---------------------------------------------------------------------------
 

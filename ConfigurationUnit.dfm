@@ -1,10 +1,10 @@
 object ConfigurationForm: TConfigurationForm
-  Left = 684
-  Top = 191
+  Left = 638
+  Top = 128
   Width = 811
-  Height = 595
+  Height = 596
   Caption = 'ConfigurationForm'
-  Color = clBtnFace
+  Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -20,7 +20,7 @@ object ConfigurationForm: TConfigurationForm
     Width = 795
     Height = 13
     Align = alTop
-    Caption = #1057#1087#1080#1089#1086#1082' '#1087#1088#1080#1085#1103#1090#1099#1093' '#1080#1079#1093#1084#1077#1085#1077#1085#1080#1081
+    Caption = '      '#1057#1087#1080#1089#1086#1082' '#1087#1088#1080#1085#1103#1090#1099#1093' '#1080#1079#1084#1077#1085#1077#1085#1080#1081
   end
   object PageControl1: TPageControl
     Left = 0
@@ -29,22 +29,30 @@ object ConfigurationForm: TConfigurationForm
     Height = 425
     ActivePage = PictureSelectTab
     Align = alTop
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
     TabIndex = 3
     TabOrder = 0
-    object InfoLabelsSheet: TTabSheet
-      Caption = 'InfoLabelsSheet'
-      Font.Charset = RUSSIAN_CHARSET
+    object PanelsFontTabSheet: TTabSheet
+      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1096#1088#1080#1092#1090#1086#1074' '#1087#1072#1085#1077#1083#1077#1081' '#1090#1072#1073#1083#1086
+      Font.Charset = ANSI_CHARSET
       Font.Color = clWindowText
-      Font.Height = -15
+      Font.Height = -13
       Font.Name = 'Arial'
-      Font.Style = [fsBold, fsItalic]
+      Font.Style = []
+      ImageIndex = 2
       ParentFont = False
-      object GroupBox1: TGroupBox
-        Left = 400
-        Top = 8
-        Width = 385
-        Height = 377
-        Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085' '#1086#1095#1082#1086#1074' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1072' '#1089#1087#1088#1072#1074#1072
+      object GroupBox6: TGroupBox
+        Left = 0
+        Top = 0
+        Width = 787
+        Height = 113
+        Align = alTop
+        Caption = #1064#1088#1080#1092#1090' '#1094#1077#1085#1090#1088#1072#1083#1100#1085#1099#1093' '#1087#1072#1085#1077#1083#1080
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -52,91 +60,16 @@ object ConfigurationForm: TConfigurationForm
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
         TabOrder = 0
-        object Player1ScoresLabelText: TLabeledEdit
-          Left = 8
+        object SetCentralPanelFontBitBtn: TBitBtn
+          Left = 312
           Top = 64
-          Width = 233
-          Height = 25
-          EditLabel.Width = 93
-          EditLabel.Height = 17
-          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1086#1095#1082#1086#1074
-          EditLabel.Font.Charset = RUSSIAN_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -15
-          EditLabel.Font.Name = 'Arial'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          LabelPosition = lpAbove
-          LabelSpacing = 3
-          ParentFont = False
-          TabOrder = 0
-          OnChange = Player1ScoresLabelTextChange
-        end
-        object Player1AdvantageLabelText: TLabeledEdit
-          Left = 8
-          Top = 136
-          Width = 233
-          Height = 25
-          EditLabel.Width = 145
-          EditLabel.Height = 17
-          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074
-          EditLabel.Font.Charset = RUSSIAN_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -15
-          EditLabel.Font.Name = 'Arial'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          LabelPosition = lpAbove
-          LabelSpacing = 3
-          ParentFont = False
-          TabOrder = 1
-          OnChange = Player1ScoresLabelTextChange
-        end
-        object Player1PenaltyLabelText: TLabeledEdit
-          Left = 8
-          Top = 208
-          Width = 233
-          Height = 25
-          EditLabel.Width = 115
-          EditLabel.Height = 17
-          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1096#1090#1088#1072#1092#1086#1074
-          EditLabel.Font.Charset = RUSSIAN_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -15
-          EditLabel.Font.Name = 'Arial'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          LabelPosition = lpAbove
-          LabelSpacing = 3
-          ParentFont = False
-          TabOrder = 2
-          OnChange = Player1ScoresLabelTextChange
-        end
-        object Player1ScoresLabelsBtn: TBitBtn
-          Left = 200
-          Top = 328
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
           Default = True
           Enabled = False
-          TabOrder = 3
-          OnClick = Player1ScoresLabelsBtnClick
+          TabOrder = 0
+          OnClick = SetCentralPanelFontBitBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -156,160 +89,60 @@ object ConfigurationForm: TConfigurationForm
             0000}
           NumGlyphs = 2
         end
-        object GroupBox4: TGroupBox
-          Left = 248
-          Top = 40
-          Width = 129
-          Height = 201
-          Caption = #1064#1088#1080#1092#1090#1099
-          TabOrder = 4
-          object Player1ScoresLabelTextFontBitBtn: TBitBtn
-            Left = 8
-            Top = 24
-            Width = 113
-            Height = 25
-            Caption = #1054#1095#1082#1080
-            Font.Charset = RUSSIAN_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Arial'
-            Font.Style = [fsItalic]
-            ParentFont = False
-            TabOrder = 0
-            OnClick = Player1ScoresLabelTextFontBitBtnClick
-          end
-          object Player1AdvantageLabelTextFontBitBtn: TBitBtn
-            Left = 8
-            Top = 96
-            Width = 113
-            Height = 25
-            Caption = #1055#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074#1072
-            Font.Charset = RUSSIAN_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 1
-            OnClick = Player1AdvantageLabelTextFontBitBtnClick
-          end
-          object Player1PenaltyLabelTextFontBitBtn: TBitBtn
-            Left = 8
-            Top = 168
-            Width = 113
-            Height = 25
-            Caption = #1064#1090#1088#1072#1092#1099
-            Font.Charset = RUSSIAN_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Arial'
-            Font.Style = [fsItalic]
-            ParentFont = False
-            TabOrder = 2
-            OnClick = Player1PenaltyLabelTextFontBitBtnClick
-          end
+        object CategoryPanelFontBtn: TButton
+          Left = 16
+          Top = 32
+          Width = 281
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1080' '#1082#1072#1090#1077#1075#1086#1088#1080#1081
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = CategoryPanelFontBtnClick
+        end
+        object TimePanelFontBtn: TButton
+          Left = 488
+          Top = 32
+          Width = 281
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1080' '#1074#1088#1077#1084#1077#1085#1080
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = TimePanelFontBtnClick
         end
       end
-      object GroupBox2: TGroupBox
+      object GroupBox8: TGroupBox
         Left = 0
-        Top = 8
+        Top = 120
         Width = 385
-        Height = 377
-        Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085' '#1086#1095#1082#1086#1074' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1072' '#1089#1083#1077#1074#1072
-        Color = clBtnFace
+        Height = 265
+        Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = [fsBold, fsItalic]
-        ParentColor = False
         ParentFont = False
         TabOrder = 1
-        object Player2PenaltyLabelText: TLabeledEdit
+        object SetPlayer2PanelFontBitBtn: TBitBtn
           Left = 8
-          Top = 208
-          Width = 233
-          Height = 25
-          EditLabel.Width = 115
-          EditLabel.Height = 17
-          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1096#1090#1088#1072#1092#1086#1074
-          EditLabel.Font.Charset = RUSSIAN_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -15
-          EditLabel.Font.Name = 'Arial'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          LabelPosition = lpAbove
-          LabelSpacing = 3
-          ParentFont = False
-          TabOrder = 0
-          OnChange = Player2ScoresLabelTextChange
-        end
-        object Player2AdvantageLabelText: TLabeledEdit
-          Left = 8
-          Top = 136
-          Width = 233
-          Height = 25
-          EditLabel.Width = 145
-          EditLabel.Height = 17
-          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074
-          EditLabel.Font.Charset = RUSSIAN_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -15
-          EditLabel.Font.Name = 'Arial'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          LabelPosition = lpAbove
-          LabelSpacing = 3
-          ParentFont = False
-          TabOrder = 1
-          OnChange = Player2ScoresLabelTextChange
-        end
-        object Player2ScoresLabelText: TLabeledEdit
-          Left = 8
-          Top = 64
-          Width = 233
-          Height = 25
-          EditLabel.Width = 93
-          EditLabel.Height = 17
-          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1086#1095#1082#1086#1074
-          EditLabel.Font.Charset = RUSSIAN_CHARSET
-          EditLabel.Font.Color = clWindowText
-          EditLabel.Font.Height = -15
-          EditLabel.Font.Name = 'Arial'
-          EditLabel.Font.Style = []
-          EditLabel.ParentFont = False
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -15
-          Font.Name = 'Arial'
-          Font.Style = []
-          LabelPosition = lpAbove
-          LabelSpacing = 3
-          ParentFont = False
-          TabOrder = 2
-          OnChange = Player2ScoresLabelTextChange
-        end
-        object Player2ScoresLabelsBtn: TBitBtn
-          Left = 200
-          Top = 328
+          Top = 216
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
           Default = True
           Enabled = False
-          TabOrder = 3
-          OnClick = Player2ScoresLabelsBtnClick
+          TabOrder = 0
+          OnClick = SetPlayer2PanelFontBitBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -329,63 +162,173 @@ object ConfigurationForm: TConfigurationForm
             0000}
           NumGlyphs = 2
         end
-        object GroupBox3: TGroupBox
-          Left = 248
-          Top = 40
-          Width = 129
-          Height = 201
-          Caption = #1064#1088#1080#1092#1090#1099
+        object Player2NamePanelFontBtn: TButton
+          Left = 24
+          Top = 32
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1080#1084#1077#1085#1080' '#1089#1083#1077#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = Player2NamePanelFontBtnClick
+        end
+        object Player2ScoresPanelFontBtn: TButton
+          Left = 24
+          Top = 72
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1086#1095#1082#1086#1074' '#1089#1083#1077#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = Player2ScoresPanelFontBtnClick
+        end
+        object Player2AdvantagePanelFontBtn: TButton
+          Left = 24
+          Top = 112
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074' '#1089#1083#1077#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          OnClick = Player2AdvantagePanelFontBtnClick
+        end
+        object Player2PenaltyPanelFontBtn: TButton
+          Left = 24
+          Top = 152
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1096#1090#1088#1072#1092#1086#1074' '#1089#1083#1077#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
           TabOrder = 4
-          object Player2ScoresLabelTextFontBitBtn: TBitBtn
-            Left = 8
-            Top = 24
-            Width = 113
-            Height = 25
-            Caption = #1054#1095#1082#1080
-            Font.Charset = RUSSIAN_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Arial'
-            Font.Style = [fsItalic]
-            ParentFont = False
-            TabOrder = 0
-            OnClick = Player2ScoresLabelTextFontBitBtnClick
-          end
-          object Player2AdvantageLabelTextFontBitBtn: TBitBtn
-            Left = 8
-            Top = 96
-            Width = 113
-            Height = 25
-            Caption = #1055#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074#1072
-            Font.Charset = RUSSIAN_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Arial Narrow'
-            Font.Style = []
-            ParentFont = False
-            TabOrder = 1
-            OnClick = Player2AdvantageLabelTextFontBitBtnClick
-          end
-          object Player2PenaltyLabelTextFontBitBtn: TBitBtn
-            Left = 8
-            Top = 168
-            Width = 113
-            Height = 25
-            Caption = #1064#1090#1088#1072#1092#1099
-            Font.Charset = RUSSIAN_CHARSET
-            Font.Color = clWindowText
-            Font.Height = -15
-            Font.Name = 'Arial'
-            Font.Style = [fsItalic]
-            ParentFont = False
-            TabOrder = 2
-            OnClick = Player2PenaltyLabelTextFontBitBtnClick
-          end
+          OnClick = Player2PenaltyPanelFontBtnClick
+        end
+      end
+      object GroupBox10: TGroupBox
+        Left = 400
+        Top = 120
+        Width = 385
+        Height = 265
+        Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1087#1088#1072#1074#1072
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+        TabOrder = 2
+        object SetPlayer1PanelFontBitBtn: TBitBtn
+          Left = 8
+          Top = 216
+          Width = 171
+          Height = 41
+          Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
+          Default = True
+          Enabled = False
+          TabOrder = 0
+          OnClick = SetPlayer1PanelFontBitBtnClick
+          Glyph.Data = {
+            DE010000424DDE01000000000000760000002800000024000000120000000100
+            0400000000006801000000000000000000001000000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+            3333333333333333333333330000333333333333333333333333F33333333333
+            00003333344333333333333333388F3333333333000033334224333333333333
+            338338F3333333330000333422224333333333333833338F3333333300003342
+            222224333333333383333338F3333333000034222A22224333333338F338F333
+            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+            0000333333333A222433333333333338F338F33300003333333333A222433333
+            333333338F338F33000033333333333A222433333333333338F338F300003333
+            33333333A222433333333333338F338F00003333333333333A22433333333333
+            3338F38F000033333333333333A223333333333333338F830000333333333333
+            333A333333333333333338330000333333333333333333333333333333333333
+            0000}
+          NumGlyphs = 2
+        end
+        object Player1NamePanelFontBtn: TButton
+          Left = 24
+          Top = 32
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1080#1084#1077#1085#1080' '#1089#1087#1088#1072#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 1
+          OnClick = Player1NamePanelFontBtnClick
+        end
+        object Player1ScoresPanelFontBtn: TButton
+          Left = 24
+          Top = 72
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1086#1095#1082#1086#1074' '#1089#1087#1088#1072#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 2
+          OnClick = Player1ScoresPanelFontBtnClick
+        end
+        object Player1AdvantagePanelFontBtn: TButton
+          Left = 24
+          Top = 112
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074' '#1089#1087#1088#1072#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 3
+          OnClick = Player1AdvantagePanelFontBtnClick
+        end
+        object Player1PenaltyPanelFontBtn: TButton
+          Left = 24
+          Top = 152
+          Width = 337
+          Height = 25
+          Caption = #1064#1088#1080#1092#1090' '#1096#1090#1088#1072#1092#1086#1074' '#1089#1087#1088#1072#1074#1072
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -16
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          TabOrder = 4
+          OnClick = Player1PenaltyPanelFontBtnClick
         end
       end
     end
     object PanelsColorTabSheet: TTabSheet
-      Caption = 'PanelsColorTabSheet'
+      Caption = #1062#1074#1077#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1090#1072#1073#1083#1086
       ImageIndex = 1
       object GroupBox7: TGroupBox
         Left = 0
@@ -798,16 +741,20 @@ object ConfigurationForm: TConfigurationForm
         end
       end
     end
-    object PanelsFontTabSheet: TTabSheet
-      Caption = 'PanelsFontTabSheet'
-      ImageIndex = 2
-      object GroupBox6: TGroupBox
-        Left = 0
-        Top = 0
-        Width = 787
-        Height = 113
-        Align = alTop
-        Caption = #1064#1088#1080#1092#1090' '#1094#1077#1085#1090#1088#1072#1083#1100#1085#1099#1093' '#1087#1072#1085#1077#1083#1080
+    object InfoLabelsSheet: TTabSheet
+      Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085
+      Font.Charset = RUSSIAN_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -15
+      Font.Name = 'Arial'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
+      object GroupBox1: TGroupBox
+        Left = 400
+        Top = 8
+        Width = 385
+        Height = 377
+        Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085' '#1086#1095#1082#1086#1074' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1072' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -815,16 +762,91 @@ object ConfigurationForm: TConfigurationForm
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
         TabOrder = 0
-        object SetCentralPanelFontBitBtn: TBitBtn
-          Left = 312
+        object Player1ScoresLabelText: TLabeledEdit
+          Left = 8
           Top = 64
+          Width = 233
+          Height = 25
+          EditLabel.Width = 99
+          EditLabel.Height = 18
+          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1086#1095#1082#1086#1074
+          EditLabel.Font.Charset = RUSSIAN_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -16
+          EditLabel.Font.Name = 'Arial'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          LabelPosition = lpAbove
+          LabelSpacing = 3
+          ParentFont = False
+          TabOrder = 0
+          OnChange = Player1ScoresLabelTextChange
+        end
+        object Player1AdvantageLabelText: TLabeledEdit
+          Left = 8
+          Top = 136
+          Width = 233
+          Height = 25
+          EditLabel.Width = 153
+          EditLabel.Height = 18
+          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074
+          EditLabel.Font.Charset = RUSSIAN_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -16
+          EditLabel.Font.Name = 'Arial'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          LabelPosition = lpAbove
+          LabelSpacing = 3
+          ParentFont = False
+          TabOrder = 1
+          OnChange = Player1ScoresLabelTextChange
+        end
+        object Player1PenaltyLabelText: TLabeledEdit
+          Left = 8
+          Top = 208
+          Width = 233
+          Height = 25
+          EditLabel.Width = 124
+          EditLabel.Height = 18
+          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1096#1090#1088#1072#1092#1086#1074
+          EditLabel.Font.Charset = RUSSIAN_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -16
+          EditLabel.Font.Name = 'Arial'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          LabelPosition = lpAbove
+          LabelSpacing = 3
+          ParentFont = False
+          TabOrder = 2
+          OnChange = Player1ScoresLabelTextChange
+        end
+        object Player1ScoresLabelsBtn: TBitBtn
+          Left = 200
+          Top = 328
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
           Default = True
           Enabled = False
-          TabOrder = 0
-          OnClick = SetCentralPanelFontBitBtnClick
+          TabOrder = 3
+          OnClick = Player1ScoresLabelsBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -844,43 +866,66 @@ object ConfigurationForm: TConfigurationForm
             0000}
           NumGlyphs = 2
         end
-        object CategoryPanelFontBtn: TButton
-          Left = 16
-          Top = 32
-          Width = 281
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1080' '#1082#1072#1090#1077#1075#1086#1088#1080#1081
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 1
-          OnClick = CategoryPanelFontBtnClick
-        end
-        object TimePanelFontBtn: TButton
-          Left = 488
-          Top = 32
-          Width = 281
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1080' '#1074#1088#1077#1084#1077#1085#1080
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 2
-          OnClick = TimePanelFontBtnClick
+        object GroupBox4: TGroupBox
+          Left = 248
+          Top = 40
+          Width = 129
+          Height = 201
+          Caption = #1064#1088#1080#1092#1090#1099
+          TabOrder = 4
+          object Player1ScoresLabelTextFontBitBtn: TBitBtn
+            Left = 8
+            Top = 24
+            Width = 113
+            Height = 25
+            Caption = #1054#1095#1082#1080
+            Font.Charset = RUSSIAN_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Arial'
+            Font.Style = [fsItalic]
+            ParentFont = False
+            TabOrder = 0
+            OnClick = Player1ScoresLabelTextFontBitBtnClick
+          end
+          object Player1AdvantageLabelTextFontBitBtn: TBitBtn
+            Left = 8
+            Top = 96
+            Width = 113
+            Height = 25
+            Caption = #1055#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074#1072
+            Font.Charset = RUSSIAN_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = Player1AdvantageLabelTextFontBitBtnClick
+          end
+          object Player1PenaltyLabelTextFontBitBtn: TBitBtn
+            Left = 8
+            Top = 168
+            Width = 113
+            Height = 25
+            Caption = #1064#1090#1088#1072#1092#1099
+            Font.Charset = RUSSIAN_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Arial'
+            Font.Style = [fsItalic]
+            ParentFont = False
+            TabOrder = 2
+            OnClick = Player1PenaltyLabelTextFontBitBtnClick
+          end
         end
       end
-      object GroupBox8: TGroupBox
+      object GroupBox2: TGroupBox
         Left = 0
-        Top = 120
+        Top = 8
         Width = 385
-        Height = 265
-        Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1083#1077#1074#1072
+        Height = 377
+        Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085' '#1086#1095#1082#1086#1074' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1072' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -888,16 +933,91 @@ object ConfigurationForm: TConfigurationForm
         Font.Style = [fsBold, fsItalic]
         ParentFont = False
         TabOrder = 1
-        object SetPlayer2PanelFontBitBtn: TBitBtn
+        object Player2PenaltyLabelText: TLabeledEdit
           Left = 8
-          Top = 216
+          Top = 208
+          Width = 233
+          Height = 25
+          EditLabel.Width = 124
+          EditLabel.Height = 18
+          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1096#1090#1088#1072#1092#1086#1074
+          EditLabel.Font.Charset = RUSSIAN_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -16
+          EditLabel.Font.Name = 'Arial'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          LabelPosition = lpAbove
+          LabelSpacing = 3
+          ParentFont = False
+          TabOrder = 0
+          OnChange = Player2ScoresLabelTextChange
+        end
+        object Player2AdvantageLabelText: TLabeledEdit
+          Left = 8
+          Top = 136
+          Width = 233
+          Height = 25
+          EditLabel.Width = 153
+          EditLabel.Height = 18
+          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074
+          EditLabel.Font.Charset = RUSSIAN_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -16
+          EditLabel.Font.Name = 'Arial'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          LabelPosition = lpAbove
+          LabelSpacing = 3
+          ParentFont = False
+          TabOrder = 1
+          OnChange = Player2ScoresLabelTextChange
+        end
+        object Player2ScoresLabelText: TLabeledEdit
+          Left = 8
+          Top = 64
+          Width = 233
+          Height = 25
+          EditLabel.Width = 99
+          EditLabel.Height = 18
+          EditLabel.Caption = #1055#1072#1085#1077#1083#1100' '#1086#1095#1082#1086#1074
+          EditLabel.Font.Charset = RUSSIAN_CHARSET
+          EditLabel.Font.Color = clWindowText
+          EditLabel.Font.Height = -16
+          EditLabel.Font.Name = 'Arial'
+          EditLabel.Font.Style = []
+          EditLabel.ParentFont = False
+          Font.Charset = RUSSIAN_CHARSET
+          Font.Color = clWindowText
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = []
+          LabelPosition = lpAbove
+          LabelSpacing = 3
+          ParentFont = False
+          TabOrder = 2
+          OnChange = Player2ScoresLabelTextChange
+        end
+        object Player2ScoresLabelsBtn: TBitBtn
+          Left = 200
+          Top = 328
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
           Default = True
           Enabled = False
-          TabOrder = 0
-          OnClick = SetPlayer2PanelFontBitBtnClick
+          TabOrder = 3
+          OnClick = Player2ScoresLabelsBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -917,185 +1037,77 @@ object ConfigurationForm: TConfigurationForm
             0000}
           NumGlyphs = 2
         end
-        object Player2NamePanelFontBtn: TButton
-          Left = 24
-          Top = 32
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1080#1084#1077#1085#1080' '#1089#1083#1077#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 1
-          OnClick = Player2NamePanelFontBtnClick
-        end
-        object Player2ScoresPanelFontBtn: TButton
-          Left = 24
-          Top = 72
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1086#1095#1082#1086#1074' '#1089#1083#1077#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 2
-          OnClick = Player2ScoresPanelFontBtnClick
-        end
-        object Player2AdvantagePanelFontBtn: TButton
-          Left = 24
-          Top = 112
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074' '#1089#1083#1077#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 3
-          OnClick = Player2AdvantagePanelFontBtnClick
-        end
-        object Player2PenaltyPanelFontBtn: TButton
-          Left = 24
-          Top = 152
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1096#1090#1088#1072#1092#1086#1074' '#1089#1083#1077#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
+        object GroupBox3: TGroupBox
+          Left = 248
+          Top = 40
+          Width = 129
+          Height = 201
+          Caption = #1064#1088#1080#1092#1090#1099
           TabOrder = 4
-          OnClick = Player2PenaltyPanelFontBtnClick
-        end
-      end
-      object GroupBox10: TGroupBox
-        Left = 400
-        Top = 120
-        Width = 385
-        Height = 265
-        Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1087#1088#1072#1074#1072
-        Font.Charset = RUSSIAN_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold, fsItalic]
-        ParentFont = False
-        TabOrder = 2
-        object SetPlayer1PanelFontBitBtn: TBitBtn
-          Left = 8
-          Top = 216
-          Width = 171
-          Height = 41
-          Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100
-          Default = True
-          Enabled = False
-          TabOrder = 0
-          OnClick = SetPlayer1PanelFontBitBtnClick
-          Glyph.Data = {
-            DE010000424DDE01000000000000760000002800000024000000120000000100
-            0400000000006801000000000000000000001000000000000000000000000000
-            80000080000000808000800000008000800080800000C0C0C000808080000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-            3333333333333333333333330000333333333333333333333333F33333333333
-            00003333344333333333333333388F3333333333000033334224333333333333
-            338338F3333333330000333422224333333333333833338F3333333300003342
-            222224333333333383333338F3333333000034222A22224333333338F338F333
-            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
-            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
-            0000333333333A222433333333333338F338F33300003333333333A222433333
-            333333338F338F33000033333333333A222433333333333338F338F300003333
-            33333333A222433333333333338F338F00003333333333333A22433333333333
-            3338F38F000033333333333333A223333333333333338F830000333333333333
-            333A333333333333333338330000333333333333333333333333333333333333
-            0000}
-          NumGlyphs = 2
-        end
-        object Player1NamePanelFontBtn: TButton
-          Left = 24
-          Top = 32
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1080#1084#1077#1085#1080' '#1089#1087#1088#1072#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 1
-          OnClick = Player1NamePanelFontBtnClick
-        end
-        object Player1ScoresPanelFontBtn: TButton
-          Left = 24
-          Top = 72
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1086#1095#1082#1086#1074' '#1089#1087#1088#1072#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 2
-          OnClick = Player1ScoresPanelFontBtnClick
-        end
-        object Player1AdvantagePanelFontBtn: TButton
-          Left = 24
-          Top = 112
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1087#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074' '#1089#1087#1088#1072#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 3
-          OnClick = Player1AdvantagePanelFontBtnClick
-        end
-        object Player1PenaltyPanelFontBtn: TButton
-          Left = 24
-          Top = 152
-          Width = 337
-          Height = 25
-          Caption = #1064#1088#1080#1092#1090' '#1096#1090#1088#1072#1092#1086#1074' '#1089#1087#1088#1072#1074#1072
-          Font.Charset = RUSSIAN_CHARSET
-          Font.Color = clWindowText
-          Font.Height = -16
-          Font.Name = 'Arial'
-          Font.Style = []
-          ParentFont = False
-          TabOrder = 4
-          OnClick = Player1PenaltyPanelFontBtnClick
+          object Player2ScoresLabelTextFontBitBtn: TBitBtn
+            Left = 8
+            Top = 24
+            Width = 113
+            Height = 25
+            Caption = #1054#1095#1082#1080
+            Font.Charset = RUSSIAN_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Arial'
+            Font.Style = [fsItalic]
+            ParentFont = False
+            TabOrder = 0
+            OnClick = Player2ScoresLabelTextFontBitBtnClick
+          end
+          object Player2AdvantageLabelTextFontBitBtn: TBitBtn
+            Left = 8
+            Top = 96
+            Width = 113
+            Height = 25
+            Caption = #1055#1088#1077#1080#1084#1091#1097#1077#1089#1090#1074#1072
+            Font.Charset = RUSSIAN_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Arial Narrow'
+            Font.Style = []
+            ParentFont = False
+            TabOrder = 1
+            OnClick = Player2AdvantageLabelTextFontBitBtnClick
+          end
+          object Player2PenaltyLabelTextFontBitBtn: TBitBtn
+            Left = 8
+            Top = 168
+            Width = 113
+            Height = 25
+            Caption = #1064#1090#1088#1072#1092#1099
+            Font.Charset = RUSSIAN_CHARSET
+            Font.Color = clWindowText
+            Font.Height = -15
+            Font.Name = 'Arial'
+            Font.Style = [fsItalic]
+            ParentFont = False
+            TabOrder = 2
+            OnClick = Player2PenaltyLabelTextFontBitBtnClick
+          end
         end
       end
     end
     object PictureSelectTab: TTabSheet
-      Caption = 'PictureSelectTab'
+      Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1083#1086#1075#1086#1090#1080#1087#1086#1074
       ImageIndex = 3
       object Image1: TImage
         Left = 32
         Top = 32
         Width = 129
         Height = 129
+        Stretch = True
       end
       object Image2: TImage
         Left = 32
         Top = 232
         Width = 129
         Height = 129
+        Stretch = True
       end
       object Picture1Edit: TLabeledEdit
         Left = 176
@@ -1120,6 +1132,7 @@ object ConfigurationForm: TConfigurationForm
         LabelSpacing = 3
         ParentFont = False
         TabOrder = 0
+        OnChange = Picture1EditChange
       end
       object Picture2Edit: TLabeledEdit
         Left = 176
@@ -1144,11 +1157,12 @@ object ConfigurationForm: TConfigurationForm
         LabelSpacing = 3
         ParentFont = False
         TabOrder = 1
+        OnChange = Picture2EditChange
       end
       object Picture1BitBtn: TBitBtn
         Left = 704
         Top = 80
-        Width = 41
+        Width = 49
         Height = 28
         Caption = '. . .'
         Font.Charset = RUSSIAN_CHARSET
@@ -1158,6 +1172,7 @@ object ConfigurationForm: TConfigurationForm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
+        OnClick = Picture1BitBtnClick
       end
       object Picture2BitBtn: TBitBtn
         Left = 704
@@ -1172,8 +1187,9 @@ object ConfigurationForm: TConfigurationForm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 3
+        OnClick = Picture2BitBtnClick
       end
-      object BitBtn3: TBitBtn
+      object SetPicture1BitBtn: TBitBtn
         Left = 176
         Top = 120
         Width = 171
@@ -1182,7 +1198,7 @@ object ConfigurationForm: TConfigurationForm
         Default = True
         Enabled = False
         TabOrder = 4
-        OnClick = SetCentralPanelFontBitBtnClick
+        OnClick = SetPicture1BitBtnClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -1202,7 +1218,7 @@ object ConfigurationForm: TConfigurationForm
           0000}
         NumGlyphs = 2
       end
-      object BitBtn4: TBitBtn
+      object SetPicture2BitBtn: TBitBtn
         Left = 176
         Top = 320
         Width = 171
@@ -1211,7 +1227,7 @@ object ConfigurationForm: TConfigurationForm
         Default = True
         Enabled = False
         TabOrder = 5
-        OnClick = SetCentralPanelFontBitBtnClick
+        OnClick = SetPicture2BitBtnClick
         Glyph.Data = {
           DE010000424DDE01000000000000760000002800000024000000120000000100
           0400000000006801000000000000000000001000000000000000000000000000
@@ -1253,15 +1269,15 @@ object ConfigurationForm: TConfigurationForm
     Kind = bkAbort
   end
   object ChangeLogMemo: TMemo
-    Left = 0
+    Left = 16
     Top = 438
-    Width = 457
-    Height = 119
-    Align = alLeft
+    Width = 441
+    Height = 107
+    Align = alCustom
     Lines.Strings = (
-      
-        #1047#1072#1087#1080#1089#1099#1074#1072#1090#1100' '#1089#1102#1076#1072' '#1074#1089#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103', '#1082#1086#1090#1088#1099#1077' '#1073#1099#1083#1080' '#1087#1086#1076#1090#1074#1077#1088#1078#1076#1077#1085#1099' '#1082#1085#1086#1087#1082#1086#1081' ' +
-        '"'#1087#1088#1080#1084#1077#1085#1080#1090#1100'"')
+      #1047#1072#1087#1080#1089#1099#1074#1072#1090#1100' '#1089#1102#1076#1072' '#1074#1089#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103', '#1082#1086#1090#1088#1099#1077' '#1073#1099#1083#1080' '#1087#1086#1076#1090#1074#1077#1088#1078#1076#1077#1085#1099' '#1082#1085#1086#1087#1082#1086#1081' '
+      '"'#1087#1088#1080#1084#1077#1085#1080#1090#1100'"')
+    ParentColor = True
     ReadOnly = True
     ScrollBars = ssVertical
     TabOrder = 3
@@ -1468,5 +1484,16 @@ object ConfigurationForm: TConfigurationForm
     MaxFontSize = 0
     Left = 384
     Top = 488
+  end
+  object OpenPictureDialog: TOpenPictureDialog
+    Filter = 
+      'All (*.jpg;*.jpeg;*.bmp;*.ico;*.emf;*.wmf)|*.jpg;*.jpeg;*.bmp;*.' +
+      'ico;*.emf;*.wmf|JPEG Image File (*.jpg)|*.jpg|JPEG Image File (*' +
+      '.jpeg)|*.jpeg|Bitmaps (*.bmp)|*.bmp|Icons (*.ico)|*.ico|Enhanced' +
+      ' Metafiles (*.emf)|*.emf|Metafiles (*.wmf)|*.wmf|PNG files (*.pn' +
+      'g)|*.png'
+    Title = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1072#1088#1090#1080#1085#1082#1091' '#1076#1083#1103' '#1086#1090#1086#1073#1088#1072#1078#1077#1085#1080#1103' '#1085#1072' '#1076#1080#1089#1087#1083#1077#1077
+    Left = 224
+    Top = 472
   end
 end

@@ -12,8 +12,10 @@
 #include <Buttons.hpp>
 #include <Dialogs.hpp>
 #include <IniFiles.hpp>
+#include <ExtDlgs.hpp>
+#include <JPEG.hpp>
 //---------------------------------------------------------------------------
-const AnsiString INI_FILE = ".\\Config\\DesignConfig.ini";
+
 
 class TConfigurationForm : public TForm
 {
@@ -110,8 +112,9 @@ __published:	// IDE-managed Components
         TBitBtn *Picture2BitBtn;
         TImage *Image1;
         TImage *Image2;
-        TBitBtn *BitBtn3;
-        TBitBtn *BitBtn4;
+        TBitBtn *SetPicture1BitBtn;
+        TBitBtn *SetPicture2BitBtn;
+        TOpenPictureDialog *OpenPictureDialog;
         void __fastcall Player1ScoresLabelTextChange(TObject *Sender);
         void __fastcall BitBtn3Click(TObject *Sender);
         //void __fastcall Player1PenaltyLabelTextChange(TObject *Sender);
@@ -153,8 +156,15 @@ __published:	// IDE-managed Components
         void __fastcall Player1ScoresPanelFontBtnClick(TObject *Sender);
         void __fastcall Player1AdvantagePanelFontBtnClick(TObject *Sender);
         void __fastcall Player1PenaltyPanelFontBtnClick(TObject *Sender);
+        void __fastcall Picture1BitBtnClick(TObject *Sender);
+        void __fastcall Picture1EditChange(TObject *Sender);
+        void __fastcall Picture2EditChange(TObject *Sender);
+        void __fastcall Picture2BitBtnClick(TObject *Sender);
+        void __fastcall SetPicture1BitBtnClick(TObject *Sender);
+        void __fastcall SetPicture2BitBtnClick(TObject *Sender);
 private:	// User declarations
-public:		// User declarations
+        AnsiString INI_FILE; // путь к файлу инициализации
+
         bool Player1PointsLabelsChanged; //изменены подписи лейблов правого
         bool Player2PointsLabelsChanged; //изменены подписи лейблов левого
 
@@ -168,27 +178,34 @@ public:		// User declarations
 
         bool CentralPanelsFontChanged; //флаг шрифтов центральных панелей
 
+        bool Picture1Changed; // Флаги изменения картинок
+        bool Picture2Changed; //
+
+public:		// User declarations
+
         __fastcall TConfigurationForm(TComponent* Owner);
 
         bool InfoLabelsFlag; //флаг изменения информации на вкладке изменения информационных лейблов
         void AddAsteriskToTabName(bool needAsterisk,TTabSheet* tab); //добасляем к имени вкладки звездочку, если были изменения
-        //int __fastcall WriteInfoLabelsConfigToFile();
-        int WriteFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
 
+        int ElementWasChanged(TTabSheet* tab, TButton* btn, bool & flag );// действия при изменении элементов интерфейса
+        int SetButtonPressed(TTabSheet* tab, TButton* btn, bool & flag, AnsiString mes); // установка информации при нажатии на кнопку "Принять"
+
+        //функции записи в ини файл***********************************************************
+        int WriteFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
         int WritePlayer1ScoresLabelsConfigToFile(); //записываем в файл информацию о шрифтах лейблов подписей панелей
         int WritePlayer2ScoresLabelsConfigToFile();
-
         int WritePlayer1PanelColorToFile(); //записываем в файл информацию о цветах панелей спорстменов
         int WritePlayer2PanelColorToFile();
-
         int WriteCentralPanelColorToFile();//записываем в файл информацию о цвете центральных панелей
-
         int WriteCentralPanelFontToFile();//аписываем в файл информациб о шрифтах центральной панели
-
         int WritePlayer1PanelFontToFile(); //записываем в файл информацию о шрифтах панелей спорстменов
         int WritePlayer2PanelFontToFile();
+        int WritePicturesPathToFile(); //запись путей к картинкам логотипов
+        //************************************************************************************
 
-
+        //функции загрузки из ini файла*******************************************************
+        int LoadConfigFromFile(AnsiString iniPath); //загрузка данных в форму из ini файла
 
 };
 //---------------------------------------------------------------------------

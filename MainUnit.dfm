@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 622
-  Top = 323
+  Left = 318
+  Top = 203
   Width = 1237
   Height = 709
   Caption = 'MainForm'
@@ -58,7 +58,7 @@ object MainForm: TMainForm
         object Player1NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 541
+          Width = 173
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -418,7 +418,7 @@ object MainForm: TMainForm
         object Player2NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 624
+          Width = 173
           Height = 22
           Align = alTop
           Alignment = taCenter

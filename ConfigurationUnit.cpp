@@ -24,8 +24,7 @@ __fastcall TConfigurationForm::TConfigurationForm(TComponent* Owner)
 void __fastcall TConfigurationForm::Player1ScoresLabelTextChange(
       TObject *Sender)
 {
-        Player1ScoresLabelsBtn->Enabled = true;
-        AddAsteriskToTabName(true, InfoLabelsSheet);
+        ElementWasChanged(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged);
 }
 //---------------------------------------------------------------------------
 /*int __fastcall TConfigurationForm::WriteInfoLabelsConfigToFile()   //записываем конфиг для лейблов
@@ -76,8 +75,7 @@ void TConfigurationForm::AddAsteriskToTabName(bool needAsterisk,TTabSheet* tab)
 void __fastcall TConfigurationForm::Player2ScoresLabelTextChange(
       TObject *Sender)
 {
-        Player2ScoresLabelsBtn->Enabled = true;
-        AddAsteriskToTabName(true, InfoLabelsSheet);
+        ElementWasChanged(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged);
 }
 //---------------------------------------------------------------------------
 
@@ -210,6 +208,12 @@ void __fastcall TConfigurationForm::BitBtn1Click(TObject *Sender)
         {
                 WritePlayer2PanelFontToFile();
         };
+        //пишем информацию о картинке
+        if (Picture1Changed || Picture2Changed)
+        {
+                WritePicturesPathToFile();
+        }
+        //добавить выключение флагов при изменении элементов(чтобы не записывать ложную информацию)
 
 }
 //---------------------------------------------------------------------------
@@ -217,11 +221,9 @@ void __fastcall TConfigurationForm::BitBtn1Click(TObject *Sender)
 void __fastcall TConfigurationForm::Player2ScoresLabelTextFontBitBtnClick(
       TObject *Sender)
 {
-
         if (Player2ScoresLabelTextFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, InfoLabelsSheet);
-                Player2ScoresLabelsBtn->Enabled = true;
+                ElementWasChanged(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -231,8 +233,7 @@ void __fastcall TConfigurationForm::Player2AdvantageLabelTextFontBitBtnClick(
 {
         if (Player2AdvantageLabelTextFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, InfoLabelsSheet);
-                Player2ScoresLabelsBtn->Enabled = true;
+                ElementWasChanged(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -243,8 +244,7 @@ void __fastcall TConfigurationForm::Player2PenaltyLabelTextFontBitBtnClick(
 {
         if (Player2PenaltyLabelTextFontDialog->Execute())
         {
-                Player2ScoresLabelsBtn->Enabled = true;
-                AddAsteriskToTabName(true, InfoLabelsSheet);
+                ElementWasChanged(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -255,8 +255,7 @@ void __fastcall TConfigurationForm::Player1ScoresLabelTextFontBitBtnClick(
 {
         if (Player2ScoresLabelTextFontDialog->Execute())
         {
-                Player1ScoresLabelsBtn->Enabled = true;
-                AddAsteriskToTabName(true, InfoLabelsSheet);
+                ElementWasChanged(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -266,8 +265,7 @@ void __fastcall TConfigurationForm::Player1AdvantageLabelTextFontBitBtnClick(
 {
         if (Player1AdvantageLabelTextFontDialog->Execute())
         {
-                Player1ScoresLabelsBtn->Enabled = true;
-                AddAsteriskToTabName(true, InfoLabelsSheet);
+                ElementWasChanged(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -277,8 +275,7 @@ void __fastcall TConfigurationForm::Player1PenaltyLabelTextFontBitBtnClick(
 {
          if (Player1PenaltyLabelTextFontDialog->Execute())
         {
-                Player1ScoresLabelsBtn->Enabled = true;
-                AddAsteriskToTabName(true, InfoLabelsSheet);
+                ElementWasChanged(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -287,20 +284,14 @@ void __fastcall TConfigurationForm::Player1PenaltyLabelTextFontBitBtnClick(
 void __fastcall TConfigurationForm::Player2ScoresLabelsBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        AddAsteriskToTabName(false, InfoLabelsSheet);
-        Player2PointsLabelsChanged = true;
-        ChangeLogMemo->Lines->Add("Внесены изенения для подписей окон очков слева");
+        SetButtonPressed(InfoLabelsSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изенения для подписей окон очков слева");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::Player1ScoresLabelsBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        AddAsteriskToTabName(false, InfoLabelsSheet);
-        Player1PointsLabelsChanged = true;
-        ChangeLogMemo->Lines->Add("Внесены изенения для подписей окон очков справа");
+        SetButtonPressed(InfoLabelsSheet, ((TButton*) Sender), Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");
 }
 //---------------------------------------------------------------------------
 
@@ -371,11 +362,7 @@ int TConfigurationForm::WritePlayer2PanelColorToFile()
 void __fastcall TConfigurationForm::SetPlayer2PanelColorBitBtnClick(
       TObject *Sender)
 {
-
-        ((TButton*) Sender)->Enabled = false;
-        Player2PanelColorChanged = true;
-        AddAsteriskToTabName(false, PanelsColorTabSheet);
-        ChangeLogMemo->Lines->Add("Внесены изенения цвета панелей слева");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изенения цвета панелей слева");
 }
 //---------------------------------------------------------------------------
 
@@ -383,44 +370,35 @@ void __fastcall TConfigurationForm::SetPlayer2PanelColorBitBtnClick(
 void __fastcall TConfigurationForm::CategoryPanelColorBoxChange(
       TObject *Sender)
 {
-        SetCentralPanelColorBitBtn->Enabled = true;
-        AddAsteriskToTabName(true, PanelsColorTabSheet);
+        ElementWasChanged(PanelsColorTabSheet, SetCentralPanelColorBitBtn, CentralPanelsColorChanged);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::SetPlayer1PanelColorBitBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        Player1PanelColorChanged = true;
-        AddAsteriskToTabName(false, PanelsColorTabSheet);
-        ChangeLogMemo->Lines->Add("Внесены изенения цвета панелей справа");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изенения цвета панелей справа");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::SetCentralPanelColorBitBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        CentralPanelsColorChanged = true;
-        AddAsteriskToTabName(false, PanelsColorTabSheet);
-        ChangeLogMemo->Lines->Add("Внесены изенения цвета центральных панелей");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), CentralPanelsColorChanged, "Внесены изенения цвета центральных панелей");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::Player1NamePanelColorBoxChange(
       TObject *Sender)
 {
-        SetPlayer1PanelColorBitBtn->Enabled = true;
-        AddAsteriskToTabName(true, PanelsColorTabSheet);
+        ElementWasChanged(PanelsColorTabSheet, SetPlayer1PanelColorBitBtn, Player1PanelColorChanged);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::Player2NamePanelColorBoxChange(
       TObject *Sender)
 {
-        SetPlayer2PanelColorBitBtn->Enabled = true;
-        AddAsteriskToTabName(true, PanelsColorTabSheet);
+        ElementWasChanged(PanelsColorTabSheet, SetPlayer2PanelColorBitBtn, Player2PanelColorChanged);
 }
 //---------------------------------------------------------------------------
 
@@ -462,6 +440,8 @@ void __fastcall TConfigurationForm::ResetToDefaultBitBtnClick(
 
 void __fastcall TConfigurationForm::FormCreate(TObject *Sender)
 {
+        //INI_FILE = ".\\Config\\DesignConfig.ini";
+        INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini";
         ChangeLogMemo->Text = "";
         //устанавливаем флаги
         Player1PointsLabelsChanged = false;
@@ -469,6 +449,8 @@ void __fastcall TConfigurationForm::FormCreate(TObject *Sender)
         Player1PanelColorChanged = false;
         Player2PanelColorChanged = false;
         CentralPanelsColorChanged = false;
+        Picture1Changed = false;
+        Picture2Changed = false;
 }
 //---------------------------------------------------------------------------
 
@@ -480,8 +462,7 @@ void __fastcall TConfigurationForm::CategoryPanelFontBtnClick(
 {
         if (CategoryPanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetCentralPanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetCentralPanelFontBitBtn, CentralPanelsFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -489,30 +470,21 @@ void __fastcall TConfigurationForm::CategoryPanelFontBtnClick(
 void __fastcall TConfigurationForm::SetCentralPanelFontBitBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        CentralPanelsFontChanged = true;
-        AddAsteriskToTabName(false, PanelsFontTabSheet);
-        ChangeLogMemo->Lines->Add("Внесены изенения в шрифты центральных панелей");
+        SetButtonPressed(PanelsFontTabSheet, ((TButton*) Sender), CentralPanelsFontChanged, "Внесены изенения в шрифты центральных панелей");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::SetPlayer2PanelFontBitBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        CentralPanelsFontChanged = true;
-        AddAsteriskToTabName(false, PanelsFontTabSheet);
-        ChangeLogMemo->Lines->Add("Внесены изенения в шрифты панелей слева");
+        SetButtonPressed(PanelsFontTabSheet, ((TButton*) Sender), Player2PanelFontChanged, "Внесены изменения в шрифты панелей слева");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::SetPlayer1PanelFontBitBtnClick(
       TObject *Sender)
 {
-        ((TButton*) Sender)->Enabled = false;
-        CentralPanelsFontChanged = true;
-        AddAsteriskToTabName(false, PanelsFontTabSheet);
-        ChangeLogMemo->Lines->Add("Внесены изенения в шрифты панелей справа");        
+        SetButtonPressed(PanelsFontTabSheet, ((TButton*) Sender), Player1PanelFontChanged, "Внесены изменения в шрифты панелей справа");
 }
 //---------------------------------------------------------------------------
 
@@ -521,8 +493,7 @@ void __fastcall TConfigurationForm::Player2NamePanelFontBtnClick(
 {
         if (CategoryPanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer2PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -531,8 +502,7 @@ void __fastcall TConfigurationForm::TimePanelFontBtnClick(TObject *Sender)
 {
         if (Player2NamePanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetCentralPanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetCentralPanelFontBitBtn, CentralPanelsFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -542,8 +512,7 @@ void __fastcall TConfigurationForm::Player2ScoresPanelFontBtnClick(
 {
         if (Player2ScoresPanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer2PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -553,8 +522,7 @@ void __fastcall TConfigurationForm::Player2AdvantagePanelFontBtnClick(
 {
         if (Player2AdvantagePanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer2PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -564,8 +532,7 @@ void __fastcall TConfigurationForm::Player2PenaltyPanelFontBtnClick(
 {
         if (Player2PenaltyPanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer2PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -575,8 +542,7 @@ void __fastcall TConfigurationForm::Player1NamePanelFontBtnClick(
 {
         if (Player1NamePanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer1PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -586,8 +552,7 @@ void __fastcall TConfigurationForm::Player1ScoresPanelFontBtnClick(
 {
         if (Player1ScoresPanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer1PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -597,8 +562,7 @@ void __fastcall TConfigurationForm::Player1AdvantagePanelFontBtnClick(
 {
         if (Player1AdvantagePanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer1PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -608,8 +572,7 @@ void __fastcall TConfigurationForm::Player1PenaltyPanelFontBtnClick(
 {
         if (Player1PenaltyPanelFontDialog->Execute())
         {
-                AddAsteriskToTabName(true, PanelsFontTabSheet);
-                SetPlayer1PanelFontBitBtn->Enabled = true;
+                ElementWasChanged(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged);
         };
 }
 //---------------------------------------------------------------------------
@@ -704,5 +667,145 @@ int TConfigurationForm::WritePlayer1PanelFontToFile()
                 }
                 return 1;
          }
+}
+
+void __fastcall TConfigurationForm::Picture1BitBtnClick(TObject *Sender)
+{
+        if (OpenPictureDialog->Execute())
+        {
+                Picture1Edit->Text = OpenPictureDialog->FileName;
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TConfigurationForm::Picture1EditChange(TObject *Sender)
+{
+        if (Picture1Edit->Text != "")
+        {
+                ElementWasChanged(PictureSelectTab, SetPicture1BitBtn, Picture1Changed);
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TConfigurationForm::Picture2EditChange(TObject *Sender)
+{
+        if (Picture2Edit->Text != "")
+        {
+                ElementWasChanged(PictureSelectTab, SetPicture2BitBtn, Picture2Changed);
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TConfigurationForm::Picture2BitBtnClick(TObject *Sender)
+{
+        if (OpenPictureDialog->Execute())
+        {
+                Picture2Edit->Text = OpenPictureDialog->FileName;
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TConfigurationForm::SetPicture1BitBtnClick(TObject *Sender)
+{
+        if (FileExists(Picture1Edit->Text) == false)
+        {
+                ShowMessage("Файла по выбранному пути не существует");
+        }
+        else
+        {
+                try
+                {
+                        Image1->Picture->LoadFromFile(Picture1Edit->Text);
+                        SetButtonPressed(PictureSelectTab, ((TButton*) Sender), Picture1Changed, "Изменена картинка № 1");
+                }
+                catch (...)
+                {
+                        ShowMessage("Возникла ошибка при загрузке файла изображения");
+                        Picture1Changed = false;
+                }
+        };
+        ((TButton*) Sender)->Enabled = false;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TConfigurationForm::SetPicture2BitBtnClick(TObject *Sender)
+{
+        if (FileExists(Picture2Edit->Text) == false)
+        {
+                ShowMessage("Файла по выбранному пути не существует");
+        }
+        else
+        {
+                try
+                {
+                        Image2->Picture->LoadFromFile(Picture2Edit->Text);
+                        SetButtonPressed(PictureSelectTab, ((TButton*) Sender), Picture2Changed, "Изменена картинка № 2");
+                }
+                catch (...)
+                {
+                        ShowMessage("Возникла ошибка при загрузке файла изображения");
+                        Picture2Changed = false;
+                }
+        };
+        ((TButton*) Sender)->Enabled = false;
+}
+//---------------------------------------------------------------------------
+
+int TConfigurationForm::WritePicturesPathToFile()
+{
+        AnsiString section = "PicturesPath";
+        TIniFile* ini;
+        ini = NULL;
+        try
+        {
+                ini = new TIniFile(INI_FILE);
+
+
+                if (Picture1Changed == true)
+                {
+                        ini->WriteString(section,"Picture1",Picture1Edit->Text);
+                };
+
+                if (Picture2Changed == true)
+                {
+                        ini->WriteString(section,"Picture2",Picture2Edit->Text);
+                };
+
+                delete ini;
+                return 0;
+         }
+         catch (...)
+         {
+                if (ini != NULL)
+                {
+                        delete ini;
+                }
+                return 1;
+         }
+
+}
+
+int TConfigurationForm::ElementWasChanged(TTabSheet* tab, TButton* btn, bool & flag )
+{
+        AddAsteriskToTabName(true, tab); //добавляем звездочку в название закладки
+        btn->Enabled = true; //разблокируем главную кнопку
+        flag = false; //ставим флаг принятия изменений 0, поскольку информация для приема уже изменена, но не подтверждена
+        return 0;
+}
+
+int TConfigurationForm::SetButtonPressed(TTabSheet* tab, TButton* btn, bool & flag, AnsiString mes)
+{
+        btn->Enabled = false;
+        AddAsteriskToTabName(false, tab);
+        flag = true;
+        ChangeLogMemo->Lines->Add(mes);
+        return 0;
+}
+
+int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
+{
+        //после загрузки значений сделать все кнопки недоступными, сбросить флаги и убрать звезды
+
+
 }
 
