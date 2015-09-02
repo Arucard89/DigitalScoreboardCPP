@@ -412,7 +412,7 @@ int TConfigurationForm::WriteCentralPanelColorToFile()
                 TIniFile* ini;
                 ini = NULL;
                 ini = new TIniFile(INI_FILE);
-                
+
                 //записываем параметры цвета панелей
                 ini->WriteString(section,"CategoryPanelColor", ColorToString(CategoryPanelColorBox->Selected));
                 ini->WriteString(section,"TimePanelColor", ColorToString(TimePanelColorBox->Selected));
@@ -434,7 +434,8 @@ int TConfigurationForm::WriteCentralPanelColorToFile()
 void __fastcall TConfigurationForm::ResetToDefaultBitBtnClick(
       TObject *Sender)
 {
-        //здесь будет загрузка параметров по умолчанию из файла Default.ini        
+        //здесь будет загрузка параметров по умолчанию из файла Default.ini
+        
 }
 //---------------------------------------------------------------------------
 
@@ -805,7 +806,180 @@ int TConfigurationForm::SetButtonPressed(TTabSheet* tab, TButton* btn, bool & fl
 int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
 {
         //после загрузки значений сделать все кнопки недоступными, сбросить флаги и убрать звезды
+        //проверяем
+        if (FileExists(iniPath) == false)
+        {
+                ShowMessage("Файл настроек не найден");
+                return 1;
+        }
 
 
 }
+
+int TConfigurationForm::LoadFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident)
+{
+
+        f->Name = ini->ReadString(section, ident + "_name","Arial");
+        f->Color = StringToColor(ini->ReadString(section, ident + "_color","clBlack"));
+        f->Size = ini->ReadInteger(section, ident + "_size",20);
+
+        if (ini->ReadBool(section, ident + "_Bold", false))
+        {
+                f->Style << fsBold;
+        };
+        if (ini->ReadBool(section, ident + "_Italic", false))
+        {
+                f->Style << fsItalic;
+        };
+        if (ini->ReadBool(section, ident + "_Underline", false))
+        {
+                f->Style << fsUnderline;
+        };
+        if (ini->ReadBool(section, ident + "_StrikeOut", false))
+        {
+                f->Style << fsStrikeOut;
+        };
+
+        return 0;
+}
+
+int TConfigurationForm::LoadPlayer1ScoresLabelsConfigFromFile(TIniFile* ini)
+{
+        AnsiString section = "Player1PointsLabelsConfig";
+        //записываем текст
+        Player1ScoresLabelText->Text = ini->ReadString(section, "Player1ScoresText", "Очки");
+        Player1AdvantageLabelText->Text = ini->ReadString(section, "Player1AdvantageText", "Преимущества");
+        Player1PenaltyLabelText->Text = ini->ReadString(section, "Player1PenaltyText", "Штрафы");
+
+        //записываем параметры шрифтов
+        //очки
+        LoadFontParameters( ini,Player1ScoresLabelTextFontDialog->Font, section, "Player1ScoresFont" );
+        //преимущества
+        LoadFontParameters( ini,Player1AdvantageLabelTextFontDialog->Font, section, "Player1AdvantageFont" );
+        //пенальти
+        LoadFontParameters( ini,Player1PenaltyLabelTextFontDialog->Font, section, "Player1PenaltyFont" );
+
+        return 0;
+}
+
+int TConfigurationForm::LoadPlayer2ScoresLabelsConfigFromFile(TIniFile* ini)
+{
+        AnsiString section = "Player2PointsLabelsConfig";
+        //записываем текст
+        Player2ScoresLabelText->Text = ini->ReadString(section, "Player2ScoresText", "Очки");
+        Player2AdvantageLabelText->Text = ini->ReadString(section, "Player2AdvantageText", "Преимущества");
+        Player2PenaltyLabelText->Text = ini->ReadString(section, "Player2PenaltyText", "Штрафы");
+
+        //записываем параметры шрифтов
+        //очки
+        LoadFontParameters( ini,Player2ScoresLabelTextFontDialog->Font, section, "Player2ScoresFont" );
+        //преимущества
+        LoadFontParameters( ini,Player2AdvantageLabelTextFontDialog->Font, section, "Player2AdvantageFont" );
+        //пенальти
+        LoadFontParameters( ini,Player2PenaltyLabelTextFontDialog->Font, section, "Player2PenaltyFont" );
+
+        return 0;
+}
+
+int TConfigurationForm::LoadPlayer1PanelColorFromFile(TIniFile* ini)
+{
+        AnsiString section = "Player1PanelsColorConfig";
+        //считываем параметры цвета панелей
+        Player1NamePanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player1NamePanelColor", clWhite));
+        Player1ScoresPanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player1ScoresPanelColor", clWhite));
+        Player1AdvantagePanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player1AdvantagePanelColor", clWhite));
+        Player1PenaltyPanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player1PenaltyPanelColor", clWhite));
+        return 0;
+}
+
+int TConfigurationForm::LoadPlayer2PanelColorFromFile(TIniFile* ini)
+{
+        AnsiString section = "Player2PanelsColorConfig";
+        //считываем параметры цвета панелей
+        Player2NamePanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player2NamePanelColor", clWhite));
+        Player2ScoresPanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player2ScoresPanelColor", clWhite));
+        Player2AdvantagePanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player2AdvantagePanelColor", clWhite));
+        Player2PenaltyPanelColorBox->Selected = StringToColor(ini->ReadString(section,"Player2PenaltyPanelColor", clWhite));
+        return 0;
+}
+
+int TConfigurationForm::LoadCentralPanelColorFromFile(TIniFile* ini)
+{
+        AnsiString section = "CentralPanelColorConfig";
+        //считываем параметры цвета панелей
+        CategoryPanelColorBox->Selected = StringToColor(ini->ReadString(section,"CategoryPanelColor", clWhite));
+        TimePanelColorBox->Selected = StringToColor(ini->ReadString(section,"TimePanelColor", clWhite));
+        return 0;
+}
+
+int TConfigurationForm::LoadCentralPanelFontFromFile(TIniFile* ini)
+{
+        AnsiString section = "CentralPanelFontConfig";
+        //считываем параметры шрифтов
+        //категории
+        LoadFontParameters( ini,CategoryPanelFontDialog->Font, section, "CategoryPanelFont" );
+        //время
+        LoadFontParameters( ini,TimePanelFontDialog->Font, section, "TimePanelFont" );
+        return 0;
+}
+
+int TConfigurationForm::LoadPlayer1PanelFontFromFile(TIniFile* ini)
+{
+        AnsiString section = "Player1PanelFontConfig";
+        //считываем параметры шрифтов
+        //имя
+        LoadFontParameters( ini,Player1NamePanelFontDialog->Font, section, "NamePanelFont" );
+        //очки
+        LoadFontParameters( ini,Player1ScoresPanelFontDialog->Font, section, "ScoresPanelFont" );
+        //преимущества
+        LoadFontParameters( ini,Player1AdvantagePanelFontDialog->Font, section, "AdvantagePanelFont" );
+        //штрафы
+        LoadFontParameters( ini,Player1PenaltyPanelFontDialog->Font, section, "PenaltyPanelFont" );
+        return 0;
+}
+
+int TConfigurationForm::LoadPlayer2PanelFontFromFile(TIniFile* ini)
+{
+        AnsiString section = "Player2PanelFontConfig";
+        //считываем параметры шрифтов
+        //имя
+        LoadFontParameters( ini,Player2NamePanelFontDialog->Font, section, "NamePanelFont" );
+        //очки
+        LoadFontParameters( ini,Player2ScoresPanelFontDialog->Font, section, "ScoresPanelFont" );
+        //преимущества
+        LoadFontParameters( ini,Player2AdvantagePanelFontDialog->Font, section, "AdvantagePanelFont" );
+        //штрафы
+        LoadFontParameters( ini,Player2PenaltyPanelFontDialog->Font, section, "PenaltyPanelFont" );
+        return 0;
+}
+
+int TConfigurationForm::LoadPicturesPathFromFile(TIniFile* ini)
+{
+        AnsiString section = "PicturesPath";
+        Picture1Edit->Text = ini->ReadString(section,"Picture1","");
+        try
+        {
+                Image1->Picture->LoadFromFile(Picture1Edit->Text);
+        }
+        catch (...)
+        {
+                ShowMessage("Ошибка загрузки картинки № 1");
+                Picture1Edit->Text = "";
+        }
+        Picture2Edit->Text = ini->ReadString(section,"Picture2","");
+        try
+        {
+                Image2->Picture->LoadFromFile(Picture2Edit->Text);
+        }
+        catch (...)
+        {
+                ShowMessage("Ошибка загрузки картинки № 2");
+                Picture2Edit->Text = "";
+        }
+        return 0;
+}
+
+
+
+
 

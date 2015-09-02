@@ -3,7 +3,7 @@ object MainForm: TMainForm
   Top = 203
   Width = 1237
   Height = 709
-  Caption = 'MainForm'
+  Caption = 'htfkmyj'
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText

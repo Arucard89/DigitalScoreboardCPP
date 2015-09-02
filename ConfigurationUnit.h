@@ -192,7 +192,7 @@ public:		// User declarations
         int SetButtonPressed(TTabSheet* tab, TButton* btn, bool & flag, AnsiString mes); // установка информации при нажатии на кнопку "Принять"
 
         //функции записи в ини файл***********************************************************
-        int WriteFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
+        int WriteFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);  //запись информации о шрифтах
         int WritePlayer1ScoresLabelsConfigToFile(); //записываем в файл информацию о шрифтах лейблов подписей панелей
         int WritePlayer2ScoresLabelsConfigToFile();
         int WritePlayer1PanelColorToFile(); //записываем в файл информацию о цветах панелей спорстменов
@@ -206,6 +206,17 @@ public:		// User declarations
 
         //функции загрузки из ini файла*******************************************************
         int LoadConfigFromFile(AnsiString iniPath); //загрузка данных в форму из ini файла
+
+        int LoadFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
+        int LoadPlayer1ScoresLabelsConfigFromFile(TIniFile* ini); //считываем из файл информацию о шрифтах лейблов подписей панелей
+        int LoadPlayer2ScoresLabelsConfigFromFile(TIniFile* ini);
+        int LoadPlayer1PanelColorFromFile(TIniFile* ini); //считываем из файл файл информацию о цветах панелей спорстменов
+        int LoadPlayer2PanelColorFromFile(TIniFile* ini);
+        int LoadCentralPanelColorFromFile(TIniFile* ini);//считываем из файл файл информацию о цвете центральных панелей
+        int LoadCentralPanelFontFromFile(TIniFile* ini);//считываем из файл файл информациб о шрифтах центральной панели
+        int LoadPlayer1PanelFontFromFile(TIniFile* ini); //считываем из файл файл информацию о шрифтах панелей спорстменов
+        int LoadPlayer2PanelFontFromFile(TIniFile* ini);
+        int LoadPicturesPathFromFile(TIniFile* ini); //считываем из файл путей к картинкам логотипов
 
 };
 //---------------------------------------------------------------------------
