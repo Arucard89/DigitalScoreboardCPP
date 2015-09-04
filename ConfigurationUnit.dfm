@@ -1,6 +1,6 @@
 object ConfigurationForm: TConfigurationForm
-  Left = 595
-  Top = 99
+  Left = 582
+  Top = 170
   Width = 811
   Height = 596
   Caption = 'ConfigurationForm'
@@ -16,7 +16,7 @@ object ConfigurationForm: TConfigurationForm
   TextHeight = 13
   object Label11: TLabel
     Left = 0
-    Top = 425
+    Top = 393
     Width = 795
     Height = 13
     Align = alTop
@@ -26,8 +26,8 @@ object ConfigurationForm: TConfigurationForm
     Left = 0
     Top = 0
     Width = 795
-    Height = 425
-    ActivePage = PanelsFontTabSheet
+    Height = 393
+    ActivePage = InfoLabelsSheet
     Align = alTop
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
@@ -35,7 +35,7 @@ object ConfigurationForm: TConfigurationForm
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object PanelsFontTabSheet: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1096#1088#1080#1092#1090#1086#1074' '#1087#1072#1085#1077#1083#1077#1081' '#1090#1072#1073#1083#1086
@@ -124,7 +124,7 @@ object ConfigurationForm: TConfigurationForm
         Left = 0
         Top = 120
         Width = 385
-        Height = 265
+        Height = 241
         Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -135,7 +135,7 @@ object ConfigurationForm: TConfigurationForm
         TabOrder = 1
         object SetPlayer2PanelFontBitBtn: TBitBtn
           Left = 8
-          Top = 216
+          Top = 192
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
@@ -227,7 +227,7 @@ object ConfigurationForm: TConfigurationForm
         Left = 400
         Top = 120
         Width = 385
-        Height = 265
+        Height = 241
         Caption = #1064#1088#1080#1092#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -238,7 +238,7 @@ object ConfigurationForm: TConfigurationForm
         TabOrder = 2
         object SetPlayer1PanelFontBitBtn: TBitBtn
           Left = 8
-          Top = 216
+          Top = 192
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
@@ -334,7 +334,7 @@ object ConfigurationForm: TConfigurationForm
         Left = 0
         Top = 120
         Width = 385
-        Height = 265
+        Height = 241
         Caption = #1062#1074#1077#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -397,7 +397,7 @@ object ConfigurationForm: TConfigurationForm
         end
         object SetPlayer2PanelColorBitBtn: TBitBtn
           Left = 8
-          Top = 216
+          Top = 192
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
@@ -589,7 +589,7 @@ object ConfigurationForm: TConfigurationForm
         Left = 400
         Top = 120
         Width = 385
-        Height = 265
+        Height = 241
         Caption = #1062#1074#1077#1090' '#1087#1072#1085#1077#1083#1077#1081' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -652,7 +652,7 @@ object ConfigurationForm: TConfigurationForm
         end
         object SetPlayer1PanelColorBitBtn: TBitBtn
           Left = 8
-          Top = 216
+          Top = 192
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
@@ -753,7 +753,7 @@ object ConfigurationForm: TConfigurationForm
         Left = 400
         Top = 8
         Width = 385
-        Height = 377
+        Height = 353
         Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085' '#1086#1095#1082#1086#1074' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1072' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -839,7 +839,7 @@ object ConfigurationForm: TConfigurationForm
         end
         object Player1ScoresLabelsBtn: TBitBtn
           Left = 200
-          Top = 328
+          Top = 296
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
@@ -924,7 +924,7 @@ object ConfigurationForm: TConfigurationForm
         Left = 0
         Top = 8
         Width = 385
-        Height = 377
+        Height = 353
         Caption = #1055#1086#1076#1087#1080#1089#1080' '#1086#1082#1086#1085' '#1086#1095#1082#1086#1074' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1072' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
@@ -1010,7 +1010,7 @@ object ConfigurationForm: TConfigurationForm
         end
         object Player2ScoresLabelsBtn: TBitBtn
           Left = 200
-          Top = 328
+          Top = 296
           Width = 171
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
@@ -1263,10 +1263,16 @@ object ConfigurationForm: TConfigurationForm
   end
   object BitBtn1: TBitBtn
     Left = 504
-    Top = 440
+    Top = 456
     Width = 281
-    Height = 25
-    Caption = '&All'
+    Height = 41
+    Caption = #1055#1088#1080#1085#1103#1090#1100' '#1074#1089#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 1
     OnClick = BitBtn1Click
     Glyph.Data = {
@@ -1290,10 +1296,16 @@ object ConfigurationForm: TConfigurationForm
   end
   object BitBtn2: TBitBtn
     Left = 504
-    Top = 480
+    Top = 400
     Width = 281
-    Height = 25
+    Height = 41
     Caption = #1054#1090#1084#1077#1085#1072
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 2
     OnClick = BitBtn2Click
     Glyph.Data = {
@@ -1316,8 +1328,8 @@ object ConfigurationForm: TConfigurationForm
     NumGlyphs = 2
   end
   object ChangeLogMemo: TMemo
-    Left = 16
-    Top = 438
+    Left = 8
+    Top = 406
     Width = 441
     Height = 107
     Align = alCustom
@@ -1331,10 +1343,16 @@ object ConfigurationForm: TConfigurationForm
   end
   object ResetToDefaultBitBtn: TBitBtn
     Left = 504
-    Top = 520
+    Top = 512
     Width = 281
-    Height = 25
-    Caption = 'ResetToDefaultBitBtn'
+    Height = 33
+    Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1087#1086' '#1091#1084#1086#1083#1095#1072#1085#1080#1102
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = []
+    ParentFont = False
     TabOrder = 4
     OnClick = ResetToDefaultBitBtnClick
     Glyph.Data = {

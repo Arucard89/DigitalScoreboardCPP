@@ -206,9 +206,9 @@ public:		// User declarations
         //************************************************************************************
 
         //функции загрузки из ini файла*******************************************************
-        int LoadConfigFromFile(AnsiString iniPath); //загрузка данных в форму из ini файла
+        int LoadConfigFromFile(AnsiString iniFile); //загрузка данных в форму из ini файла
 
-        int LoadFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
+        static int LoadFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident);
         int LoadPlayer1ScoresLabelsConfigFromFile(TIniFile* ini); //считываем из файл информацию о шрифтах лейблов подписей панелей
         int LoadPlayer2ScoresLabelsConfigFromFile(TIniFile* ini);
         int LoadPlayer1PanelColorFromFile(TIniFile* ini); //считываем из файл файл информацию о цветах панелей спорстменов

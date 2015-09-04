@@ -1,9 +1,9 @@
 object MainForm: TMainForm
-  Left = 318
-  Top = 203
+  Left = 600
+  Top = 200
   Width = 1237
   Height = 709
-  Caption = 'htfkmyj'
+  Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -20,7 +20,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 633
-    ActivePage = FightSettings
+    ActivePage = FightingControls
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -29,7 +29,7 @@ object MainForm: TMainForm
     Font.Style = [fsBold, fsItalic]
     MultiLine = True
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -40,7 +40,6 @@ object MainForm: TMainForm
       Font.Name = 'Arial'
       Font.Style = [fsBold]
       ParentFont = False
-      OnShow = FormResize
       object Player1GroupBox: TGroupBox
         Left = 0
         Top = 113
@@ -58,7 +57,7 @@ object MainForm: TMainForm
         object Player1NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 173
+          Width = 541
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -76,6 +75,7 @@ object MainForm: TMainForm
           Width = 541
           Height = 74
           Align = alTop
+          BevelOuter = bvNone
           Caption = 'Player1ScoresPanel'
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWindowText
@@ -84,7 +84,6 @@ object MainForm: TMainForm
           Font.Style = [fsBold]
           ParentFont = False
           TabOrder = 0
-          OnResize = FormCreate
         end
         object Player1AdvantagePanel: TPanel
           Left = 2
@@ -92,6 +91,7 @@ object MainForm: TMainForm
           Width = 231
           Height = 38
           Align = alLeft
+          BevelOuter = bvNone
           Caption = 'Player1AdvantagePanel'
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWindowText
@@ -107,6 +107,7 @@ object MainForm: TMainForm
           Width = 310
           Height = 38
           Align = alClient
+          BevelOuter = bvNone
           Caption = 'Player1PenaltyPanel'
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWindowText
@@ -314,6 +315,7 @@ object MainForm: TMainForm
               Width = 276
               Height = 123
               Align = alClient
+              BevelOuter = bvNone
               BorderWidth = 20
               TabOrder = 0
               object Player1AdvantagePlusBitBtn: TBitBtn
@@ -363,6 +365,7 @@ object MainForm: TMainForm
               Width = 255
               Height = 123
               Align = alClient
+              BevelOuter = bvNone
               BorderWidth = 20
               TabOrder = 0
               object Player1PenaltyPlusBitBtn: TBitBtn
@@ -418,7 +421,7 @@ object MainForm: TMainForm
         object Player2NameLabel: TLabel
           Left = 2
           Top = 21
-          Width = 173
+          Width = 624
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -436,6 +439,7 @@ object MainForm: TMainForm
           Width = 624
           Height = 74
           Align = alTop
+          BevelOuter = bvNone
           Caption = 'Player2ScoresPanel'
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWindowText
@@ -451,6 +455,7 @@ object MainForm: TMainForm
           Width = 279
           Height = 34
           Align = alRight
+          BevelOuter = bvNone
           Caption = 'Player2AdvantagePanel'
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWindowText
@@ -466,6 +471,7 @@ object MainForm: TMainForm
           Width = 345
           Height = 34
           Align = alClient
+          BevelOuter = bvNone
           Caption = 'Player2PenaltyPanel'
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clWindowText
@@ -673,6 +679,7 @@ object MainForm: TMainForm
               Width = 228
               Height = 138
               Align = alClient
+              BevelOuter = bvNone
               BorderWidth = 20
               TabOrder = 0
               object Player2AdvantagePlusBitBtn: TBitBtn
@@ -722,6 +729,7 @@ object MainForm: TMainForm
               Width = 386
               Height = 138
               Align = alClient
+              BevelOuter = bvNone
               BorderWidth = 20
               TabOrder = 0
               object Player2PenaltyPlusBitBtn: TBitBtn
@@ -775,16 +783,16 @@ object MainForm: TMainForm
         ParentFont = False
         TabOrder = 2
       end
-      object InformationPanel: TPanel
+      object CategoryPanel: TPanel
         Left = 0
         Top = 0
         Width = 1173
         Height = 17
         Align = alTop
-        Caption = 'InformationPanel'
+        Caption = 'CategoryPanel'
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
-        Font.Height = -13
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = [fsBold]
         ParentFont = False
@@ -866,7 +874,7 @@ object MainForm: TMainForm
       ImageIndex = 1
       object InformationGroupBox: TGroupBox
         Left = 0
-        Top = 201
+        Top = 0
         Width = 1173
         Height = 136
         Align = alTop
@@ -1066,7 +1074,7 @@ object MainForm: TMainForm
       end
       object PlayersNamesGroupBox: TGroupBox
         Left = 0
-        Top = 0
+        Top = 136
         Width = 1173
         Height = 201
         Align = alTop

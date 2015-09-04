@@ -51,7 +51,7 @@ __published:	// IDE-managed Components
         TBitBtn *AcceptAllConfigurationBtn;
         TButton *OpenConfigurationButton;
         TPanel *TimePanel;
-        TPanel *InformationPanel;
+        TPanel *CategoryPanel;
         TPanel *Player1ScoresPanel;
         TPanel *Player1AdvantagePanel;
         TPanel *Player1PenaltyPanel;
@@ -120,7 +120,6 @@ __published:	// IDE-managed Components
         TTimer *Timer1;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
-        void __fastcall FormCreate(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
         void __fastcall AcceptPlayersNamesBtnClick(TObject *Sender);
         void __fastcall Player1ComboBoxChange(TObject *Sender);
@@ -139,7 +138,8 @@ __published:	// IDE-managed Components
         void __fastcall StartFightBtnClick(TObject *Sender);
         void __fastcall PauseFightBtnClick(TObject *Sender);
         void __fastcall StopFightBtnClick(TObject *Sender);
-        void __fastcall ResetBtnClick(TObject *Sender);//обща€ процедура дл€ отклика на нажати€ кнопок очеков дл€ первого игрока
+        void __fastcall ResetBtnClick(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);//обща€ процедура дл€ отклика на нажати€ кнопок очеков дл€ первого игрока
 private:	// User declarations
 
         TDisplayForm *DisplayForm;
@@ -152,6 +152,7 @@ private:	// User declarations
         int timerInterval; //отсчет дл€ таймера
         bool dots; //показывать точки во времени или нет
         int defaultInterval; //занчение дл€ интервала по умолчанию
+        AnsiString INI_FILE; // путь к файлу инициализации
 
 public:		// User declarations
         __fastcall TMainForm(TComponent* Owner);
@@ -169,6 +170,19 @@ public:		// User declarations
         void ShowTime(bool doubleDot = true); //выводим врем€ на панельки
         void UpdateScores(); //обновл€ем информацию об очках борцов
         int minusInterval(); //используетс€ в счетчике времени
+
+        //загрузка настроек интерфейса
+        int LoadInterfaceParameters(AnsiString iniFile);
+        int LoadCentralPanelsParameters(TIniFile* ini);
+        int LoadPlayer1PanelsParameters(TIniFile* ini);
+        int LoadPlayer2PanelsParameters(TIniFile* ini);
+        int LoadPictures(TIniFile* ini);
+
+        int LoadPlayer1LabelsFontParameters(TIniFile* ini);
+        int LoadPlayer2LabelsFontParameters(TIniFile* ini);
+
+
+
 
         //добавить логи на нажатие каждой кнопки: кака€ кнопка, врем€, что сделано.
 };

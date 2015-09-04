@@ -265,7 +265,7 @@ void __fastcall TConfigurationForm::Player2PenaltyLabelTextFontBitBtnClick(
 void __fastcall TConfigurationForm::Player1ScoresLabelTextFontBitBtnClick(
       TObject *Sender)
 {
-        if (Player2ScoresLabelTextFontDialog->Execute())
+        if (Player1ScoresLabelTextFontDialog->Execute())
         {
                 ElementWasChanged(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged);
         };
@@ -384,7 +384,7 @@ int TConfigurationForm::WritePlayer2PanelColorToFile()
 void __fastcall TConfigurationForm::SetPlayer2PanelColorBitBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изменения цвета панелей слева");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PanelColorChanged, "Внесены изменения цвета панелей слева");
 }
 //---------------------------------------------------------------------------
 
@@ -399,7 +399,7 @@ void __fastcall TConfigurationForm::CategoryPanelColorBoxChange(
 void __fastcall TConfigurationForm::SetPlayer1PanelColorBitBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изменения цвета панелей справа");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player1PanelColorChanged, "Внесены изменения цвета панелей справа");
 }
 //---------------------------------------------------------------------------
 
@@ -882,13 +882,16 @@ int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
                 LoadPicturesPathFromFile(ini);
         }
         catch (...)
-         {
+        {
                 if (ini != NULL)
                 {
                         delete ini;
                 }
                 return 1;
-         }
+        }
+
+        delete ini;
+        return 0;
 
 
 

@@ -1,6 +1,6 @@
 object DisplayForm: TDisplayForm
-  Left = 1983
-  Top = 120
+  Left = 2067
+  Top = 148
   Width = 1342
   Height = 801
   BorderIcons = [biMinimize, biMaximize]
@@ -317,7 +317,7 @@ object DisplayForm: TDisplayForm
       BevelOuter = bvNone
       Caption = 'CentralTopPanel'
       TabOrder = 0
-      object TopPicture: TImage
+      object Image1: TImage
         Left = 0
         Top = 0
         Width = 320
@@ -335,7 +335,7 @@ object DisplayForm: TDisplayForm
       BevelOuter = bvNone
       Caption = 'CentralBottomPanel'
       TabOrder = 1
-      object BottomPicture: TImage
+      object Image2: TImage
         Left = 0
         Top = 0
         Width = 320
