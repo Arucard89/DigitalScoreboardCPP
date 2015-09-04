@@ -164,6 +164,7 @@ __published:	// IDE-managed Components
         void __fastcall SetPicture2BitBtnClick(TObject *Sender);
 private:	// User declarations
         AnsiString INI_FILE; // путь к файлу инициализации
+        AnsiString DEF_INI_FILE; // путь к файлу настрое по-умолчанию
 
         bool Player1PointsLabelsChanged; //изменены подписи лейблов правого
         bool Player2PointsLabelsChanged; //изменены подписи лейблов левого
@@ -186,7 +187,7 @@ public:		// User declarations
         __fastcall TConfigurationForm(TComponent* Owner);
 
         bool InfoLabelsFlag; //флаг изменения информации на вкладке изменения информационных лейблов
-        void AddAsteriskToTabName(bool needAsterisk,TTabSheet* tab); //добасляем к имени вкладки звездочку, если были изменения
+        void AddAsteriskToTabName(bool needAsterisk,TTabSheet* tab, bool alreadyHaveAsterisk); //добасляем к имени вкладки звездочку, если были изменения
 
         int ElementWasChanged(TTabSheet* tab, TButton* btn, bool & flag );// действия при изменении элементов интерфейса
         int SetButtonPressed(TTabSheet* tab, TButton* btn, bool & flag, AnsiString mes); // установка информации при нажатии на кнопку "Принять"

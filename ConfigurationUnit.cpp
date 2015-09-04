@@ -55,18 +55,18 @@ void __fastcall TConfigurationForm::BitBtn3Click(TObject *Sender)
         //FontDialog1->
 }
 //---------------------------------------------------------------------------
-void TConfigurationForm::AddAsteriskToTabName(bool needAsterisk,TTabSheet* tab)
+void TConfigurationForm::AddAsteriskToTabName(bool needAsterisk, TTabSheet* tab, bool alreadyHaveAsterisk)
 {
         if (needAsterisk == true)
         {
-                if (tab->Caption.Pos("*") == 0)
+                if (alreadyHaveAsterisk == false)//(tab->Caption.Pos("*") == 0)//если флаг изменений уже установлен, значит, звезда уже есть и новую не добавляем.
                 {
                         tab->Caption = tab->Caption + "*";
                 };
         }
         else
         {
-                tab->Caption = StringReplace(tab->Caption, "*", "", TReplaceFlags() << rfReplaceAll << rfIgnoreCase);
+                tab->Caption = StringReplace(tab->Caption, "*", "", TReplaceFlags() << rfIgnoreCase);
         }
 }
 
@@ -168,6 +168,16 @@ void __fastcall TConfigurationForm::BitBtn1Click(TObject *Sender)
 {
 // добавить логирование ошибок при выполнении операций записи в файл!!
         //пишем информацию об информационных лейблах очков
+        for (int i = 0; i < PageControl1->PageCount; i++)
+        {
+                if (PageControl1->Pages[i]->Caption.Pos("*")!=0)
+                {
+                        if (MessageDlg("Есть непринятые изменения, которые не будут применены.\r\nПродолжить?", mtWarning, mbOKCancel, 0) == mrCancel)
+                        {
+                                return;
+                        }
+                }
+        }
 
         if (Player1PointsLabelsChanged == true)
         {
@@ -213,6 +223,8 @@ void __fastcall TConfigurationForm::BitBtn1Click(TObject *Sender)
         {
                 WritePicturesPathToFile();
         }
+
+        ModalResult = mrOk;
         //добавить выключение флагов при изменении элементов(чтобы не записывать ложную информацию)
 
 }
@@ -284,22 +296,32 @@ void __fastcall TConfigurationForm::Player1PenaltyLabelTextFontBitBtnClick(
 void __fastcall TConfigurationForm::Player2ScoresLabelsBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(InfoLabelsSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изенения для подписей окон очков слева");
+        SetButtonPressed(InfoLabelsSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изменения для подписей окон очков слева");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::Player1ScoresLabelsBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(InfoLabelsSheet, ((TButton*) Sender), Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");
+        SetButtonPressed(InfoLabelsSheet, ((TButton*) Sender), Player1PointsLabelsChanged, "Внесены изменения для подписей окон очков справа");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::BitBtn2Click(TObject *Sender)
 {
-        Player1PointsLabelsChanged = false;
-        Player2PointsLabelsChanged = false;
-        //записать сюда обнуление всех флагов. и в конструктор тоже
+        bool f = Player1PointsLabelsChanged || Player2PointsLabelsChanged || Player1PanelColorChanged ||
+                Player2PanelColorChanged || CentralPanelsColorChanged || Player1PanelFontChanged ||
+                Player2PanelFontChanged || CentralPanelsFontChanged || Picture1Changed || Picture2Changed;
+        if (f == true)
+        {
+                AnsiString mes = "Есть несохраненные изменения интерфейса:\r\n" + ChangeLogMemo->Text +
+                        "\r\n" + "В случае продолжения они не будут применены. Продолжить?";
+                if (MessageDlg(mes, mtWarning, mbOKCancel, 0) != mrOk )
+                {
+                        return;
+                }
+        }
+        ModalResult = mrCancel;
 }
 //---------------------------------------------------------------------------
 
@@ -362,7 +384,7 @@ int TConfigurationForm::WritePlayer2PanelColorToFile()
 void __fastcall TConfigurationForm::SetPlayer2PanelColorBitBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изенения цвета панелей слева");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изменения цвета панелей слева");
 }
 //---------------------------------------------------------------------------
 
@@ -377,14 +399,14 @@ void __fastcall TConfigurationForm::CategoryPanelColorBoxChange(
 void __fastcall TConfigurationForm::SetPlayer1PanelColorBitBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изенения цвета панелей справа");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), Player2PointsLabelsChanged, "Внесены изменения цвета панелей справа");
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::SetCentralPanelColorBitBtnClick(
       TObject *Sender)
 {
-        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), CentralPanelsColorChanged, "Внесены изенения цвета центральных панелей");
+        SetButtonPressed(PanelsColorTabSheet, ((TButton*) Sender), CentralPanelsColorChanged, "Внесены изменения цвета центральных панелей");
 }
 //---------------------------------------------------------------------------
 
@@ -435,23 +457,55 @@ void __fastcall TConfigurationForm::ResetToDefaultBitBtnClick(
       TObject *Sender)
 {
         //здесь будет загрузка параметров по умолчанию из файла Default.ini
-        
+        LoadConfigFromFile(DEF_INI_FILE);
+        //имитиируем нажатия кнопок, чтобы воспользоваться стандартным вариантом сохранения(как будто мы не гружили, а вручную выбрали все и пронажимали кнопки)
+        SetButtonPressed(PanelsFontTabSheet, SetCentralPanelFontBitBtn, CentralPanelsFontChanged, "Внесены изенения в шрифты центральных панелей");
+        SetButtonPressed(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged, "Внесены изменения в шрифты панелей слева");
+        SetButtonPressed(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged, "Внесены изменения в шрифты панелей справа");
+
+        SetButtonPressed(PanelsColorTabSheet, SetCentralPanelColorBitBtn, CentralPanelsColorChanged, "Внесены изенения цвета центральных панелей");
+        SetButtonPressed(PanelsColorTabSheet, SetPlayer2PanelColorBitBtn, Player2PointsLabelsChanged, "Внесены изенения цвета панелей слева");
+        SetButtonPressed(PanelsColorTabSheet, SetPlayer1PanelColorBitBtn, Player2PointsLabelsChanged, "Внесены изенения цвета панелей справа");
+
+        SetButtonPressed(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged, "Внесены изенения для подписей окон очков слева");
+        SetButtonPressed(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");
+
+        SetPicture1BitBtnClick(SetPicture1BitBtn);
+        SetPicture2BitBtnClick(SetPicture2BitBtn);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::FormCreate(TObject *Sender)
 {
-        //INI_FILE = ".\\Config\\DesignConfig.ini";
         INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini";
+        DEF_INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\Default.ini";
+        LoadConfigFromFile(INI_FILE);
+        //при изменении текста в эдитах возникает событие изменения(в других элементах нет такого). поэтому имитируем нажатие кнопок там, где есть этдиты
+        SetButtonPressed(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged, "Внесены изенения для подписей окон очков слева");
+        SetButtonPressed(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");
+
+        SetPicture1BitBtnClick(SetPicture1BitBtn);
+        SetPicture2BitBtnClick(SetPicture2BitBtn);
+        //*************************************************************************************************************************************************
+
         ChangeLogMemo->Text = "";
+
         //устанавливаем флаги
-        Player1PointsLabelsChanged = false;
-        Player2PointsLabelsChanged =false;
+        CentralPanelsFontChanged = false;
+        Player2PanelFontChanged = false;
+        Player1PanelFontChanged = false;
+
         Player1PanelColorChanged = false;
         Player2PanelColorChanged = false;
         CentralPanelsColorChanged = false;
+
+        Player1PointsLabelsChanged = false;
+        Player2PointsLabelsChanged =false;
+
         Picture1Changed = false;
         Picture2Changed = false;
+        //
+        PageControl1->ActivePage = PanelsFontTabSheet;
 }
 //---------------------------------------------------------------------------
 
@@ -492,7 +546,7 @@ void __fastcall TConfigurationForm::SetPlayer1PanelFontBitBtnClick(
 void __fastcall TConfigurationForm::Player2NamePanelFontBtnClick(
       TObject *Sender)
 {
-        if (CategoryPanelFontDialog->Execute())
+        if (Player2NamePanelFontDialog->Execute())
         {
                 ElementWasChanged(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged);
         };
@@ -501,7 +555,7 @@ void __fastcall TConfigurationForm::Player2NamePanelFontBtnClick(
 
 void __fastcall TConfigurationForm::TimePanelFontBtnClick(TObject *Sender)
 {
-        if (Player2NamePanelFontDialog->Execute())
+        if (TimePanelFontDialog->Execute())
         {
                 ElementWasChanged(PanelsFontTabSheet, SetCentralPanelFontBitBtn, CentralPanelsFontChanged);
         };
@@ -710,7 +764,7 @@ void __fastcall TConfigurationForm::SetPicture1BitBtnClick(TObject *Sender)
 {
         if (FileExists(Picture1Edit->Text) == false)
         {
-                ShowMessage("Файла по выбранному пути не существует");
+                ShowMessage("Файла картинки 1 по выбранному пути не существует");
         }
         else
         {
@@ -733,7 +787,7 @@ void __fastcall TConfigurationForm::SetPicture2BitBtnClick(TObject *Sender)
 {
         if (FileExists(Picture2Edit->Text) == false)
         {
-                ShowMessage("Файла по выбранному пути не существует");
+                ShowMessage("Файла картинки 2 по выбранному пути не существует");
         }
         else
         {
@@ -788,7 +842,7 @@ int TConfigurationForm::WritePicturesPathToFile()
 
 int TConfigurationForm::ElementWasChanged(TTabSheet* tab, TButton* btn, bool & flag )
 {
-        AddAsteriskToTabName(true, tab); //добавляем звездочку в название закладки
+        AddAsteriskToTabName(true, tab,  btn->Enabled); //добавляем звездочку в название закладки
         btn->Enabled = true; //разблокируем главную кнопку
         flag = false; //ставим флаг принятия изменений 0, поскольку информация для приема уже изменена, но не подтверждена
         return 0;
@@ -796,10 +850,10 @@ int TConfigurationForm::ElementWasChanged(TTabSheet* tab, TButton* btn, bool & f
 
 int TConfigurationForm::SetButtonPressed(TTabSheet* tab, TButton* btn, bool & flag, AnsiString mes)
 {
-        btn->Enabled = false;
-        AddAsteriskToTabName(false, tab);
-        flag = true;
-        ChangeLogMemo->Lines->Add(mes);
+        btn->Enabled = false;   //выключаем кнопку
+        AddAsteriskToTabName(false, tab, false); //убираем звездочку из вкладки
+        flag = true; //флаг изменения ставим да
+        ChangeLogMemo->Lines->Add(mes); //добавляем сообщение в информационное окно
         return 0;
 }
 
@@ -812,6 +866,30 @@ int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
                 ShowMessage("Файл настроек не найден");
                 return 1;
         }
+        TIniFile* ini;
+        ini = NULL;
+        try
+        {
+                ini = new TIniFile(INI_FILE);
+                LoadPlayer1ScoresLabelsConfigFromFile(ini);
+                LoadPlayer2ScoresLabelsConfigFromFile(ini);
+                LoadPlayer1PanelColorFromFile(ini);
+                LoadPlayer2PanelColorFromFile(ini);
+                LoadCentralPanelColorFromFile(ini);
+                LoadCentralPanelFontFromFile(ini);
+                LoadPlayer1PanelFontFromFile(ini);
+                LoadPlayer2PanelFontFromFile(ini);
+                LoadPicturesPathFromFile(ini);
+        }
+        catch (...)
+         {
+                if (ini != NULL)
+                {
+                        delete ini;
+                }
+                return 1;
+         }
+
 
 
 }
