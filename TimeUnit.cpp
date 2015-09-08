@@ -54,7 +54,7 @@ int CTimeOfFight::minusSecond()
 {
         zero = 0;
         seconds--;
-        if ( seconds < 0)
+        if ( seconds <= 0)
         {
                 minutes--;
                 if ( minutes < 0 )

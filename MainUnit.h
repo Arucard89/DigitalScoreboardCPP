@@ -24,6 +24,18 @@ struct SFightInfo
         AnsiString weight;
 };
 
+struct SDispColorSetup //структура для запоминания настроек цвета панелей табло(используется при мерцании дисплея)
+{
+        TColor cat;
+        TColor catFont;
+        TColor pl1;
+        TColor pl1Font;
+        TColor pl2;
+        TColor pl2Font;
+        TColor time;
+        TColor timeFont;
+};
+
 //const int INTERVAL_FOR_TIMER = 10;
 
 class TMainForm : public TForm
@@ -49,7 +61,6 @@ __published:	// IDE-managed Components
         TGroupBox *PlayersNamesGroupBox;
         TBitBtn *AcceptPlayersNamesBtn;
         TBitBtn *AcceptAllConfigurationBtn;
-        TButton *OpenConfigurationButton;
         TPanel *TimePanel;
         TPanel *CategoryPanel;
         TPanel *Player1ScoresPanel;
@@ -118,6 +129,10 @@ __published:	// IDE-managed Components
         TGroupBox *WeightGroupBox;
         TComboBox *WeightComboBox;
         TTimer *Timer1;
+        TButton *OpenConfigurationButton;
+        TBitBtn *ShowDisplayFormBtn;
+        TTimer *Timer2;
+        TCheckBox *GrapplingCheckBox;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
@@ -139,7 +154,10 @@ __published:	// IDE-managed Components
         void __fastcall PauseFightBtnClick(TObject *Sender);
         void __fastcall StopFightBtnClick(TObject *Sender);
         void __fastcall ResetBtnClick(TObject *Sender);
-        void __fastcall FormCreate(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall FormCreate(TObject *Sender);
+        void __fastcall ShowDisplayFormBtnClick(TObject *Sender);
+        void __fastcall Timer2Timer(TObject *Sender);
+        void __fastcall GrapplingCheckBoxClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
 
         TDisplayForm *DisplayForm;
@@ -152,7 +170,9 @@ private:	// User declarations
         int timerInterval; //отсчет для таймера
         bool dots; //показывать точки во времени или нет
         int defaultInterval; //занчение для интервала по умолчанию
-        AnsiString INI_FILE; // путь к файлу инициализации
+        //AnsiString INI_FILE; // путь к файлу инициализации
+        SDispColorSetup displayColorSetup; //настройки цвета панели(сюда сохраняем при изменении для того, чтобы менять цвет при мерцании)
+        bool grapplingMode; //флаг включения режима грэпплинга(если тру, то табло для грэпплинга)
 
 public:		// User declarations
         __fastcall TMainForm(TComponent* Owner);
@@ -171,17 +191,20 @@ public:		// User declarations
         void UpdateScores(); //обновляем информацию об очках борцов
         int minusInterval(); //используется в счетчике времени
 
+        int getColorInfo(); //запись информации о цветах панелей в структуру(для применения в мерцании)
+        int setColorInfo(AnsiString col = "", AnsiString fontCol = "");//возврат настроек обратно
+
         //загрузка настроек интерфейса
         int LoadInterfaceParameters(AnsiString iniFile);
         int LoadCentralPanelsParameters(TIniFile* ini);
         int LoadPlayer1PanelsParameters(TIniFile* ini);
         int LoadPlayer2PanelsParameters(TIniFile* ini);
         int LoadPictures(TIniFile* ini);
-
-        int LoadPlayer1LabelsFontParameters(TIniFile* ini);
-        int LoadPlayer2LabelsFontParameters(TIniFile* ini);
-
-
+        int LoadPlayer1LabelsParameters(TIniFile* ini);
+        int LoadPlayer2LabelsParameters(TIniFile* ini);
+        int LoadPlayerPanelsFontParameters(TIniFile* ini, TLabel* name, TPanel* score,
+                TPanel* adv, TPanel* pen, TLabel* dispName, TPanel* dispScore,
+                TPanel* dispAdv, TPanel* dispPen, AnsiString section);
 
 
         //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.

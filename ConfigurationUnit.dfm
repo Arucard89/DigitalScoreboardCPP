@@ -1,9 +1,10 @@
 object ConfigurationForm: TConfigurationForm
-  Left = 582
-  Top = 170
-  Width = 811
-  Height = 596
+  Left = 587
+  Top = 130
+  BorderStyle = bsToolWindow
   Caption = 'ConfigurationForm'
+  ClientHeight = 559
+  ClientWidth = 795
   Color = clSkyBlue
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -27,7 +28,7 @@ object ConfigurationForm: TConfigurationForm
     Top = 0
     Width = 795
     Height = 393
-    ActivePage = InfoLabelsSheet
+    ActivePage = LoadCustomConfigTab
     Align = alTop
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
@@ -35,7 +36,7 @@ object ConfigurationForm: TConfigurationForm
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabIndex = 2
+    TabIndex = 4
     TabOrder = 0
     object PanelsFontTabSheet: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1096#1088#1080#1092#1090#1086#1074' '#1087#1072#1085#1077#1083#1077#1081' '#1090#1072#1073#1083#1086
@@ -1172,7 +1173,7 @@ object ConfigurationForm: TConfigurationForm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
-        OnClick = Picture1BitBtnClick
+        OnClick = Picture1BiBtnClick
       end
       object Picture2BitBtn: TBitBtn
         Left = 704
@@ -1260,13 +1261,92 @@ object ConfigurationForm: TConfigurationForm
         NumGlyphs = 2
       end
     end
+    object LoadCustomConfigTab: TTabSheet
+      Caption = #1047#1072#1075#1088#1091#1079#1082#1072' '#1082#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1080
+      ImageIndex = 4
+      object CustomConfigPathEdit: TLabeledEdit
+        Left = 16
+        Top = 120
+        Width = 665
+        Height = 28
+        EditLabel.Width = 130
+        EditLabel.Height = 18
+        EditLabel.Caption = #1042#1077#1088#1093#1085#1103#1103' '#1082#1072#1088#1090#1080#1085#1082#1072
+        EditLabel.Font.Charset = RUSSIAN_CHARSET
+        EditLabel.Font.Color = clWindowText
+        EditLabel.Font.Height = -16
+        EditLabel.Font.Name = 'Arial'
+        EditLabel.Font.Style = []
+        EditLabel.ParentFont = False
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial Narrow'
+        Font.Style = []
+        LabelPosition = lpAbove
+        LabelSpacing = 3
+        ParentFont = False
+        TabOrder = 0
+        OnChange = CustomConfigPathEditChange
+      end
+      object OpenCustomConfigPathBitBtn: TBitBtn
+        Left = 712
+        Top = 120
+        Width = 49
+        Height = 28
+        Caption = '. . .'
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -19
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        TabOrder = 1
+        OnClick = OpenCustomConfigPathBitBtnClick
+      end
+      object AcceptCustomConfigBitBtn: TBitBtn
+        Left = 592
+        Top = 176
+        Width = 171
+        Height = 41
+        Caption = #1055#1088#1080#1085#1103#1090#1100
+        Default = True
+        Enabled = False
+        Font.Charset = RUSSIAN_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -16
+        Font.Name = 'Arial'
+        Font.Style = [fsBold, fsItalic]
+        ParentFont = False
+        TabOrder = 2
+        OnClick = AcceptCustomConfigBitBtnClick
+        Glyph.Data = {
+          DE010000424DDE01000000000000760000002800000024000000120000000100
+          0400000000006801000000000000000000001000000000000000000000000000
+          80000080000000808000800000008000800080800000C0C0C000808080000000
+          FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
+          3333333333333333333333330000333333333333333333333333F33333333333
+          00003333344333333333333333388F3333333333000033334224333333333333
+          338338F3333333330000333422224333333333333833338F3333333300003342
+          222224333333333383333338F3333333000034222A22224333333338F338F333
+          8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
+          33333338F83338F338F33333000033A33333A222433333338333338F338F3333
+          0000333333333A222433333333333338F338F33300003333333333A222433333
+          333333338F338F33000033333333333A222433333333333338F338F300003333
+          33333333A222433333333333338F338F00003333333333333A22433333333333
+          3338F38F000033333333333333A223333333333333338F830000333333333333
+          333A333333333333333338330000333333333333333333333333333333333333
+          0000}
+        NumGlyphs = 2
+      end
+    end
   end
-  object BitBtn1: TBitBtn
+  object AcceptAllBitBtn: TBitBtn
     Left = 504
-    Top = 456
+    Top = 400
     Width = 281
     Height = 41
-    Caption = #1055#1088#1080#1085#1103#1090#1100' '#1074#1089#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
+    Caption = #1055#1088#1080#1084#1077#1085#1080#1090#1100' '#1074#1089#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
     Font.Height = -16
@@ -1274,7 +1354,7 @@ object ConfigurationForm: TConfigurationForm
     Font.Style = []
     ParentFont = False
     TabOrder = 1
-    OnClick = BitBtn1Click
+    OnClick = AcceptAllBitBtnClick
     Glyph.Data = {
       F2010000424DF201000000000000760000002800000024000000130000000100
       0400000000007C01000000000000000000001000000000000000000000000000
@@ -1294,9 +1374,9 @@ object ConfigurationForm: TConfigurationForm
       000033333333333333A3333333333333333383330000}
     NumGlyphs = 2
   end
-  object BitBtn2: TBitBtn
+  object CancelAllBitBtn: TBitBtn
     Left = 504
-    Top = 400
+    Top = 456
     Width = 281
     Height = 41
     Caption = #1054#1090#1084#1077#1085#1072
@@ -1307,7 +1387,7 @@ object ConfigurationForm: TConfigurationForm
     Font.Style = []
     ParentFont = False
     TabOrder = 2
-    OnClick = BitBtn2Click
+    OnClick = CancelAllBitBtnClick
     Glyph.Data = {
       DE010000424DDE01000000000000760000002800000024000000120000000100
       0400000000006801000000000000000000001000000000000000000000000000
@@ -1559,6 +1639,12 @@ object ConfigurationForm: TConfigurationForm
       'g)|*.png'
     Title = #1042#1099#1073#1077#1088#1080#1090#1077' '#1082#1072#1088#1090#1080#1085#1082#1091' '#1076#1083#1103' '#1086#1090#1086#1073#1088#1072#1078#1077#1085#1080#1103' '#1085#1072' '#1076#1080#1089#1087#1083#1077#1077
     Left = 224
+    Top = 472
+  end
+  object OpenCustomConfigPathDialog: TOpenDialog
+    DefaultExt = '*.ini'
+    Filter = 'ini files(*.ini)|*.ini'
+    Left = 168
     Top = 472
   end
 end

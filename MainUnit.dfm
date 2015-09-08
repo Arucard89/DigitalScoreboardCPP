@@ -1,10 +1,10 @@
 object MainForm: TMainForm
-  Left = 600
-  Top = 200
+  Left = 352
+  Top = 75
   Width = 1237
-  Height = 709
+  Height = 714
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
-  Color = clBtnFace
+  Color = clMoneyGreen
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -26,7 +26,7 @@ object MainForm: TMainForm
     Font.Color = clWindowText
     Font.Height = -19
     Font.Name = 'Arial'
-    Font.Style = [fsBold, fsItalic]
+    Font.Style = []
     MultiLine = True
     ParentFont = False
     TabIndex = 0
@@ -38,25 +38,25 @@ object MainForm: TMainForm
       Font.Color = clWindowText
       Font.Height = -11
       Font.Name = 'Arial'
-      Font.Style = [fsBold]
+      Font.Style = []
       ParentFont = False
       object Player1GroupBox: TGroupBox
-        Left = 0
+        Left = 628
         Top = 113
         Width = 545
-        Height = 442
-        Align = alLeft
-        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1083#1077#1074#1072
+        Height = 443
+        Align = alRight
+        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Arial'
-        Font.Style = [fsBold]
+        Font.Style = [fsBold, fsItalic]
         ParentFont = False
         TabOrder = 0
         object Player1NameLabel: TLabel
           Left = 2
-          Top = 21
+          Top = 20
           Width = 541
           Height = 22
           Align = alTop
@@ -71,7 +71,7 @@ object MainForm: TMainForm
         end
         object Player1ScoresPanel: TPanel
           Left = 2
-          Top = 43
+          Top = 42
           Width = 541
           Height = 74
           Align = alTop
@@ -87,9 +87,9 @@ object MainForm: TMainForm
         end
         object Player1AdvantagePanel: TPanel
           Left = 2
-          Top = 117
+          Top = 116
           Width = 231
-          Height = 38
+          Height = 40
           Align = alLeft
           BevelOuter = bvNone
           Caption = 'Player1AdvantagePanel'
@@ -103,9 +103,9 @@ object MainForm: TMainForm
         end
         object Player1PenaltyPanel: TPanel
           Left = 233
-          Top = 117
+          Top = 116
           Width = 310
-          Height = 38
+          Height = 40
           Align = alClient
           BevelOuter = bvNone
           Caption = 'Player1PenaltyPanel'
@@ -119,11 +119,12 @@ object MainForm: TMainForm
         end
         object Player1ScoresButtonsPanel: TPanel
           Left = 2
-          Top = 155
+          Top = 156
           Width = 541
           Height = 285
           Align = alBottom
           Caption = 'Player1ScoresButtonsPanel'
+          ParentColor = True
           TabOrder = 3
           object Player1ScoresGroupBox: TGroupBox
             Left = 1
@@ -135,11 +136,12 @@ object MainForm: TMainForm
             TabOrder = 0
             object Player1OneScorePanel: TPanel
               Left = 2
-              Top = 21
+              Top = 20
               Width = 95
-              Height = 114
+              Height = 115
               Align = alLeft
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 0
               OnResize = Player1OneScorePanelResize
               object Player1OneScorePlusBitBtn: TBitBtn
@@ -177,11 +179,12 @@ object MainForm: TMainForm
             end
             object Player1FourScorePanel: TPanel
               Left = 297
-              Top = 21
+              Top = 20
               Width = 240
-              Height = 114
+              Height = 115
               Align = alClient
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 1
               object Player1FourScorePlusBitBtn: TBitBtn
                 Tag = 4
@@ -218,11 +221,12 @@ object MainForm: TMainForm
             end
             object Player1TwoScorePanel: TPanel
               Left = 97
-              Top = 21
+              Top = 20
               Width = 104
-              Height = 114
+              Height = 115
               Align = alLeft
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 2
               OnResize = Player1OneScorePanelResize
               object Player1TwoScorePlusBitBtn: TBitBtn
@@ -260,11 +264,12 @@ object MainForm: TMainForm
             end
             object Player1ThreeScorePanel: TPanel
               Left = 201
-              Top = 21
+              Top = 20
               Width = 96
-              Height = 114
+              Height = 115
               Align = alLeft
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 3
               OnResize = Player1OneScorePanelResize
               object Player1ThreeScorePlusBitBtn: TBitBtn
@@ -309,14 +314,16 @@ object MainForm: TMainForm
             Align = alLeft
             Caption = 'Player1AdvantageGroupBox'
             TabOrder = 1
+            Visible = False
             object Player1ChangeAdvantagePanel: TPanel
               Left = 2
-              Top = 21
+              Top = 20
               Width = 276
-              Height = 123
+              Height = 124
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 0
               object Player1AdvantagePlusBitBtn: TBitBtn
                 Tag = 1
@@ -361,12 +368,13 @@ object MainForm: TMainForm
             TabOrder = 2
             object Player1ChangePenaltyPanel: TPanel
               Left = 2
-              Top = 21
+              Top = 20
               Width = 255
-              Height = 123
+              Height = 124
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 0
               object Player1PenaltyPlusBitBtn: TBitBtn
                 Tag = 1
@@ -405,22 +413,22 @@ object MainForm: TMainForm
         end
       end
       object Player2GroupBox: TGroupBox
-        Left = 545
+        Left = 0
         Top = 113
         Width = 628
-        Height = 442
+        Height = 443
         Align = alClient
-        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1087#1088#1072#1074#1072
+        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
         Font.Name = 'Arial'
-        Font.Style = [fsBold]
+        Font.Style = [fsBold, fsItalic]
         ParentFont = False
         TabOrder = 1
         object Player2NameLabel: TLabel
           Left = 2
-          Top = 21
+          Top = 20
           Width = 624
           Height = 22
           Align = alTop
@@ -435,7 +443,7 @@ object MainForm: TMainForm
         end
         object Player2ScoresPanel: TPanel
           Left = 2
-          Top = 43
+          Top = 42
           Width = 624
           Height = 74
           Align = alTop
@@ -451,9 +459,9 @@ object MainForm: TMainForm
         end
         object Player2AdvantagePanel: TPanel
           Left = 347
-          Top = 117
+          Top = 116
           Width = 279
-          Height = 34
+          Height = 36
           Align = alRight
           BevelOuter = bvNone
           Caption = 'Player2AdvantagePanel'
@@ -467,9 +475,9 @@ object MainForm: TMainForm
         end
         object Player2PenaltyPanel: TPanel
           Left = 2
-          Top = 117
+          Top = 116
           Width = 345
-          Height = 34
+          Height = 36
           Align = alClient
           BevelOuter = bvNone
           Caption = 'Player2PenaltyPanel'
@@ -483,11 +491,12 @@ object MainForm: TMainForm
         end
         object Player2ScoresButtonsPanel: TPanel
           Left = 2
-          Top = 151
+          Top = 152
           Width = 624
           Height = 289
           Align = alBottom
           Caption = 'Player2ScoresButtonsPanel'
+          ParentColor = True
           TabOrder = 3
           object Player2ScoresGroupBox: TGroupBox
             Left = 1
@@ -499,11 +508,12 @@ object MainForm: TMainForm
             TabOrder = 0
             object Player2OneScorePanel: TPanel
               Left = 2
-              Top = 21
+              Top = 20
               Width = 95
-              Height = 103
+              Height = 104
               Align = alLeft
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 0
               OnResize = Player1OneScorePanelResize
               object Player2OneScorePlusBitBtn: TBitBtn
@@ -541,11 +551,12 @@ object MainForm: TMainForm
             end
             object Player2TwoScorePanel: TPanel
               Left = 97
-              Top = 21
+              Top = 20
               Width = 104
-              Height = 103
+              Height = 104
               Align = alLeft
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 1
               OnResize = Player1OneScorePanelResize
               object Player2TwoScorePlusBitBtn: TBitBtn
@@ -583,11 +594,12 @@ object MainForm: TMainForm
             end
             object Player2FourScorePanel: TPanel
               Left = 305
-              Top = 21
+              Top = 20
               Width = 315
-              Height = 103
+              Height = 104
               Align = alClient
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 2
               object Player2FourScorePlusBitBtn: TBitBtn
                 Tag = 4
@@ -624,11 +636,12 @@ object MainForm: TMainForm
             end
             object Player2ThreeScorePanel: TPanel
               Left = 201
-              Top = 21
+              Top = 20
               Width = 104
-              Height = 103
+              Height = 104
               Align = alLeft
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 3
               OnResize = Player1OneScorePanelResize
               object Player2ThreeScorePlusBitBtn: TBitBtn
@@ -673,14 +686,16 @@ object MainForm: TMainForm
             Align = alRight
             Caption = 'Player2AdvantageGroupBox'
             TabOrder = 1
+            Visible = False
             object Player2ChangeAdvantagePanel: TPanel
               Left = 2
-              Top = 21
+              Top = 20
               Width = 228
-              Height = 138
+              Height = 139
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 0
               object Player2AdvantagePlusBitBtn: TBitBtn
                 Tag = 1
@@ -725,12 +740,13 @@ object MainForm: TMainForm
             TabOrder = 2
             object Player2ChangePenaltyPanel: TPanel
               Left = 2
-              Top = 21
+              Top = 20
               Width = 386
-              Height = 138
+              Height = 139
               Align = alClient
               BevelOuter = bvNone
               BorderWidth = 20
+              ParentColor = True
               TabOrder = 0
               object Player2PenaltyPlusBitBtn: TBitBtn
                 Tag = 1
@@ -804,6 +820,7 @@ object MainForm: TMainForm
         Width = 1173
         Height = 55
         Align = alTop
+        ParentColor = True
         TabOrder = 4
         object StartFightBtn: TBitBtn
           Left = 8
@@ -893,7 +910,6 @@ object MainForm: TMainForm
           Height = 19
           Align = alTop
           Alignment = taCenter
-          Caption = 'CurrentInfoSetupLabel'
         end
         object AcceptInformationBtn: TBitBtn
           Left = 872
@@ -939,7 +955,6 @@ object MainForm: TMainForm
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
-            Text = 'AgeComboBox'
             OnChange = AgeComboBoxChange
           end
         end
@@ -959,7 +974,6 @@ object MainForm: TMainForm
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
-            Text = 'BeltComboBox'
             OnChange = AgeComboBoxChange
           end
         end
@@ -979,7 +993,6 @@ object MainForm: TMainForm
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
-            Text = 'WeightComboBox'
             OnChange = AgeComboBoxChange
           end
         end
@@ -1005,7 +1018,6 @@ object MainForm: TMainForm
           Height = 19
           Align = alTop
           Alignment = taCenter
-          Caption = 'CurrentTimeSetupLabel'
         end
         object MinutesGroupBox: TGroupBox
           Left = 2
@@ -1013,7 +1025,7 @@ object MainForm: TMainForm
           Width = 153
           Height = 70
           Align = alLeft
-          Caption = 'MinutesGroupBox'
+          Caption = #1052#1080#1085#1091#1090#1099
           TabOrder = 0
           object MinutesSpinEdit: TCSpinEdit
             Left = 8
@@ -1031,7 +1043,7 @@ object MainForm: TMainForm
           Width = 159
           Height = 70
           Align = alLeft
-          Caption = 'SecondsGroupBox'
+          Caption = #1057#1077#1082#1091#1085#1076#1099
           TabOrder = 1
           object SecondsSpinEdit: TCSpinEdit
             Left = 8
@@ -1116,11 +1128,11 @@ object MainForm: TMainForm
         end
         object Player1NameGroupBox: TGroupBox
           Left = 2
-          Top = 81
+          Top = 21
           Width = 1169
           Height = 60
           Align = alTop
-          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
+          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
           TabOrder = 1
           object Player1ComboBox: TComboBox
             Left = 8
@@ -1130,17 +1142,16 @@ object MainForm: TMainForm
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
-            Text = 'Player1ComboBox'
             OnChange = Player1ComboBoxChange
           end
         end
         object Player2NameGroupBox: TGroupBox
           Left = 2
-          Top = 21
+          Top = 81
           Width = 1169
           Height = 60
           Align = alTop
-          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
+          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
           TabOrder = 2
           object Player2ComboBox: TComboBox
             Left = 8
@@ -1150,7 +1161,6 @@ object MainForm: TMainForm
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
-            Text = 'Player2ComboBox'
             OnChange = Player1ComboBoxChange
           end
         end
@@ -1188,25 +1198,55 @@ object MainForm: TMainForm
           000033333333333333A3333333333333333383330000}
         NumGlyphs = 2
       end
-      object OpenConfigurationButton: TButton
-        Left = 80
-        Top = 452
-        Width = 337
+      object GrapplingCheckBox: TCheckBox
+        Left = 0
+        Top = 456
+        Width = 281
         Height = 25
-        Caption = 'OpenConfigurationButton'
-        Font.Charset = ANSI_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
+        Caption = #1056#1077#1078#1080#1084' '#1075#1088#1101#1087#1087#1083#1080#1085#1075#1072
         TabOrder = 4
-        OnClick = OpenConfigurationButtonClick
+        OnClick = GrapplingCheckBoxClick
       end
     end
+  end
+  object OpenConfigurationButton: TButton
+    Left = 776
+    Top = 636
+    Width = 337
+    Height = 25
+    Caption = #1054#1090#1082#1088#1099#1090#1100' '#1086#1082#1085#1086' '#1085#1072#1089#1090#1088#1086#1077#1082
+    Font.Charset = ANSI_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -16
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 1
+    OnClick = OpenConfigurationButtonClick
+  end
+  object ShowDisplayFormBtn: TBitBtn
+    Left = 0
+    Top = 632
+    Width = 225
+    Height = 33
+    Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -19
+    Font.Name = 'Arial'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 2
+    OnClick = ShowDisplayFormBtnClick
   end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     Left = 1024
+  end
+  object Timer2: TTimer
+    Enabled = False
+    Interval = 250
+    OnTimer = Timer2Timer
+    Left = 1088
   end
 end

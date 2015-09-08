@@ -164,7 +164,7 @@ int TConfigurationForm::WriteFontParameters(TIniFile* ini, TFont* f, AnsiString 
         ini->WriteBool(section, ident + "_StrikeOut", f->Style.Contains(fsStrikeOut));
         return 0;
 }
-void __fastcall TConfigurationForm::BitBtn1Click(TObject *Sender)
+void __fastcall TConfigurationForm::AcceptAllBitBtnClick(TObject *Sender)
 {
 // добавить логирование ошибок при выполнении операций записи в файл!!
         //пишем информацию об информационных лейблах очков
@@ -307,7 +307,7 @@ void __fastcall TConfigurationForm::Player1ScoresLabelsBtnClick(
 }
 //---------------------------------------------------------------------------
 
-void __fastcall TConfigurationForm::BitBtn2Click(TObject *Sender)
+void __fastcall TConfigurationForm::CancelAllBitBtnClick(TObject *Sender)
 {
         bool f = Player1PointsLabelsChanged || Player2PointsLabelsChanged || Player1PanelColorChanged ||
                 Player2PanelColorChanged || CentralPanelsColorChanged || Player1PanelFontChanged ||
@@ -456,8 +456,9 @@ int TConfigurationForm::WriteCentralPanelColorToFile()
 void __fastcall TConfigurationForm::ResetToDefaultBitBtnClick(
       TObject *Sender)
 {
-        //здесь будет загрузка параметров по умолчанию из файла Default.ini
-        LoadConfigFromFile(DEF_INI_FILE);
+        LoadConfigFromFileWithChange(DEF_INI_FILE);
+        /*//здесь будет загрузка параметров по умолчанию из файла Default.ini
+        LoadConfigFromFile
         //имитиируем нажатия кнопок, чтобы воспользоваться стандартным вариантом сохранения(как будто мы не гружили, а вручную выбрали все и пронажимали кнопки)
         SetButtonPressed(PanelsFontTabSheet, SetCentralPanelFontBitBtn, CentralPanelsFontChanged, "Внесены изенения в шрифты центральных панелей");
         SetButtonPressed(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged, "Внесены изменения в шрифты панелей слева");
@@ -471,13 +472,13 @@ void __fastcall TConfigurationForm::ResetToDefaultBitBtnClick(
         SetButtonPressed(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");
 
         SetPicture1BitBtnClick(SetPicture1BitBtn);
-        SetPicture2BitBtnClick(SetPicture2BitBtn);
+        SetPicture2BitBtnClick(SetPicture2BitBtn)*/
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TConfigurationForm::FormCreate(TObject *Sender)
 {
-        INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini";
+      //  INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini";
         DEF_INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\Default.ini";
         LoadConfigFromFile(INI_FILE);
         //при изменении текста в эдитах возникает событие изменения(в других элементах нет такого). поэтому имитируем нажатие кнопок там, где есть этдиты
@@ -724,7 +725,7 @@ int TConfigurationForm::WritePlayer1PanelFontToFile()
          }
 }
 
-void __fastcall TConfigurationForm::Picture1BitBtnClick(TObject *Sender)
+void __fastcall TConfigurationForm::Picture1BiBtnClick(TObject *Sender)
 {
         if (OpenPictureDialog->Execute())
         {
@@ -870,7 +871,7 @@ int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
         ini = NULL;
         try
         {
-                ini = new TIniFile(INI_FILE);
+                ini = new TIniFile(iniPath);
                 LoadPlayer1ScoresLabelsConfigFromFile(ini);
                 LoadPlayer2ScoresLabelsConfigFromFile(ini);
                 LoadPlayer1PanelColorFromFile(ini);
@@ -887,7 +888,7 @@ int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
                 {
                         delete ini;
                 }
-                return 1;
+                return 2;
         }
 
         delete ini;
@@ -900,25 +901,27 @@ int TConfigurationForm::LoadConfigFromFile(AnsiString iniPath)
 int TConfigurationForm::LoadFontParameters(TIniFile* ini, TFont* f, AnsiString section, AnsiString ident)
 {
 
+        f->Style = f->Style.Clear();
+
         f->Name = ini->ReadString(section, ident + "_name","Arial");
         f->Color = StringToColor(ini->ReadString(section, ident + "_color","clBlack"));
         f->Size = ini->ReadInteger(section, ident + "_size",20);
 
         if (ini->ReadBool(section, ident + "_Bold", false))
         {
-                f->Style << fsBold;
+                f->Style = f->Style << fsBold;
         };
         if (ini->ReadBool(section, ident + "_Italic", false))
         {
-                f->Style << fsItalic;
+                f->Style = f->Style << fsItalic;
         };
         if (ini->ReadBool(section, ident + "_Underline", false))
         {
-                f->Style << fsUnderline;
+                f->Style = f->Style << fsUnderline;
         };
         if (ini->ReadBool(section, ident + "_StrikeOut", false))
         {
-                f->Style << fsStrikeOut;
+                f->Style = f->Style << fsStrikeOut;
         };
 
         return 0;
@@ -1060,7 +1063,61 @@ int TConfigurationForm::LoadPicturesPathFromFile(TIniFile* ini)
         return 0;
 }
 
+void __fastcall TConfigurationForm::OpenCustomConfigPathBitBtnClick(
+      TObject *Sender)
+{
+        OpenCustomConfigPathDialog->InitialDir = ExtractFileDir(Application->ExeName) + "\\Config";
+        if (OpenCustomConfigPathDialog->Execute())
+        {
+                CustomConfigPathEdit->Text = OpenCustomConfigPathDialog->FileName;
+        }
+}
+//---------------------------------------------------------------------------
 
+void __fastcall TConfigurationForm::CustomConfigPathEditChange(
+      TObject *Sender)
+{
+        if (CustomConfigPathEdit->Text != "")
+        {
+                bool f;
+                ElementWasChanged(LoadCustomConfigTab, AcceptCustomConfigBitBtn, f);
+        }
+}
+//---------------------------------------------------------------------------
 
+int TConfigurationForm::LoadConfigFromFileWithChange(AnsiString iniFile)
+{
+        //здесь будет загрузка параметров по умолчанию из файла Default.ini
+        LoadConfigFromFile(iniFile);
+        //имитиируем нажатия кнопок, чтобы воспользоваться стандартным вариантом сохранения(как будто мы не гружили, а вручную выбрали все и пронажимали кнопки)
+        SetButtonPressed(PanelsFontTabSheet, SetCentralPanelFontBitBtn, CentralPanelsFontChanged, "Внесены изенения в шрифты центральных панелей");
+        SetButtonPressed(PanelsFontTabSheet, SetPlayer2PanelFontBitBtn, Player2PanelFontChanged, "Внесены изменения в шрифты панелей слева");
+        SetButtonPressed(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged, "Внесены изменения в шрифты панелей справа");
 
+        SetButtonPressed(PanelsColorTabSheet, SetCentralPanelColorBitBtn, CentralPanelsColorChanged, "Внесены изенения цвета центральных панелей");
+        SetButtonPressed(PanelsColorTabSheet, SetPlayer2PanelColorBitBtn, Player2PointsLabelsChanged, "Внесены изенения цвета панелей слева");
+        SetButtonPressed(PanelsColorTabSheet, SetPlayer1PanelColorBitBtn, Player2PointsLabelsChanged, "Внесены изенения цвета панелей справа");
+
+        SetButtonPressed(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged, "Внесены изенения для подписей окон очков слева");
+        SetButtonPressed(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");
+
+        SetPicture1BitBtnClick(SetPicture1BitBtn);
+        SetPicture2BitBtnClick(SetPicture2BitBtn);
+
+        return 0;
+}
+void __fastcall TConfigurationForm::AcceptCustomConfigBitBtnClick(
+      TObject *Sender)
+{
+        if (CustomConfigPathEdit->Text != "")
+        {
+                if (LoadConfigFromFileWithChange(CustomConfigPathEdit->Text) != 0)
+                {
+                        ShowMessage("Не удалось загрузить конфигурацию из выбранного файла.");
+                };
+                bool f;
+                SetButtonPressed(LoadCustomConfigTab, ((TButton*) Sender), f, "Загружена конфигурация");
+        }
+}
+//---------------------------------------------------------------------------
 

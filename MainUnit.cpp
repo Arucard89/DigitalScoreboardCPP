@@ -11,6 +11,7 @@
 #pragma link "CSPIN"
 #pragma resource "*.dfm"
 TMainForm *MainForm;
+
 //---------------------------------------------------------------------------
 __fastcall TMainForm::TMainForm(TComponent* Owner)
         : TForm(Owner)
@@ -26,7 +27,7 @@ void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
         res = ConfigurationForm->ShowModal();
         if (res == mrOk)
         {
-                LoadInterfaceParameters(INI_FILE);
+                LoadInterfaceParameters(TConfigurationForm::INI_FILE);
         }
 }
 //---------------------------------------------------------------------------
@@ -88,6 +89,8 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         ConfigureFightButtons();
 //вкладка настроек схватки
         ResizeFightSettings();
+
+//меняем положение кнопки
 
 //
 
@@ -392,7 +395,15 @@ void TMainForm::FulfillFightInfo()
         FightInfo.age = AgeComboBox->Text;
         FightInfo.belt = BeltComboBox->Text;
         FightInfo.weight = WeightComboBox->Text;
-        AnsiString s = "Возраст: " + FightInfo.age + " Пояс: " + FightInfo.belt + " Вес: " + FightInfo.weight;
+
+        AnsiString s = "Возраст: " + FightInfo.age;
+        //если грепплинг, то пояс не нужен
+        if (grapplingMode == false)
+        {
+                s += " Пояс: " + FightInfo.belt;
+        }
+        s += " Вес: " + FightInfo.weight;
+
         CurrentInfoSetupLabel->Caption = s;
         CategoryPanel->Caption = s;
         DisplayForm->CategoryPanel->Caption = s;
@@ -482,14 +493,16 @@ void __fastcall TMainForm::Timer1Timer(TObject *Sender)
 {
         if (fightState == 1) //если схватка идет
         {
-
-                if (timerInterval == defaultInterval)         //от 10,9,8,7,6,5,4,3,2,1
+                if (timerInterval == defaultInterval)         
                 {
                         TimeOfFight->minusSecond();
                         if (TimeOfFight->getZero() == 1) //если закончилось время
                         {
                                 fightState = 0;
                                 Timer1->Enabled = false;
+                                //выключаем сторой таймер и мерцание
+                                Timer2->Enabled = false;
+                                setColorInfo();
                         }
                 }
                 if ((timerInterval == (defaultInterval / 2))||(timerInterval == defaultInterval)) //гасим точки посреди секунды  и зажигаем вначале интервала
@@ -498,6 +511,11 @@ void __fastcall TMainForm::Timer1Timer(TObject *Sender)
                 }
                 ShowTime(dots);  //большая зависимость от шрифтов
                 minusInterval(); //отнимаем один интервал отсчета
+                //если осталось 10 секунд и меньше
+                if ((TimeOfFight->getMinutes() == 0) && (TimeOfFight->getSeconds() <= 10))
+                {
+                        Timer2->Enabled = true;
+                }
         }
         //если таймер закончился, то вывести окно установки результатов, но при этом дать возможность вернуться к результатам проведения поединка, чтобы изменить очки(если присудили баллы в последний момент)
 
@@ -585,13 +603,14 @@ int  TMainForm::LoadInterfaceParameters(AnsiString iniFile)
 
                 try
         {
-                ini = new TIniFile(INI_FILE);
+                ini = new TIniFile(TConfigurationForm::INI_FILE);
                 LoadCentralPanelsParameters(ini);
                 LoadPlayer1PanelsParameters(ini);
                 LoadPlayer2PanelsParameters(ini);
                 LoadPictures(ini);
-                LoadPlayer1LabelsFontParameters(ini);
-                LoadPlayer2LabelsFontParameters(ini);
+                LoadPlayer1LabelsParameters(ini);
+                LoadPlayer2LabelsParameters(ini);
+                getColorInfo();
         }
         catch (...)
         {
@@ -599,6 +618,7 @@ int  TMainForm::LoadInterfaceParameters(AnsiString iniFile)
                 {
                         delete ini;
                 }
+                getColorInfo();
                 return 1;
         }
         delete ini;
@@ -615,6 +635,19 @@ int  TMainForm::LoadCentralPanelsParameters(TIniFile* ini)
 
         DisplayForm->TimePanel->Color = StringToColor(ini->ReadString(section,"TimePanelColor", clWhite));
         TimePanel->Color = DisplayForm->TimePanel->Color;
+
+        //грузим шрифты
+        section = "CentralPanelFontConfig";
+        //инфа
+        TConfigurationForm::LoadFontParameters(ini, DisplayForm->CategoryPanel->Font, section, "CategoryPanelFont");
+        CategoryPanel->Font = DisplayForm->CategoryPanel->Font;
+        CategoryPanel->Font->Size = 12;
+
+        //время
+        TConfigurationForm::LoadFontParameters( ini, DisplayForm->TimePanel->Font, section, "TimePanelFont" );
+        TimePanel->Font = DisplayForm->TimePanel->Font;
+        TimePanel->Font->Size = 36;
+
         return 0;
 }
 
@@ -636,6 +669,11 @@ int  TMainForm::LoadPlayer1PanelsParameters(TIniFile* ini)
         //применяем параметры цвета панелей преимуществ первого бойца
         DisplayForm->Player1Penalty->Color = StringToColor(ini->ReadString(section,"Player1PenaltyPanelColor", clWhite));
         Player1PenaltyPanel->Color = DisplayForm->Player1Penalty->Color;
+
+        //применяем шрифты
+        LoadPlayerPanelsFontParameters(ini, Player1NameLabel, Player1ScoresPanel, Player1AdvantagePanel, Player1PenaltyPanel,
+                DisplayForm->Player1Label, DisplayForm->Player1Scores, DisplayForm->Player1Advantage,
+                DisplayForm->Player1Penalty, "Player1PanelFontConfig");
 
         return 0;
 }
@@ -659,6 +697,11 @@ int  TMainForm::LoadPlayer2PanelsParameters(TIniFile* ini)
         //применяем параметры цвета панелей преимуществ второго бойца
         DisplayForm->Player2Penalty->Color = StringToColor(ini->ReadString(section,"Player2PenaltyPanelColor", clWhite));
         Player2PenaltyPanel->Color = DisplayForm->Player2Penalty->Color;
+
+        //применяем шрифты
+        LoadPlayerPanelsFontParameters(ini, Player2NameLabel, Player2ScoresPanel, Player2AdvantagePanel, Player2PenaltyPanel,
+                DisplayForm->Player2Label, DisplayForm->Player2Scores, DisplayForm->Player2Advantage,
+                DisplayForm->Player2Penalty, "Player2PanelFontConfig");
 
         return 0;
 
@@ -698,7 +741,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
         fightState = 0; //схватка "остановлена"
         dots = false; // необходимо для первого срабатывания
 
-        INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini"; // путь к файлу инициализации
+        TConfigurationForm::INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini"; // путь к файлу инициализации
 
         TimeOfFight = new CTimeOfFight();
         Player1 = new CPlayer();
@@ -706,17 +749,22 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
         UpdateScores();
 
         //загружаем настройки
-        LoadInterfaceParameters(INI_FILE);
+        LoadInterfaceParameters(TConfigurationForm::INI_FILE);
+        //флаг грепплинга ставим в 0, т.к. по умолчанию это БДД
+        GrapplingCheckBoxClick(NULL);
 }
 //---------------------------------------------------------------------------
 
-int TMainForm::LoadPlayer1LabelsFontParameters(TIniFile* ini)
+int TMainForm::LoadPlayer1LabelsParameters(TIniFile* ini)
 {
         AnsiString section = "Player1PointsLabelsConfig";
         //записываем текст
         DisplayForm->Player1ScoresLabel->Caption = ini->ReadString(section, "Player1ScoresText", "Очки");
+        Player1ScoresGroupBox->Caption = DisplayForm->Player1ScoresLabel->Caption;
         DisplayForm->Player1AdvantageLabel->Caption = ini->ReadString(section, "Player1AdvantageText", "Преимущества");
+        Player1AdvantageGroupBox->Caption = DisplayForm->Player1AdvantageLabel->Caption;
         DisplayForm->Player1PenaltyLabel->Caption = ini->ReadString(section, "Player1PenaltyText", "Штрафы");
+        Player1PenaltyGroupBox->Caption = DisplayForm->Player1PenaltyLabel->Caption;
         //записываем параметры шрифтов
         //очки
         TConfigurationForm::LoadFontParameters( ini, DisplayForm->Player1ScoresLabel->Font, section, "Player1ScoresFont");
@@ -729,13 +777,16 @@ int TMainForm::LoadPlayer1LabelsFontParameters(TIniFile* ini)
         return 0;
 }
 
-int TMainForm::LoadPlayer2LabelsFontParameters(TIniFile* ini)
+int TMainForm::LoadPlayer2LabelsParameters(TIniFile* ini)
 {
         AnsiString section = "Player2PointsLabelsConfig";
         //записываем текст
         DisplayForm->Player2ScoresLabel->Caption = ini->ReadString(section, "Player2ScoresText", "Очки");
+        Player2ScoresGroupBox->Caption = DisplayForm->Player2ScoresLabel->Caption;
         DisplayForm->Player2AdvantageLabel->Caption = ini->ReadString(section, "Player2AdvantageText", "Преимущества");
+        Player2AdvantageGroupBox->Caption = DisplayForm->Player2AdvantageLabel->Caption;
         DisplayForm->Player2PenaltyLabel->Caption = ini->ReadString(section, "Player2PenaltyText", "Штрафы");
+        Player2PenaltyGroupBox->Caption = DisplayForm->Player2PenaltyLabel->Caption;
         //записываем параметры шрифтов
         //очки
         TConfigurationForm::LoadFontParameters( ini, DisplayForm->Player2ScoresLabel->Font, section, "Player2ScoresFont");
@@ -747,3 +798,134 @@ int TMainForm::LoadPlayer2LabelsFontParameters(TIniFile* ini)
 
         return 0;
 }
+
+int TMainForm::LoadPlayerPanelsFontParameters(TIniFile* ini, TLabel* name, TPanel* score,
+                TPanel* adv, TPanel* pen, TLabel* dispName, TPanel* dispScore,
+                TPanel* dispAdv, TPanel* dispPen, AnsiString section)
+{
+        //имя
+        TConfigurationForm::LoadFontParameters(ini, dispName->Font, section, "NamePanelFont");
+        name->Font = dispName->Font;
+        name->Font->Size = 14;
+
+        //очки
+        TConfigurationForm::LoadFontParameters( ini, dispScore->Font, section, "ScoresPanelFont" );
+        score->Font = dispScore->Font;
+        score->Font->Size = 22;
+
+        //преимущества
+        TConfigurationForm::LoadFontParameters( ini, dispAdv->Font, section, "AdvantagePanelFont" );
+        adv->Font = dispAdv->Font;
+        adv->Font->Size = 22;
+
+        //штрафы
+        TConfigurationForm::LoadFontParameters( ini, dispPen->Font, section, "PenaltyPanelFont" );
+        pen->Font = dispPen->Font;
+        pen->Font->Size = 22;
+}
+
+void __fastcall TMainForm::ShowDisplayFormBtnClick(TObject *Sender)
+{
+        DisplayForm->Show();
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Timer2Timer(TObject *Sender)
+{
+        if (fightState == 1)
+        {
+        //мерцаем
+                if (DisplayForm->TimePanel->Color == displayColorSetup.time) //если цвет = установленному, то меняем на мограющий
+                {
+                        setColorInfo("clRed", "clWhite");
+
+                }
+                else
+                {
+                        setColorInfo();
+                }
+        }
+        else
+        {
+        //если схватка не идет, то выключаем таймер Timer2  (перестраховка)
+                Timer2->Enabled = false;
+                setColorInfo();
+        }
+}
+//---------------------------------------------------------------------------
+
+int TMainForm::getColorInfo()
+{
+        displayColorSetup.cat = DisplayForm->CategoryPanel->Color;
+        displayColorSetup.catFont = DisplayForm->CategoryPanel->Font->Color;
+        displayColorSetup.time = DisplayForm->TimePanel->Color;
+        displayColorSetup.timeFont = DisplayForm->TimePanel->Font->Color;
+        displayColorSetup.pl1 = DisplayForm->Player1Label->Color;
+        displayColorSetup.pl1Font = DisplayForm->Player1Label->Font->Color;
+        displayColorSetup.pl2 = DisplayForm->TimePanel->Color;
+        displayColorSetup.pl2Font = DisplayForm->TimePanel->Font->Color;
+        return 0;
+}
+
+int TMainForm::setColorInfo(AnsiString col, AnsiString fontCol)
+{
+        //если цвет прописан, то устанавливаем его. если нет, то берем из структуры
+        if ((col != "")&&(fontCol != ""))
+        {
+                TColor c = StringToColor(col);
+                TColor fc = StringToColor(fontCol);
+                DisplayForm->CategoryPanel->Color = c;
+                CategoryPanel->Color = DisplayForm->CategoryPanel->Color;
+                DisplayForm->CategoryPanel->Font->Color = fc;
+                CategoryPanel->Font->Color = DisplayForm->CategoryPanel->Font->Color;
+                DisplayForm->TimePanel->Color = c;
+                TimePanel->Color = DisplayForm->TimePanel->Color;
+                DisplayForm->TimePanel->Font->Color = fc;
+                TimePanel->Font->Color = DisplayForm->TimePanel->Font->Color;
+                DisplayForm->Player1Label->Color = c;
+                DisplayForm->Player1Label->Font->Color = fc;
+                DisplayForm->Player2Label->Color = c;
+                DisplayForm->Player2Label->Font->Color = fc;
+                DisplayForm->TimePanel->Color = c;
+                DisplayForm->TimePanel->Font->Color = fc;
+                return 0;
+        }
+
+        DisplayForm->CategoryPanel->Color = displayColorSetup.cat;
+        CategoryPanel->Color = DisplayForm->CategoryPanel->Color;
+        DisplayForm->CategoryPanel->Font->Color = displayColorSetup.catFont;
+        CategoryPanel->Font->Color = DisplayForm->CategoryPanel->Font->Color;
+        DisplayForm->TimePanel->Color = displayColorSetup.time;
+        TimePanel->Color = DisplayForm->TimePanel->Color;
+        DisplayForm->TimePanel->Font->Color = displayColorSetup.timeFont;
+        TimePanel->Font->Color = DisplayForm->TimePanel->Font->Color;
+        DisplayForm->Player1Label->Color = displayColorSetup.pl1;
+        DisplayForm->Player1Label->Font->Color = displayColorSetup.pl1Font;
+        DisplayForm->Player2Label->Color = displayColorSetup.pl2;
+        DisplayForm->Player2Label->Font->Color = displayColorSetup.pl2Font;
+        DisplayForm->TimePanel->Color = displayColorSetup.pl2;
+        DisplayForm->TimePanel->Font->Color = displayColorSetup.pl2Font;
+        return 0;
+
+}
+void __fastcall TMainForm::GrapplingCheckBoxClick(TObject *Sender)
+{
+        grapplingMode = GrapplingCheckBox->Checked;
+       //видимость кнопок
+        Player1AdvantageGroupBox->Visible = !grapplingMode;
+        Player2AdvantageGroupBox->Visible = !grapplingMode;
+
+        //панель преимуществ на табло
+        DisplayForm->Player1Advantage->Visible = !grapplingMode;
+        DisplayForm->Player2Advantage->Visible = !grapplingMode;
+
+        //меняем видимость панель преимуществ в центре управления
+        Player1AdvantagePanel->Visible = !grapplingMode;
+        Player2AdvantagePanel->Visible = !grapplingMode;
+
+        //перерисовываем окна
+        MainForm->FormResize(NULL);
+        DisplayForm->FormResize(NULL);
+}
+//---------------------------------------------------------------------------
+

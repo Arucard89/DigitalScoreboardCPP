@@ -17,6 +17,7 @@
 //---------------------------------------------------------------------------
 
 
+
 class TConfigurationForm : public TForm
 {
 __published:	// IDE-managed Components
@@ -24,8 +25,8 @@ __published:	// IDE-managed Components
         TTabSheet *InfoLabelsSheet;
         TTabSheet *PanelsColorTabSheet;
         TTabSheet *PanelsFontTabSheet;
-        TBitBtn *BitBtn1;
-        TBitBtn *BitBtn2;
+        TBitBtn *AcceptAllBitBtn;
+        TBitBtn *CancelAllBitBtn;
         TGroupBox *GroupBox1;
         TFontDialog *Player1ScoresLabelTextFontDialog;
         TLabeledEdit *Player1ScoresLabelText;
@@ -115,11 +116,16 @@ __published:	// IDE-managed Components
         TBitBtn *SetPicture1BitBtn;
         TBitBtn *SetPicture2BitBtn;
         TOpenPictureDialog *OpenPictureDialog;
+        TTabSheet *LoadCustomConfigTab;
+        TLabeledEdit *CustomConfigPathEdit;
+        TBitBtn *OpenCustomConfigPathBitBtn;
+        TBitBtn *AcceptCustomConfigBitBtn;
+        TOpenDialog *OpenCustomConfigPathDialog;
         void __fastcall Player1ScoresLabelTextChange(TObject *Sender);
         void __fastcall BitBtn3Click(TObject *Sender);
         //void __fastcall Player1PenaltyLabelTextChange(TObject *Sender);
         void __fastcall Player2ScoresLabelTextChange(TObject *Sender);
-        void __fastcall BitBtn1Click(TObject *Sender);
+        void __fastcall AcceptAllBitBtnClick(TObject *Sender);
         void __fastcall Player2ScoresLabelTextFontBitBtnClick(
           TObject *Sender);
         void __fastcall Player2AdvantageLabelTextFontBitBtnClick(
@@ -134,7 +140,7 @@ __published:	// IDE-managed Components
           TObject *Sender);
         void __fastcall Player2ScoresLabelsBtnClick(TObject *Sender);
         void __fastcall Player1ScoresLabelsBtnClick(TObject *Sender);
-        void __fastcall BitBtn2Click(TObject *Sender);
+        void __fastcall CancelAllBitBtnClick(TObject *Sender);
         void __fastcall SetPlayer2PanelColorBitBtnClick(TObject *Sender);
         void __fastcall CategoryPanelColorBoxChange(TObject *Sender);
         void __fastcall SetPlayer1PanelColorBitBtnClick(TObject *Sender);
@@ -156,16 +162,16 @@ __published:	// IDE-managed Components
         void __fastcall Player1ScoresPanelFontBtnClick(TObject *Sender);
         void __fastcall Player1AdvantagePanelFontBtnClick(TObject *Sender);
         void __fastcall Player1PenaltyPanelFontBtnClick(TObject *Sender);
-        void __fastcall Picture1BitBtnClick(TObject *Sender);
+        void __fastcall Picture1BiBtnClick(TObject *Sender);
         void __fastcall Picture1EditChange(TObject *Sender);
         void __fastcall Picture2EditChange(TObject *Sender);
         void __fastcall Picture2BitBtnClick(TObject *Sender);
         void __fastcall SetPicture1BitBtnClick(TObject *Sender);
         void __fastcall SetPicture2BitBtnClick(TObject *Sender);
+        void __fastcall OpenCustomConfigPathBitBtnClick(TObject *Sender);
+        void __fastcall CustomConfigPathEditChange(TObject *Sender);
+        void __fastcall AcceptCustomConfigBitBtnClick(TObject *Sender);
 private:	// User declarations
-        AnsiString INI_FILE; // путь к файлу инициализации
-        AnsiString DEF_INI_FILE; // путь к файлу настрое по-умолчанию
-
         bool Player1PointsLabelsChanged; //изменены подписи лейблов правого
         bool Player2PointsLabelsChanged; //изменены подписи лейблов левого
 
@@ -183,6 +189,9 @@ private:	// User declarations
         bool Picture2Changed; //
 
 public:		// User declarations
+
+        static AnsiString INI_FILE; // путь к файлу инициализации
+        AnsiString DEF_INI_FILE; // путь к файлу настрое по-умолчанию
 
         __fastcall TConfigurationForm(TComponent* Owner);
 
@@ -219,7 +228,13 @@ public:		// User declarations
         int LoadPlayer2PanelFontFromFile(TIniFile* ini);
         int LoadPicturesPathFromFile(TIniFile* ini); //считываем из файл путей к картинкам логотипов
 
+        int LoadConfigFromFileWithChange(AnsiString iniFile); //загрузка данных в форму из ini файла с отображением всех изменений
+
 };
+
+AnsiString TConfigurationForm::INI_FILE; // путь к файлу инициализации
+//AnsiString TConfigurationForm::DEF_INI_FILE; // путь к файлу настрое по-умолчанию
+
 //---------------------------------------------------------------------------
 extern PACKAGE TConfigurationForm *ConfigurationForm;
 //---------------------------------------------------------------------------
