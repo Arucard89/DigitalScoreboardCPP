@@ -133,6 +133,9 @@ __published:	// IDE-managed Components
         TBitBtn *ShowDisplayFormBtn;
         TTimer *Timer2;
         TCheckBox *GrapplingCheckBox;
+        TTabSheet *FightLogs;
+        TMemo *FightHistoryMemo;
+        TLabel *Label1;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
@@ -208,6 +211,7 @@ public:		// User declarations
 
 
         //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.
+        int WriteFightLog(AnsiString logMes); //пишем инфоромацию в лог. автоматом пишется: дата/время, категория ФИО борцов, действие
 };
 //---------------------------------------------------------------------------
 extern PACKAGE TMainForm *MainForm;

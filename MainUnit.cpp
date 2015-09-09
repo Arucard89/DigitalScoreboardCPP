@@ -89,6 +89,9 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         ConfigureFightButtons();
 //вкладка настроек схватки
         ResizeFightSettings();
+//вкладка хронология поединка
+        FightHistoryMemo->Height = FightLogs->Height - FightHistoryMemo->Top * 2;
+        FightHistoryMemo->Width = FightLogs->Width - FightHistoryMemo->Left * 2;
 
 //меняем положение кнопки
 
@@ -424,7 +427,8 @@ void __fastcall TMainForm::Player1ThreeScorePlusBitBtnClick(
 {
         Player1->PlusScore(((TPanel *)Sender)->Tag);
         UpdateScores();
-        //здесь добавить логирование
+        //логирование
+        WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player1ScoresLabel->Caption + " " + Player1->GetName());
 }
 
 //---------------------------------------------------------------------------
@@ -433,7 +437,8 @@ void __fastcall TMainForm::Player2OneScorePlusBitBtnClick(TObject *Sender)
 {
         Player2->PlusScore(((TPanel *)Sender)->Tag);
         UpdateScores();
-        //здесь добавить логирование
+        //логирование
+        WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player2ScoresLabel->Caption + " " + Player2->GetName());
 }
 //---------------------------------------------------------------------------
 
@@ -461,7 +466,8 @@ void __fastcall TMainForm::Player1AdvantagePlusBitBtnClick(TObject *Sender)
 {
         Player1->PlusAdvantage(((TPanel *)Sender)->Tag);
         UpdateScores();
-        //добавить логирование изменения очков
+        //логирование изменения очков
+        WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player1AdvantageLabel->Caption + " " + Player1->GetName());
 }
 //---------------------------------------------------------------------------
 
@@ -469,21 +475,53 @@ void __fastcall TMainForm::Player2AdvantagePlusBitBtnClick(TObject *Sender)
 {
         Player2->PlusAdvantage(((TPanel *)Sender)->Tag);
         UpdateScores();
-         //добавить логирование изменения очков
+         //логирование изменения очков
+         WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player2AdvantageLabel->Caption + " " + Player2->GetName());
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::Player1PenaltyMinusBitBtnClick(TObject *Sender)
 {
-        Player1->PlusPenalty(((TPanel *)Sender)->Tag);
+        int p = ((TPanel *)Sender)->Tag; //значение нажатой кнопки
+        if (grapplingMode == true)
+        {
+                if (!((p < 0) && (Player1->GetPenalty() == 0)))
+                {
+                        Player2->PlusScore(p);
+                        Player1->PlusPenalty(((TPanel *)Sender)->Tag);
+                        WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player1PenaltyLabel->Caption + " " + Player1->GetName()+
+                                " и " + IntToStr(p) + " " + DisplayForm->Player2ScoresLabel->Caption + " " + Player2->GetName());
+                }
+        }
+        else
+        {
+                Player1->PlusPenalty(((TPanel *)Sender)->Tag);
+                WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player1PenaltyLabel->Caption + " " + Player1->GetName());
+        }
         UpdateScores();
-         //добавить логирование изменения очков
+
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::Player2PenaltyMinusBitBtnClick(TObject *Sender)
 {
-        Player2->PlusPenalty(((TPanel *)Sender)->Tag);
+        int p = ((TPanel *)Sender)->Tag; //значение нажатой кнопки
+        if (grapplingMode == true)
+        {
+                if (!((p < 0) && (Player2->GetPenalty() == 0)))
+                {
+                        Player1->PlusScore(p);
+                        Player2->PlusPenalty(((TPanel *)Sender)->Tag);
+                        WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player2PenaltyLabel->Caption + " " + Player2->GetName()+
+                                " и " + IntToStr(p) + " " + DisplayForm->Player1ScoresLabel->Caption + " " + Player1->GetName());
+                        
+                }
+        }
+        else
+        {
+                Player2->PlusPenalty(((TPanel *)Sender)->Tag);
+                WriteFightLog(IntToStr(((TButton*)Sender)->Tag) + " " + DisplayForm->Player2PenaltyLabel->Caption + " " + Player2->GetName());
+        }
         UpdateScores();
          //добавить логирование изменения очков
 }
@@ -493,24 +531,29 @@ void __fastcall TMainForm::Timer1Timer(TObject *Sender)
 {
         if (fightState == 1) //если схватка идет
         {
-                if (timerInterval == defaultInterval)         
+                minusInterval(); //отнимаем один интервал отсчета
+
+                if ((timerInterval == (defaultInterval / 2))||(timerInterval == defaultInterval)) //гасим точки посреди секунды  и зажигаем вначале интервала
+                {
+                        dots = !dots;
+                }
+                ShowTime(dots);  //большая зависимость от шрифтов
+
+                if (timerInterval == defaultInterval)
                 {
                         TimeOfFight->minusSecond();
                         if (TimeOfFight->getZero() == 1) //если закончилось время
                         {
                                 fightState = 0;
                                 Timer1->Enabled = false;
-                                //выключаем сторой таймер и мерцание
+                                ShowTime();
+                                //выключаем второй таймер и мерцание
                                 Timer2->Enabled = false;
                                 setColorInfo();
+                                ShowMessage("Конец");  //здесь имитация нажатия на кнопку стоп
                         }
                 }
-                if ((timerInterval == (defaultInterval / 2))||(timerInterval == defaultInterval)) //гасим точки посреди секунды  и зажигаем вначале интервала
-                {
-                        dots = !dots;
-                }
-                ShowTime(dots);  //большая зависимость от шрифтов
-                minusInterval(); //отнимаем один интервал отсчета
+
                 //если осталось 10 секунд и меньше
                 if ((TimeOfFight->getMinutes() == 0) && (TimeOfFight->getSeconds() <= 10))
                 {
@@ -535,6 +578,8 @@ void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
         PauseFightBtn->Enabled = true; //делаем возможным приостановку схватки на паузу
         StartFightBtn->Enabled = false;//внопку старт отключаем(чтобы не тыкали)
         Timer1->Enabled = true;
+        //пишем лог
+        WriteFightLog(((TButton*) Sender)->Caption);
 }
 //---------------------------------------------------------------------------
 
@@ -550,17 +595,22 @@ void __fastcall TMainForm::PauseFightBtnClick(TObject *Sender)
         StartFightBtn->Enabled = true;//включаем кнопку продолжения.
         PauseFightBtn->Enabled = false; //уже нажали, больше не надо
         Timer1->Enabled = false;
+        //пишем лог
+        WriteFightLog(((TButton*) Sender)->Caption);
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
 {
-        fightState = 0;
+        fightState = 1;
         StartFightBtn->Enabled = true;//включаем кнопку
         PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
         Timer1->Enabled = false;
+        StartFightBtn->Caption = "ПРОДОЛЖИТЬ";//кнопка старт переименовывается в более правильное название(т.к. она будет продолжать схватку после паузы)
         //тут вызываем модальную форму с причинами победы(подгрузка причин либо из БД, либо из ини файла)
         //с вожможностью отмены нажатия кнопки (для продолжения схватки или корректировки результатов)
+        fightState = 0;  //если форма окончания принята
+        //StartFightBtn->Caption = "СТАРТ";//
 }
 //---------------------------------------------------------------------------
 
@@ -570,6 +620,7 @@ void __fastcall TMainForm::ResetBtnClick(TObject *Sender)
         StartFightBtn->Caption = "СТАРТ";
         StartFightBtn->Enabled = true;//включаем кнопку .
         PauseFightBtn->Enabled = false; //еще старт не нажат
+        StopFightBtn->Enabled = false; //еще старт не нажат
         Timer1->Enabled = false;
 
         //сбрасываем очки и время
@@ -582,6 +633,8 @@ void __fastcall TMainForm::ResetBtnClick(TObject *Sender)
         ShowTime();
 
         //добавить лог о действии сброса
+        //пишем лог
+        WriteFightLog(((TButton*) Sender)->Caption);
 }
 //---------------------------------------------------------------------------
 
@@ -822,6 +875,8 @@ int TMainForm::LoadPlayerPanelsFontParameters(TIniFile* ini, TLabel* name, TPane
         TConfigurationForm::LoadFontParameters( ini, dispPen->Font, section, "PenaltyPanelFont" );
         pen->Font = dispPen->Font;
         pen->Font->Size = 22;
+
+        return 0;
 }
 
 void __fastcall TMainForm::ShowDisplayFormBtnClick(TObject *Sender)
@@ -928,4 +983,15 @@ void __fastcall TMainForm::GrapplingCheckBoxClick(TObject *Sender)
         DisplayForm->FormResize(NULL);
 }
 //---------------------------------------------------------------------------
+
+int TMainForm::WriteFightLog(AnsiString logMes)
+{
+        AnsiString s;
+        s = DateTimeToStr(Now());
+        s += "; " + CategoryPanel->Caption;
+        s += "; " + Player1->GetName();
+        s += "; " + Player2->GetName();
+        s += "; " + logMes;
+        FightHistoryMemo->Lines->Add(s);
+}
 

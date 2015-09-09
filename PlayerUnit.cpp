@@ -72,6 +72,7 @@ void CPlayer::PlusPenalty(int p)
         ((Penalty + p) < 0) ? Penalty = 0 : Penalty += p;
 }
 
+/*
 void CPlayer::MinusScore(int s)
 {
         ((Score - s) < 0) ? Score = 0 : Score -= s;
@@ -86,6 +87,8 @@ void CPlayer::MinusPenalty(int p)
 {
         ((Penalty - p) < 0) ? Penalty = 0 : Penalty -= p;
 }
+
+*/
 
 void CPlayer::ResetScores()
 {

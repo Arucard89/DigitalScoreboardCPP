@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 352
-  Top = 75
+  Left = 266
+  Top = 149
   Width = 1237
   Height = 714
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
@@ -355,6 +355,7 @@ object MainForm: TMainForm
                 Font.Style = [fsBold]
                 ParentFont = False
                 TabOrder = 1
+                OnClick = Player1AdvantagePlusBitBtnClick
               end
             end
           end
@@ -1206,6 +1207,33 @@ object MainForm: TMainForm
         Caption = #1056#1077#1078#1080#1084' '#1075#1088#1101#1087#1087#1083#1080#1085#1075#1072
         TabOrder = 4
         OnClick = GrapplingCheckBoxClick
+      end
+    end
+    object FightLogs: TTabSheet
+      Caption = #1061#1088#1086#1085#1086#1083#1086#1075#1080#1103' '#1087#1086#1077#1076#1080#1085#1082#1072
+      ImageIndex = 2
+      object Label1: TLabel
+        Left = 0
+        Top = 0
+        Width = 1213
+        Height = 22
+        Align = alTop
+        Caption = #1060#1086#1088#1084#1072#1090' '#1079#1072#1087#1080#1089#1080': '#1076#1072#1090#1072' '#1074#1088#1077#1084#1103'  '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080' '#1076#1077#1081#1089#1090#1074#1080#1077
+      end
+      object FightHistoryMemo: TMemo
+        Left = 24
+        Top = 32
+        Width = 425
+        Height = 529
+        Font.Charset = ANSI_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -15
+        Font.Name = 'Arial'
+        Font.Style = []
+        ParentFont = False
+        ReadOnly = True
+        ScrollBars = ssBoth
+        TabOrder = 0
       end
     end
   end
