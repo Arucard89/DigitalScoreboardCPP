@@ -829,6 +829,7 @@ object MainForm: TMainForm
           Width = 89
           Height = 41
           Caption = #1057#1058#1040#1056#1058
+          Enabled = False
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clGreen
           Font.Height = -21
@@ -845,6 +846,7 @@ object MainForm: TMainForm
           Width = 89
           Height = 41
           Caption = #1055#1040#1059#1047#1040
+          Enabled = False
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clOlive
           Font.Height = -21
@@ -860,6 +862,7 @@ object MainForm: TMainForm
           Width = 89
           Height = 41
           Caption = #1057#1058#1054#1055
+          Enabled = False
           Font.Charset = RUSSIAN_CHARSET
           Font.Color = clMaroon
           Font.Height = -21
@@ -1015,7 +1018,7 @@ object MainForm: TMainForm
         object CurrentTimeSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 1169
+          Width = 4
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -1215,7 +1218,7 @@ object MainForm: TMainForm
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 1213
+        Width = 493
         Height = 22
         Align = alTop
         Caption = #1060#1086#1088#1084#1072#1090' '#1079#1072#1087#1080#1089#1080': '#1076#1072#1090#1072' '#1074#1088#1077#1084#1103'  '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080' '#1076#1077#1081#1089#1090#1074#1080#1077

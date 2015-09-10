@@ -550,7 +550,7 @@ void __fastcall TMainForm::Timer1Timer(TObject *Sender)
                                 //выключаем второй таймер и мерцание
                                 Timer2->Enabled = false;
                                 setColorInfo();
-                                ShowMessage("Конец");  //здесь имитация нажатия на кнопку стоп
+                                StopFightBtnClick(0);//ShowMessage("Конец");  //здесь имитация нажатия на кнопку стоп
                         }
                 }
 
@@ -572,11 +572,15 @@ void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
         {
                 timerInterval = defaultInterval; //выставляем счетчик
         }
-        StartFightBtn->Caption = "СТАРТ"; //кнопка возвращает свое название(если после паузы)
+        if (fightState == 2)
+        {
+                StartFightBtn->Caption = "СТАРТ"; //кнопка возвращает свое название(если после паузы)
+        }
         fightState = 1; //ставим состояние схватки в положение "идет"
       //  StartFightBtn->Caption = 'ПРОДОЛЖИТЬ';
         PauseFightBtn->Enabled = true; //делаем возможным приостановку схватки на паузу
         StartFightBtn->Enabled = false;//внопку старт отключаем(чтобы не тыкали)
+        StopFightBtn->Enabled = true;//включаем кнопку стоп
         Timer1->Enabled = true;
         //пишем лог
         WriteFightLog(((TButton*) Sender)->Caption);
@@ -602,14 +606,20 @@ void __fastcall TMainForm::PauseFightBtnClick(TObject *Sender)
 
 void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
 {
-        fightState = 1;
+        fightState = 2;
         StartFightBtn->Enabled = true;//включаем кнопку
         PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
         Timer1->Enabled = false;
         StartFightBtn->Caption = "ПРОДОЛЖИТЬ";//кнопка старт переименовывается в более правильное название(т.к. она будет продолжать схватку после паузы)
         //тут вызываем модальную форму с причинами победы(подгрузка причин либо из БД, либо из ини файла)
         //с вожможностью отмены нажатия кнопки (для продолжения схватки или корректировки результатов)
-        fightState = 0;  //если форма окончания принята
+        if (MessageDlg("Закончить схватку?",mtInformation, mbOKCancel, 0) == mrOk)
+        {
+                fightState = 0;  //если форма окончания принята
+                StartFightBtn->Enabled = false;//включаем кнопку
+                PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
+                StopFightBtn->Enabled = false;
+        }
         //StartFightBtn->Caption = "СТАРТ";//
 }
 //---------------------------------------------------------------------------
