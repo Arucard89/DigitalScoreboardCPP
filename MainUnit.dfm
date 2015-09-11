@@ -1,8 +1,8 @@
 object MainForm: TMainForm
-  Left = 266
-  Top = 149
+  Left = 248
+  Top = 147
   Width = 1237
-  Height = 714
+  Height = 713
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
   Color = clMoneyGreen
   Font.Charset = DEFAULT_CHARSET
@@ -10,8 +10,10 @@ object MainForm: TMainForm
   Font.Height = -11
   Font.Name = 'MS Sans Serif'
   Font.Style = []
+  Menu = MainMenu1
   OldCreateOrder = False
   OnCreate = FormCreate
+  OnDestroy = FormDestroy
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13
@@ -20,7 +22,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 633
-    ActivePage = FightingControls
+    ActivePage = FightLogs
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -29,7 +31,7 @@ object MainForm: TMainForm
     Font.Style = []
     MultiLine = True
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 2
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -893,6 +895,7 @@ object MainForm: TMainForm
       BorderWidth = 20
       Caption = '    '#1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080'   '
       ImageIndex = 1
+      OnEnter = FightSettingsEnter
       object InformationGroupBox: TGroupBox
         Left = 0
         Top = 0
@@ -920,7 +923,7 @@ object MainForm: TMainForm
           Top = 88
           Width = 297
           Height = 41
-          Caption = 'OK'
+          Caption = #1055#1088#1080#1085#1103#1090#1100
           Default = True
           TabOrder = 0
           OnClick = AcceptInformationBtnClick
@@ -1018,7 +1021,7 @@ object MainForm: TMainForm
         object CurrentTimeSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 4
+          Width = 1169
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -1064,7 +1067,7 @@ object MainForm: TMainForm
           Top = 64
           Width = 297
           Height = 41
-          Caption = 'OK'
+          Caption = #1055#1088#1080#1085#1103#1090#1100
           Default = True
           TabOrder = 2
           OnClick = AcceptTimeBtnClick
@@ -1107,7 +1110,7 @@ object MainForm: TMainForm
           Top = 152
           Width = 297
           Height = 41
-          Caption = 'OK'
+          Caption = #1055#1088#1080#1085#1103#1090#1100
           Default = True
           TabOrder = 0
           OnClick = AcceptPlayersNamesBtnClick
@@ -1174,7 +1177,7 @@ object MainForm: TMainForm
         Top = 512
         Width = 353
         Height = 41
-        Caption = '&All'
+        Caption = #1055#1088#1080#1085#1103#1090#1100' '#1074#1089#1077' '#1080#1079#1084#1077#1085#1077#1085#1080#1103
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -1218,10 +1221,12 @@ object MainForm: TMainForm
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 493
+        Width = 1213
         Height = 22
         Align = alTop
-        Caption = #1060#1086#1088#1084#1072#1090' '#1079#1072#1087#1080#1089#1080': '#1076#1072#1090#1072' '#1074#1088#1077#1084#1103'  '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080' '#1076#1077#1081#1089#1090#1074#1080#1077
+        Caption = 
+          #1060#1086#1088#1084#1072#1090' '#1079#1072#1087#1080#1089#1080': '#1076#1072#1090#1072' '#1074#1088#1077#1084#1103';  '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080'; '#1074#1088#1077#1084#1103' '#1076#1086' '#1082#1086#1085#1094#1072' '#1089#1093 +
+          #1074#1072#1090#1082#1080'; '#1076#1077#1081#1089#1090#1074#1080#1077
       end
       object FightHistoryMemo: TMemo
         Left = 24
@@ -1240,36 +1245,6 @@ object MainForm: TMainForm
       end
     end
   end
-  object OpenConfigurationButton: TButton
-    Left = 776
-    Top = 636
-    Width = 337
-    Height = 25
-    Caption = #1054#1090#1082#1088#1099#1090#1100' '#1086#1082#1085#1086' '#1085#1072#1089#1090#1088#1086#1077#1082
-    Font.Charset = ANSI_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -16
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 1
-    OnClick = OpenConfigurationButtonClick
-  end
-  object ShowDisplayFormBtn: TBitBtn
-    Left = 0
-    Top = 632
-    Width = 225
-    Height = 33
-    Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
-    Font.Charset = RUSSIAN_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -19
-    Font.Name = 'Arial'
-    Font.Style = [fsBold]
-    ParentFont = False
-    TabOrder = 2
-    OnClick = ShowDisplayFormBtnClick
-  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     Left = 1024
@@ -1279,5 +1254,29 @@ object MainForm: TMainForm
     Interval = 250
     OnTimer = Timer2Timer
     Left = 1088
+  end
+  object MainMenu1: TMainMenu
+    Left = 920
+    object N1: TMenuItem
+      Caption = #1054#1089#1085#1086#1074#1085#1086#1077' '#1084#1077#1085#1102
+      object N2: TMenuItem
+        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1086#1082#1085#1086' '#1085#1072#1089#1090#1088#1086#1077#1082
+        OnClick = OpenConfigurationButtonClick
+      end
+      object N3: TMenuItem
+        Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
+        OnClick = ShowDisplayFormBtnClick
+      end
+      object N4: TMenuItem
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1086#1077#1076#1080#1085#1077#1085#1080#1103' '#1089' '#1041#1044' '#1089#1086#1088#1077#1074#1085#1086#1074#1072#1085#1080#1081
+      end
+    end
+    object N5: TMenuItem
+      Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+    end
+    object N6: TMenuItem
+      Caption = #1042#1099#1093#1086#1076
+      OnClick = N6Click
+    end
   end
 end

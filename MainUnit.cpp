@@ -571,6 +571,13 @@ void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
         if (fightState == 0)
         {
                 timerInterval = defaultInterval; //выставляем счетчик
+                if (FightHistoryMemo->Lines->Count > 200)   //если больше 200 записей, то для удобства просмотра новый файл создаем
+                {
+                        FightHistoryMemo->Lines->SaveToFile(fightHistoryLogPath +
+                                StringReplace(TimeToStr(Now()), ":", '-', TReplaceFlags() << rfReplaceAll << rfIgnoreCase) +
+                                ".log");
+                        FightHistoryMemo->Clear();
+                }
         }
         if (fightState == 2)
         {
@@ -805,6 +812,7 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
         dots = false; // необходимо для первого срабатывания
 
         TConfigurationForm::INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini"; // путь к файлу инициализации
+        fightHistoryLogPath = ExtractFileDir(Application->ExeName) + "\\logs\\fight_log_";
 
         TimeOfFight = new CTimeOfFight();
         Player1 = new CPlayer();
@@ -1001,7 +1009,42 @@ int TMainForm::WriteFightLog(AnsiString logMes)
         s += "; " + CategoryPanel->Caption;
         s += "; " + Player1->GetName();
         s += "; " + Player2->GetName();
+        s += "; " + TimeOfFight->getTime(true);
         s += "; " + logMes;
         FightHistoryMemo->Lines->Add(s);
+        return 0;
 }
+
+void __fastcall TMainForm::FormDestroy(TObject *Sender)
+{
+        AnsiString s = fightHistoryLogPath +
+                StringReplace(TimeToStr(Now()), ":", '-', TReplaceFlags() << rfReplaceAll << rfIgnoreCase) +
+                ".log";
+        FightHistoryMemo->Lines->SaveToFile(s);
+
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TMainForm::N6Click(TObject *Sender)
+{
+        Close();        
+}
+//---------------------------------------------------------------------------
+
+
+
+void __fastcall TMainForm::FightSettingsEnter(TObject *Sender)
+{
+        if (fightState == 1)
+        {
+                FightSettings->Enabled = false;
+        }
+        else
+        {
+                FightSettings->Enabled = true;
+        }
+}
+//---------------------------------------------------------------------------
 

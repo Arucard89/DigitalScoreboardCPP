@@ -16,7 +16,10 @@
 #include "TimeUnit.h"
 #include "PlayerUnit.h"
 #include <MPlayer.hpp>
+#include <Menus.hpp>
 //---------------------------------------------------------------------------
+//const AnsiString FIGHT_HISTORY_LOG
+
 struct SFightInfo
 {
         AnsiString age;
@@ -129,13 +132,18 @@ __published:	// IDE-managed Components
         TGroupBox *WeightGroupBox;
         TComboBox *WeightComboBox;
         TTimer *Timer1;
-        TButton *OpenConfigurationButton;
-        TBitBtn *ShowDisplayFormBtn;
         TTimer *Timer2;
         TCheckBox *GrapplingCheckBox;
         TTabSheet *FightLogs;
         TMemo *FightHistoryMemo;
         TLabel *Label1;
+        TMainMenu *MainMenu1;
+        TMenuItem *N1;
+        TMenuItem *N2;
+        TMenuItem *N3;
+        TMenuItem *N4;
+        TMenuItem *N5;
+        TMenuItem *N6;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
@@ -160,7 +168,10 @@ __published:	// IDE-managed Components
         void __fastcall FormCreate(TObject *Sender);
         void __fastcall ShowDisplayFormBtnClick(TObject *Sender);
         void __fastcall Timer2Timer(TObject *Sender);
-        void __fastcall GrapplingCheckBoxClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall GrapplingCheckBoxClick(TObject *Sender);
+        void __fastcall FormDestroy(TObject *Sender);
+        void __fastcall N6Click(TObject *Sender);
+        void __fastcall FightSettingsEnter(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
 
         TDisplayForm *DisplayForm;
@@ -176,7 +187,7 @@ private:	// User declarations
         //AnsiString INI_FILE; // путь к файлу инициализации
         SDispColorSetup displayColorSetup; //настройки цвета панели(сюда сохраняем при изменении для того, чтобы менять цвет при мерцании)
         bool grapplingMode; //флаг включения режима грэпплинга(если тру, то табло для грэпплинга)
-
+        AnsiString fightHistoryLogPath;
 public:		// User declarations
         __fastcall TMainForm(TComponent* Owner);
         void __fastcall ConfigureScoresButtons ();
