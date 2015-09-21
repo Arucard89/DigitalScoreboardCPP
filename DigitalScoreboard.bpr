@@ -5,15 +5,17 @@
     <VERSION value="BCB.06.00"/>
     <PROJECT value="DigitalScoreboard.exe"/>
     <OBJFILES value="DigitalScoreboard.obj DisplayUnit.obj ConfigurationUnit.obj MainUnit.obj 
-      TimeUnit.obj PlayerUnit.obj"/>
+      TimeUnit.obj PlayerUnit.obj DataModuleUnit.obj FightResultUnit.obj 
+      DBPathUnit.obj"/>
     <RESFILES value="DigitalScoreboard.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
     <DEFFILE value=""/>
-    <RESDEPEN value="$(RESFILES) DisplayUnit.dfm ConfigurationUnit.dfm MainUnit.dfm"/>
+    <RESDEPEN value="$(RESFILES) DisplayUnit.dfm ConfigurationUnit.dfm MainUnit.dfm 
+      DataModuleUnit.dfm FightResultUnit.dfm DBPathUnit.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value=""/>
-    <SPARELIBS value="vcl.lib rtl.lib bcbsmp.lib vclx.lib"/>
+    <SPARELIBS value="vcl.lib rtl.lib bcbsmp.lib vclx.lib dbrtl.lib adortl.lib"/>
     <PACKAGES value="vcl.bpi rtl.bpi dbrtl.bpi adortl.bpi vcldb.bpi vclx.bpi bdertl.bpi 
       vcldbx.bpi ibxpress.bpi dsnap.bpi cds.bpi bdecds.bpi qrpt.bpi teeui.bpi 
       teedb.bpi tee.bpi dss.bpi teeqr.bpi visualclx.bpi visualdbclx.bpi 
@@ -60,6 +62,9 @@
       <FILE FILENAME="MainUnit.cpp" FORMNAME="MainForm" UNITNAME="MainUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="TimeUnit.cpp" FORMNAME="" UNITNAME="TimeUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="PlayerUnit.cpp" FORMNAME="" UNITNAME="PlayerUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DataModuleUnit.cpp" FORMNAME="DataModule1" UNITNAME="DataModuleUnit" CONTAINERID="CCompiler" DESIGNCLASS="TDataModule" LOCALCOMMAND=""/>
+      <FILE FILENAME="FightResultUnit.cpp" FORMNAME="FightResultForm" UNITNAME="FightResultUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="DBPathUnit.cpp" FORMNAME="DBPathForm" UNITNAME="DBPathUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

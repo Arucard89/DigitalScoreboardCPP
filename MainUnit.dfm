@@ -1,10 +1,11 @@
 object MainForm: TMainForm
-  Left = 248
-  Top = 147
+  Left = 337
+  Top = 164
   Width = 1237
   Height = 713
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
   Color = clMoneyGreen
+  DefaultMonitor = dmPrimary
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11
@@ -12,6 +13,7 @@ object MainForm: TMainForm
   Font.Style = []
   Menu = MainMenu1
   OldCreateOrder = False
+  OnCloseQuery = FormCloseQuery
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   OnResize = FormResize
@@ -22,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 633
-    ActivePage = FightLogs
+    ActivePage = FightSettings
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -31,7 +33,7 @@ object MainForm: TMainForm
     Font.Style = []
     MultiLine = True
     ParentFont = False
-    TabIndex = 2
+    TabIndex = 1
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -895,7 +897,7 @@ object MainForm: TMainForm
       BorderWidth = 20
       Caption = '    '#1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080'   '
       ImageIndex = 1
-      OnEnter = FightSettingsEnter
+      OnShow = FightSettingsShow
       object InformationGroupBox: TGroupBox
         Left = 0
         Top = 0
@@ -960,7 +962,6 @@ object MainForm: TMainForm
             Width = 153
             Height = 27
             ItemHeight = 19
-            Sorted = True
             TabOrder = 0
             OnChange = AgeComboBoxChange
           end
@@ -979,7 +980,6 @@ object MainForm: TMainForm
             Width = 137
             Height = 27
             ItemHeight = 19
-            Sorted = True
             TabOrder = 0
             OnChange = AgeComboBoxChange
           end
@@ -1001,7 +1001,35 @@ object MainForm: TMainForm
             Sorted = True
             TabOrder = 0
             OnChange = AgeComboBoxChange
+            OnDropDown = WeightComboBoxDropDown
           end
+        end
+        object UpdateCategoryInfoBtn: TBitBtn
+          Left = 872
+          Top = 40
+          Width = 297
+          Height = 33
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1080#1079' '#1073#1072#1079#1099
+          TabOrder = 4
+          OnClick = UpdateCategoryInfoBtnClick
+          Glyph.Data = {
+            DE010000424DDE01000000000000760000002800000024000000120000000100
+            0400000000006801000000000000000000001000000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333444444
+            33333333333F8888883F33330000324334222222443333388F3833333388F333
+            000032244222222222433338F8833FFFFF338F3300003222222AAAAA22243338
+            F333F88888F338F30000322222A33333A2224338F33F8333338F338F00003222
+            223333333A224338F33833333338F38F00003222222333333A444338FFFF8F33
+            3338888300003AAAAAAA33333333333888888833333333330000333333333333
+            333333333333333333FFFFFF000033333333333344444433FFFF333333888888
+            00003A444333333A22222438888F333338F3333800003A2243333333A2222438
+            F38F333333833338000033A224333334422224338338FFFFF8833338000033A2
+            22444442222224338F3388888333FF380000333A2222222222AA243338FF3333
+            33FF88F800003333AA222222AA33A3333388FFFFFF8833830000333333AAAAAA
+            3333333333338888883333330000333333333333333333333333333333333333
+            0000}
+          NumGlyphs = 2
         end
       end
       object FightTimeGroupBox: TGroupBox
@@ -1097,7 +1125,7 @@ object MainForm: TMainForm
         Width = 1173
         Height = 201
         Align = alTop
-        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086#1073' '#1080#1084#1077#1085#1072#1093' '#1089#1087#1086#1088#1089#1084#1077#1085#1086#1074
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086#1073' '#1080#1084#1077#1085#1072#1093' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1086#1074
         Font.Charset = ANSI_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -1170,6 +1198,32 @@ object MainForm: TMainForm
             TabOrder = 0
             OnChange = Player1ComboBoxChange
           end
+        end
+        object UpdatePlayersInfoBtn: TBitBtn
+          Left = 8
+          Top = 152
+          Width = 297
+          Height = 33
+          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1080#1079' '#1073#1072#1079#1099
+          TabOrder = 3
+          Glyph.Data = {
+            DE010000424DDE01000000000000760000002800000024000000120000000100
+            0400000000006801000000000000000000001000000000000000000000000000
+            80000080000000808000800000008000800080800000C0C0C000808080000000
+            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333444444
+            33333333333F8888883F33330000324334222222443333388F3833333388F333
+            000032244222222222433338F8833FFFFF338F3300003222222AAAAA22243338
+            F333F88888F338F30000322222A33333A2224338F33F8333338F338F00003222
+            223333333A224338F33833333338F38F00003222222333333A444338FFFF8F33
+            3338888300003AAAAAAA33333333333888888833333333330000333333333333
+            333333333333333333FFFFFF000033333333333344444433FFFF333333888888
+            00003A444333333A22222438888F333338F3333800003A2243333333A2222438
+            F38F333333833338000033A224333334422224338338FFFFF8833338000033A2
+            22444442222224338F3388888333FF380000333A2222222222AA243338FF3333
+            33FF88F800003333AA222222AA33A3333388FFFFFF8833830000333333AAAAAA
+            3333333333338888883333330000333333333333333333333333333333333333
+            0000}
+          NumGlyphs = 2
         end
       end
       object AcceptAllConfigurationBtn: TBitBtn
@@ -1269,6 +1323,7 @@ object MainForm: TMainForm
       end
       object N4: TMenuItem
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1086#1077#1076#1080#1085#1077#1085#1080#1103' '#1089' '#1041#1044' '#1089#1086#1088#1077#1074#1085#1086#1074#1072#1085#1080#1081
+        OnClick = N4Click
       end
     end
     object N5: TMenuItem

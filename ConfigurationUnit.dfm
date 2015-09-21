@@ -1269,9 +1269,9 @@ object ConfigurationForm: TConfigurationForm
         Top = 120
         Width = 665
         Height = 28
-        EditLabel.Width = 130
+        EditLabel.Width = 199
         EditLabel.Height = 18
-        EditLabel.Caption = #1042#1077#1088#1093#1085#1103#1103' '#1082#1072#1088#1090#1080#1085#1082#1072
+        EditLabel.Caption = #1055#1091#1090#1100' '#1082' '#1092#1072#1081#1083#1091' '#1082#1086#1085#1092#1080#1075#1091#1088#1072#1094#1080#1080
         EditLabel.Font.Charset = RUSSIAN_CHARSET
         EditLabel.Font.Color = clWindowText
         EditLabel.Font.Height = -16

@@ -1,12 +1,13 @@
 object DisplayForm: TDisplayForm
-  Left = 2047
-  Top = 122
+  Left = 2181
+  Top = 112
   Width = 1360
   Height = 768
   BorderIcons = [biMinimize, biMaximize]
   BorderWidth = 10
-  Caption = 'DisplayForm'
+  Caption = #1062#1080#1092#1088#1086#1074#1086#1077' '#1090#1072#1073#1083#1086
   Color = clWhite
+  DefaultMonitor = dmDesktop
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
   Font.Height = -11

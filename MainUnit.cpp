@@ -93,8 +93,8 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
         FightHistoryMemo->Height = FightLogs->Height - FightHistoryMemo->Top * 2;
         FightHistoryMemo->Width = FightLogs->Width - FightHistoryMemo->Left * 2;
 
-//меняем положение кнопки
-
+//меняем положение кнопки подгрузки данных в комбобоксы
+        UpdateCategoryInfoBtn->Left = AcceptInformationBtn->Left;
 //
 
 }
@@ -619,9 +619,15 @@ void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
         Timer1->Enabled = false;
         StartFightBtn->Caption = "ПРОДОЛЖИТЬ";//кнопка старт переименовывается в более правильное название(т.к. она будет продолжать схватку после паузы)
         //тут вызываем модальную форму с причинами победы(подгрузка причин либо из БД, либо из ини файла)
-        //с вожможностью отмены нажатия кнопки (для продолжения схватки или корректировки результатов)
-        if (MessageDlg("Закончить схватку?",mtInformation, mbOKCancel, 0) == mrOk)
+        //с вожможностью отмены нажатия кнопки (для продолжения схватки или корректировки результатов
+        //запускаем форму результатов
+
+        FightResultForm = new TFightResultForm(this);
+        FightResultForm->LoadPlayerNames(Player1->GetName(),Player2->GetName());
+        int res = FightResultForm->ShowModal();
+        if (res == mrOk)
         {
+                //добавить запись результатов схватки в БД или в файл
                 fightState = 0;  //если форма окончания принята
                 StartFightBtn->Enabled = false;//включаем кнопку
                 PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
@@ -823,6 +829,11 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
         LoadInterfaceParameters(TConfigurationForm::INI_FILE);
         //флаг грепплинга ставим в 0, т.к. по умолчанию это БДД
         GrapplingCheckBoxClick(NULL);
+
+        //выбираем вкладку
+        PageControl1->ActivePage = FightingControls;
+        //устанавливаем флаг связи с бд в ложь
+        DBPathSelected = false;
 }
 //---------------------------------------------------------------------------
 
@@ -1035,7 +1046,101 @@ void __fastcall TMainForm::N6Click(TObject *Sender)
 
 
 
-void __fastcall TMainForm::FightSettingsEnter(TObject *Sender)
+
+
+void __fastcall TMainForm::N4Click(TObject *Sender)
+{
+        DBPathForm = new TDBPathForm(this);
+        int res = DBPathForm->ShowModal();//если путь выбран, то все хороша, если нет, то флаг возвращаем в фолс
+        if (res == mrOk)
+        {
+                DBPathSelected = true;
+                DataModule1->ADOConnection->ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
+                DBPathForm->DBPathEdit->Text + ";Persist Security Info=False";
+        }
+        else
+        {
+                DBPathSelected = false;
+        };
+        DBPathForm->Free();
+}
+//---------------------------------------------------------------------------
+
+
+void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
+{
+        TStringList* ages = new TStringList;
+        TStringList* belts = new TStringList;
+        //получаем список возрастов
+        int res = DataModule1->GetAges(ages);
+        if (res == 1)
+        {
+                WriteErrLog("Список полученных возрастов пуст");
+        }
+        else
+        {
+                if (res == 2)
+                {
+                        WriteErrLog("Ошибка подключения к БД при получении таблицы возрастов.");
+                }
+                else
+                {
+                        //при добавлении смотрим, есть ли уже такие значения
+                        for (int i = 0; i < ages->Count; i++)
+                        {
+                                if (AgeComboBox->Items->IndexOf(ages->Strings[i]) == -1)
+                                {
+                                        AgeComboBox->Items->Add(ages->Strings[i]);
+                                }
+                        }
+                }
+        };
+
+        res = DataModule1->GetBelts(belts);
+        if (res == 1)
+        {
+                WriteErrLog("Список полученных поясов пуст");
+        }
+        else
+        {
+                if (res == 2)
+                {
+                        WriteErrLog("Ошибка подключения к БД при получении таблицы поясов.");
+                }
+                else
+                {
+                        //BeltComboBox->Items->AddStrings(belts);
+                        //при добавлении смотрим, есть ли уже такие значения
+                        for (int i = 0; i < belts->Count; i++)
+                        {
+                                if (BeltComboBox->Items->IndexOf(belts->Strings[i]) == -1)
+                                {
+                                        BeltComboBox->Items->Add(belts->Strings[i]);
+                                }
+                        }
+                }
+        };
+
+        ages->Free();
+        belts->Free();
+
+}
+//---------------------------------------------------------------------------
+
+int TMainForm::WriteErrLog(AnsiString logMes)
+{
+        logMes = logMes;
+}
+void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose)
+{
+        if (MessageDlg("Данное действие приведет к закрытию программы. Закрыть?" ,mtWarning, mbOKCancel, 0) == mrCancel)
+        {
+                CanClose = False;
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::FightSettingsShow(TObject *Sender)
 {
         if (fightState == 1)
         {
@@ -1044,7 +1149,38 @@ void __fastcall TMainForm::FightSettingsEnter(TObject *Sender)
         else
         {
                 FightSettings->Enabled = true;
+        };
+        //включаем кнопки в зависимости от доступности базы
+        UpdateCategoryInfoBtn->Enabled = DBPathSelected;
+        UpdatePlayersInfoBtn->Enabled = DBPathSelected;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::WeightComboBoxDropDown(TObject *Sender)
+{
+        if (DBPathSelected == false)
+        {
+                return;
         }
+        TStringList* weights = new TStringList;
+        //получаем список возрастов
+        int res = DataModule1->GetWeights(weights, AgeComboBox->Text);
+        if (res == 1)
+        {
+                WriteErrLog("Список полученных весовых пуст для возраста " + AgeComboBox->Text);
+        }
+        else
+        {
+                if (res == 2)
+                {
+                        WriteErrLog("Ошибка подключения к БД при получении таблицы весовых.");
+                }
+                else
+                {
+                        WeightComboBox->Clear();
+                        WeightComboBox->Items->AddStrings(weights);
+                }
+        };
 }
 //---------------------------------------------------------------------------
 
