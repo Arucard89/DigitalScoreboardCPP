@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 422
-  Top = 209
+  Left = 654
+  Top = 218
   Width = 1237
   Height = 713
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
@@ -24,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 649
-    ActivePage = FightSettings
+    ActivePage = FightingControls
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -33,7 +33,7 @@ object MainForm: TMainForm
     Font.Style = []
     MultiLine = True
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -920,34 +920,6 @@ object MainForm: TMainForm
           Align = alTop
           Alignment = taCenter
         end
-        object AcceptInformationBtn: TBitBtn
-          Left = 872
-          Top = 88
-          Width = 297
-          Height = 41
-          Caption = #1055#1088#1080#1085#1103#1090#1100
-          Default = True
-          TabOrder = 0
-          OnClick = AcceptInformationBtnClick
-          Glyph.Data = {
-            DE010000424DDE01000000000000760000002800000024000000120000000100
-            0400000000006801000000000000000000001000000000000000000000000000
-            80000080000000808000800000008000800080800000C0C0C000808080000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-            3333333333333333333333330000333333333333333333333333F33333333333
-            00003333344333333333333333388F3333333333000033334224333333333333
-            338338F3333333330000333422224333333333333833338F3333333300003342
-            222224333333333383333338F3333333000034222A22224333333338F338F333
-            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
-            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
-            0000333333333A222433333333333338F338F33300003333333333A222433333
-            333333338F338F33000033333333333A222433333333333338F338F300003333
-            33333333A222433333333333338F338F00003333333333333A22433333333333
-            3338F38F000033333333333333A223333333333333338F830000333333333333
-            333A333333333333333338330000333333333333333333333333333333333333
-            0000}
-          NumGlyphs = 2
-        end
         object AgeGroupBox: TGroupBox
           Left = 2
           Top = 40
@@ -955,7 +927,7 @@ object MainForm: TMainForm
           Height = 94
           Align = alLeft
           Caption = #1042#1086#1079#1088#1072#1089#1090
-          TabOrder = 1
+          TabOrder = 0
           object AgeComboBox: TComboBox
             Left = 8
             Top = 48
@@ -973,7 +945,7 @@ object MainForm: TMainForm
           Height = 94
           Align = alLeft
           Caption = #1055#1086#1103#1089
-          TabOrder = 2
+          TabOrder = 1
           object BeltComboBox: TComboBox
             Left = 8
             Top = 48
@@ -991,7 +963,7 @@ object MainForm: TMainForm
           Height = 94
           Align = alLeft
           Caption = #1042#1077#1089
-          TabOrder = 3
+          TabOrder = 2
           object WeightComboBox: TComboBox
             Left = 8
             Top = 48
@@ -1006,12 +978,12 @@ object MainForm: TMainForm
         end
         object UpdateCategoryInfoBtn: TBitBtn
           Left = 872
-          Top = 40
+          Top = 96
           Width = 297
           Height = 33
           Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1080#1079' '#1073#1072#1079#1099
           Enabled = False
-          TabOrder = 4
+          TabOrder = 3
           OnClick = UpdateCategoryInfoBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
@@ -1138,97 +1110,41 @@ object MainForm: TMainForm
           Left = 2
           Top = 21
           Width = 1169
-          Height = 60
+          Height = 80
           Align = alTop
           Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
           TabOrder = 0
           object Player1ComboBox: TComboBox
             Left = 8
-            Top = 24
+            Top = 40
             Width = 1137
             Height = 27
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
             OnChange = Player1ComboBoxChange
-            OnDropDown = UpdatePlayersInfoBtnClick
+            OnDropDown = Player1ComboBoxDropDown
           end
         end
         object Player2NameGroupBox: TGroupBox
           Left = 2
-          Top = 81
+          Top = 105
           Width = 1169
-          Height = 60
-          Align = alTop
+          Height = 80
+          Align = alCustom
           Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
           TabOrder = 1
           object Player2ComboBox: TComboBox
             Left = 8
-            Top = 24
+            Top = 40
             Width = 1137
             Height = 27
             ItemHeight = 19
             Sorted = True
             TabOrder = 0
             OnChange = Player1ComboBoxChange
-            OnDropDown = UpdatePlayersInfoBtnClick
+            OnDropDown = Player2ComboBoxDropDown
           end
-        end
-        object AcceptPlayersNamesBtn: TBitBtn
-          Left = 872
-          Top = 152
-          Width = 297
-          Height = 41
-          Caption = #1055#1088#1080#1085#1103#1090#1100
-          Default = True
-          TabOrder = 2
-          OnClick = AcceptPlayersNamesBtnClick
-          Glyph.Data = {
-            DE010000424DDE01000000000000760000002800000024000000120000000100
-            0400000000006801000000000000000000001000000000000000000000000000
-            80000080000000808000800000008000800080800000C0C0C000808080000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333333333
-            3333333333333333333333330000333333333333333333333333F33333333333
-            00003333344333333333333333388F3333333333000033334224333333333333
-            338338F3333333330000333422224333333333333833338F3333333300003342
-            222224333333333383333338F3333333000034222A22224333333338F338F333
-            8F33333300003222A3A2224333333338F3838F338F33333300003A2A333A2224
-            33333338F83338F338F33333000033A33333A222433333338333338F338F3333
-            0000333333333A222433333333333338F338F33300003333333333A222433333
-            333333338F338F33000033333333333A222433333333333338F338F300003333
-            33333333A222433333333333338F338F00003333333333333A22433333333333
-            3338F38F000033333333333333A223333333333333338F830000333333333333
-            333A333333333333333338330000333333333333333333333333333333333333
-            0000}
-          NumGlyphs = 2
-        end
-        object UpdatePlayersInfoBtn: TBitBtn
-          Left = 8
-          Top = 160
-          Width = 297
-          Height = 33
-          Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1080#1079' '#1073#1072#1079#1099
-          Enabled = False
-          TabOrder = 3
-          OnClick = UpdatePlayersInfoBtnClick
-          Glyph.Data = {
-            DE010000424DDE01000000000000760000002800000024000000120000000100
-            0400000000006801000000000000000000001000000000000000000000000000
-            80000080000000808000800000008000800080800000C0C0C000808080000000
-            FF0000FF000000FFFF00FF000000FF00FF00FFFF0000FFFFFF00333333444444
-            33333333333F8888883F33330000324334222222443333388F3833333388F333
-            000032244222222222433338F8833FFFFF338F3300003222222AAAAA22243338
-            F333F88888F338F30000322222A33333A2224338F33F8333338F338F00003222
-            223333333A224338F33833333338F38F00003222222333333A444338FFFF8F33
-            3338888300003AAAAAAA33333333333888888833333333330000333333333333
-            333333333333333333FFFFFF000033333333333344444433FFFF333333888888
-            00003A444333333A22222438888F333338F3333800003A2243333333A2222438
-            F38F333333833338000033A224333334422224338338FFFFF8833338000033A2
-            22444442222224338F3388888333FF380000333A2222222222AA243338FF3333
-            33FF88F800003333AA222222AA33A3333388FFFFFF8833830000333333AAAAAA
-            3333333333338888883333330000333333333333333333333333333333333333
-            0000}
-          NumGlyphs = 2
         end
       end
       object AcceptAllConfigurationBtn: TBitBtn

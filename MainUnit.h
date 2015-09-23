@@ -52,7 +52,6 @@ __published:	// IDE-managed Components
         TTabSheet *FightSettings;
         TGroupBox *InformationGroupBox;
         TLabel *CurrentInfoSetupLabel;
-        TBitBtn *AcceptInformationBtn;
         TGroupBox *FightTimeGroupBox;
         TLabel *CurrentTimeSetupLabel;
         TGroupBox *MinutesGroupBox;
@@ -147,8 +146,6 @@ __published:	// IDE-managed Components
         TMenuItem *N5;
         TMenuItem *N6;
         TBitBtn *UpdateCategoryInfoBtn;
-        TBitBtn *AcceptPlayersNamesBtn;
-        TBitBtn *UpdatePlayersInfoBtn;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
@@ -181,7 +178,9 @@ __published:	// IDE-managed Components
         void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
         void __fastcall FightSettingsShow(TObject *Sender);
         void __fastcall WeightComboBoxDropDown(TObject *Sender);
-        void __fastcall UpdatePlayersInfoBtnClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall UpdatePlayersInfoBtnClick(TObject *Sender);
+        void __fastcall Player1ComboBoxDropDown(TObject *Sender);
+        void __fastcall Player2ComboBoxDropDown(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
         TFightResultForm *FightResultForm; //форма результатов схватки
         TDisplayForm *DisplayForm; //основная форма табло
@@ -234,11 +233,12 @@ public:		// User declarations
                 TPanel* adv, TPanel* pen, TLabel* dispName, TPanel* dispScore,
                 TPanel* dispAdv, TPanel* dispPen, AnsiString section);
         //***********************************
-
         //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.
         int WriteFightLog(AnsiString logMes); //пишем инфоромацию в лог. автоматом пишется: дата/время, категория ФИО борцов, действие
         //Логи ошибок
         int WriteErrLog(AnsiString logMes);  //запись лога об ошибке
+
+        int UpdatePlayerNames(TComboBox *pl); //загрузка информации в комбобокс
 
 };
 //---------------------------------------------------------------------------

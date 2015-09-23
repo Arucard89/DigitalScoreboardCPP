@@ -92,11 +92,6 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
 //вкладка хронология поединка
         FightHistoryMemo->Height = FightLogs->Height - FightHistoryMemo->Top * 2;
         FightHistoryMemo->Width = FightLogs->Width - FightHistoryMemo->Left * 2;
-
-//меняем положение кнопки подгрузки данных в комбобоксы
-        UpdateCategoryInfoBtn->Left = AcceptInformationBtn->Left;
-//
-
 }
 //---------------------------------------------------------------------------
 
@@ -283,7 +278,7 @@ void TMainForm::ResizePlayersNamesGroupBox()
         Player1ComboBox->Width = Player1NameGroupBox->Width - 2 * Player1ComboBox->Left; //делаем одинаковые отступы слева и справа
         Player2ComboBox->Width = Player2NameGroupBox->Width - 2 * Player2ComboBox->Left; //делаем одинаковые отступы слева и справа
         //привязываем кнопку к углу
-        PutButtonInCorner(AcceptPlayersNamesBtn, PlayersNamesGroupBox, 5);
+       // PutButtonInCorner(AcceptPlayersNamesBtn, PlayersNamesGroupBox, 5);
        // AcceptPlayersNamesBtn->Left = PlayersNamesGroupBox->Width - AcceptPlayersNamesBtn->Width - 5; //последняя цифра-отступ
        // AcceptPlayersNamesBtn->Top = PlayersNamesGroupBox->Height - AcceptPlayersNamesBtn->Height - 5; //последняя цифра-отступ
 }
@@ -297,7 +292,7 @@ void TMainForm::PutButtonInCorner(TButton *btn, TControl *cont, int b)
 void TMainForm::ResizeInformationGroupBox()
 {
         int b = 5;//отступ
-        int w  = (InformationGroupBox->Width - 2 * b - AcceptInformationBtn->Width)/3;
+        int w  = (InformationGroupBox->Width - 2 * b - UpdateCategoryInfoBtn->Width)/3;
         //устанавливаем ширину ячеек
         AgeGroupBox->Width = w;
         BeltGroupBox->Width = w;
@@ -306,7 +301,7 @@ void TMainForm::ResizeInformationGroupBox()
         AgeComboBox->Width = AgeGroupBox->Width - 2 * AgeComboBox->Left;
         BeltComboBox->Width = BeltGroupBox->Width - 2 * BeltComboBox->Left;
         WeightComboBox->Width = WeightGroupBox->Width - 2 * WeightComboBox->Left;
-        PutButtonInCorner(AcceptInformationBtn, InformationGroupBox, b);
+        PutButtonInCorner(UpdateCategoryInfoBtn, InformationGroupBox, b);
 }
 
 void TMainForm::ResizeFightTimeGroupBox()
@@ -415,7 +410,7 @@ void __fastcall TMainForm::AcceptAllConfigurationBtnClick(TObject *Sender)
         AcceptPlayersNamesBtnClick(0);
         AcceptInformationBtnClick(0);
         AcceptTimeBtnClick(0);
-
+        ResetBtn->Click();
 }
 //---------------------------------------------------------------------------
 
@@ -596,6 +591,11 @@ void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
 {
         if (fightState == 0)
         {
+                if (TimeOfFight->getTime(true) == "00:00")
+                {
+                        ShowMessage("Не задано время поединка");
+                        return;
+                }
                 timerInterval = defaultInterval; //выставляем счетчик
                 if (FightHistoryMemo->Lines->Count > 1000)   //если больше 1000 записей, то для удобства просмотра новый файл создаем
                 {
@@ -1253,4 +1253,50 @@ void __fastcall TMainForm::UpdatePlayersInfoBtnClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+int TMainForm::UpdatePlayerNames(TComboBox *pl)
+{
+        TStringList* players = new TStringList;
+        int res = DataModule1->GetNamesFromDB(players, AgeComboBox->Text, BeltComboBox->Text, WeightComboBox->Text);
+        if (res == 0)
+        {
+                 //чистим комбобокс перед добавлением
+                 AnsiString s = pl->Text;
+                 pl->Clear();
+                 pl->Text = s;
+                 pl->Items->AddStrings(players);
+        };
+        delete players;
+        return res;
+}
+void __fastcall TMainForm::Player1ComboBoxDropDown(TObject *Sender)
+{
+        int res = UpdatePlayerNames(Player1ComboBox);
+        if (res == 1)
+        {
+                WriteErrLog("Список полученных имен первого участника пуст");
+                return;
+        }
+        if (res == 2)
+        {
+                WriteErrLog("Ошибка подключения к БД при получении таблицы имен первого участника.");
+                return;
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::Player2ComboBoxDropDown(TObject *Sender)
+{
+        int res = UpdatePlayerNames(Player2ComboBox);
+        if (res == 1)
+        {
+                WriteErrLog("Список полученных имен второго участника пуст");
+                return;
+        }
+        if (res == 2)
+        {
+                WriteErrLog("Ошибка подключения к БД при получении таблицы имен второго участника.");
+                return;
+        }
+}
+//---------------------------------------------------------------------------
 
