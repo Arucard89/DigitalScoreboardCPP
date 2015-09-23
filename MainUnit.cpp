@@ -4,7 +4,8 @@
 #pragma hdrstop
 
 #include "MainUnit.h"
-
+#include <iostream.h>
+#include <fstream.h>
 
 //---------------------------------------------------------------------------
 #pragma package(smart_init)
@@ -439,8 +440,6 @@ void TMainForm::FulfillTime()
         TimeOfFight->setSeconds(SecondsSpinEdit->Value);
         CurrentTimeSetupLabel->Caption = "Текущая установка времени: " + TimeOfFight->getTime(true);
         ShowTime();
-       // TimeOfFight->
-
 }
 
 void __fastcall TMainForm::Player1ThreeScorePlusBitBtnClick(
@@ -1067,10 +1066,13 @@ int TMainForm::WriteFightLog(AnsiString logMes)
 
 void __fastcall TMainForm::FormDestroy(TObject *Sender)
 {
-        AnsiString s = fightHistoryLogPath +
-                StringReplace(TimeToStr(Now()), ":", '-', TReplaceFlags() << rfReplaceAll << rfIgnoreCase) +
-                ".log";
-        FightHistoryMemo->Lines->SaveToFile(s);
+        if (FightHistoryMemo->Lines->Count > 0)
+        {
+                AnsiString s = fightHistoryLogPath +
+                        StringReplace(TimeToStr(Now()), ":", '-', TReplaceFlags() << rfReplaceAll << rfIgnoreCase) +
+                        ".log";
+                FightHistoryMemo->Lines->SaveToFile(s);
+        };
 
 }
 //---------------------------------------------------------------------------
@@ -1112,6 +1114,10 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
 
 void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
 {
+        if (DBPathSelected == false)
+        {
+                return;
+        }
         TStringList* ages = new TStringList;
         TStringList* belts = new TStringList;
         //получаем список возрастов
@@ -1172,7 +1178,13 @@ void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
 
 int TMainForm::WriteErrLog(AnsiString logMes)
 {
-        ShowMessage(DateTimeToStr(Now()) + " " + logMes);
+        AnsiString s = ExtractFileDir(Application->ExeName) + "\\err_log_"+ DateToStr(Date()) + ".log";
+        //ShowMessage(DateTimeToStr(Now()) + " " + logMes);
+        ofstream out;
+        out.open(s.c_str() , ios::app);
+        s = DateTimeToStr(Now()) + " " + logMes;
+        out << s.c_str() << endl;
+        out.close();
 }
 void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
@@ -1255,6 +1267,10 @@ void __fastcall TMainForm::UpdatePlayersInfoBtnClick(TObject *Sender)
 
 int TMainForm::UpdatePlayerNames(TComboBox *pl)
 {
+        if (DBPathSelected == false)
+        {
+                return 0;
+        };
         TStringList* players = new TStringList;
         int res = DataModule1->GetNamesFromDB(players, AgeComboBox->Text, BeltComboBox->Text, WeightComboBox->Text);
         if (res == 0)
