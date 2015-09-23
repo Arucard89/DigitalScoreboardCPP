@@ -15,6 +15,7 @@ WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
         try
         {
                  Application->Initialize();
+                 Application->Title = "Цифровое табло для соревнований";
                  Application->CreateForm(__classid(TMainForm), &MainForm);
                  Application->CreateForm(__classid(TDataModule1), &DataModule1);
                  Application->Run();

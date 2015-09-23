@@ -26,3 +26,13 @@ void TFightResultForm::LoadWinReasons(TStringList &winReasons)
         WinReasonBox->Clear();
         WinReasonBox->Items->Text = winReasons.Text;
 }
+void __fastcall TFightResultForm::OKBtnClick(TObject *Sender)
+{
+        if (Trim(WinReasonBox->Text) == "" || Trim(WinnerBox->Text) == "")
+        {
+                ShowMessage("Все поля должны быть заполнены");
+                ModalResult = mrNone;
+        };
+}
+//---------------------------------------------------------------------------
+

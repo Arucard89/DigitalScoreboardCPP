@@ -1,8 +1,8 @@
 object FightResultForm: TFightResultForm
-  Left = 432
-  Top = 418
+  Left = 441
+  Top = 281
   BorderStyle = bsToolWindow
-  Caption = 'FightResultForm'
+  Caption = #1056#1077#1079#1091#1083#1100#1090#1072#1090' '#1089#1093#1074#1072#1090#1082#1080
   ClientHeight = 257
   ClientWidth = 764
   Color = clSilver
@@ -91,6 +91,7 @@ object FightResultForm: TFightResultForm
     Font.Style = [fsBold]
     ParentFont = False
     TabOrder = 2
+    OnClick = OKBtnClick
     Kind = bkOK
   end
   object CancelBtn: TBitBtn

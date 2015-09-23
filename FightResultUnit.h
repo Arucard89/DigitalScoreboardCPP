@@ -18,6 +18,7 @@ __published:	// IDE-managed Components
         TComboBox *WinReasonBox;
         TBitBtn *OKBtn;
         TBitBtn *CancelBtn;
+        void __fastcall OKBtnClick(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TFightResultForm(TComponent* Owner);

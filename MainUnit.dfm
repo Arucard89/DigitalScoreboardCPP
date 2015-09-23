@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 337
-  Top = 164
+  Left = 422
+  Top = 209
   Width = 1237
   Height = 713
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
@@ -23,7 +23,7 @@ object MainForm: TMainForm
     Left = 0
     Top = 0
     Width = 1221
-    Height = 633
+    Height = 649
     ActivePage = FightSettings
     Align = alTop
     Font.Charset = ANSI_CHARSET
@@ -48,7 +48,7 @@ object MainForm: TMainForm
         Left = 628
         Top = 113
         Width = 545
-        Height = 443
+        Height = 459
         Align = alRight
         Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
@@ -93,7 +93,7 @@ object MainForm: TMainForm
           Left = 2
           Top = 116
           Width = 231
-          Height = 40
+          Height = 56
           Align = alLeft
           BevelOuter = bvNone
           Caption = 'Player1AdvantagePanel'
@@ -109,7 +109,7 @@ object MainForm: TMainForm
           Left = 233
           Top = 116
           Width = 310
-          Height = 40
+          Height = 56
           Align = alClient
           BevelOuter = bvNone
           Caption = 'Player1PenaltyPanel'
@@ -123,7 +123,7 @@ object MainForm: TMainForm
         end
         object Player1ScoresButtonsPanel: TPanel
           Left = 2
-          Top = 156
+          Top = 172
           Width = 541
           Height = 285
           Align = alBottom
@@ -421,7 +421,7 @@ object MainForm: TMainForm
         Left = 0
         Top = 113
         Width = 628
-        Height = 443
+        Height = 459
         Align = alClient
         Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
@@ -466,7 +466,7 @@ object MainForm: TMainForm
           Left = 347
           Top = 116
           Width = 279
-          Height = 36
+          Height = 52
           Align = alRight
           BevelOuter = bvNone
           Caption = 'Player2AdvantagePanel'
@@ -482,7 +482,7 @@ object MainForm: TMainForm
           Left = 2
           Top = 116
           Width = 345
-          Height = 36
+          Height = 52
           Align = alClient
           BevelOuter = bvNone
           Caption = 'Player2PenaltyPanel'
@@ -496,7 +496,7 @@ object MainForm: TMainForm
         end
         object Player2ScoresButtonsPanel: TPanel
           Left = 2
-          Top = 152
+          Top = 168
           Width = 624
           Height = 289
           Align = alBottom
@@ -1010,6 +1010,7 @@ object MainForm: TMainForm
           Width = 297
           Height = 33
           Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1080#1079' '#1073#1072#1079#1099
+          Enabled = False
           TabOrder = 4
           OnClick = UpdateCategoryInfoBtnClick
           Glyph.Data = {
@@ -1133,6 +1134,46 @@ object MainForm: TMainForm
         Font.Style = [fsBold]
         ParentFont = False
         TabOrder = 2
+        object Player1NameGroupBox: TGroupBox
+          Left = 2
+          Top = 21
+          Width = 1169
+          Height = 60
+          Align = alTop
+          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
+          TabOrder = 0
+          object Player1ComboBox: TComboBox
+            Left = 8
+            Top = 24
+            Width = 1137
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            OnChange = Player1ComboBoxChange
+            OnDropDown = UpdatePlayersInfoBtnClick
+          end
+        end
+        object Player2NameGroupBox: TGroupBox
+          Left = 2
+          Top = 81
+          Width = 1169
+          Height = 60
+          Align = alTop
+          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
+          TabOrder = 1
+          object Player2ComboBox: TComboBox
+            Left = 8
+            Top = 24
+            Width = 1137
+            Height = 27
+            ItemHeight = 19
+            Sorted = True
+            TabOrder = 0
+            OnChange = Player1ComboBoxChange
+            OnDropDown = UpdatePlayersInfoBtnClick
+          end
+        end
         object AcceptPlayersNamesBtn: TBitBtn
           Left = 872
           Top = 152
@@ -1140,7 +1181,7 @@ object MainForm: TMainForm
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
           Default = True
-          TabOrder = 0
+          TabOrder = 2
           OnClick = AcceptPlayersNamesBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
@@ -1161,51 +1202,15 @@ object MainForm: TMainForm
             0000}
           NumGlyphs = 2
         end
-        object Player1NameGroupBox: TGroupBox
-          Left = 2
-          Top = 21
-          Width = 1169
-          Height = 60
-          Align = alTop
-          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
-          TabOrder = 1
-          object Player1ComboBox: TComboBox
-            Left = 8
-            Top = 24
-            Width = 1137
-            Height = 27
-            ItemHeight = 19
-            Sorted = True
-            TabOrder = 0
-            OnChange = Player1ComboBoxChange
-          end
-        end
-        object Player2NameGroupBox: TGroupBox
-          Left = 2
-          Top = 81
-          Width = 1169
-          Height = 60
-          Align = alTop
-          Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
-          TabOrder = 2
-          object Player2ComboBox: TComboBox
-            Left = 8
-            Top = 24
-            Width = 1137
-            Height = 27
-            ItemHeight = 19
-            Sorted = True
-            TabOrder = 0
-            OnChange = Player1ComboBoxChange
-          end
-        end
         object UpdatePlayersInfoBtn: TBitBtn
           Left = 8
-          Top = 152
+          Top = 160
           Width = 297
           Height = 33
           Caption = #1047#1072#1075#1088#1091#1079#1080#1090#1100' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1102' '#1080#1079' '#1073#1072#1079#1099
+          Enabled = False
           TabOrder = 3
+          OnClick = UpdatePlayersInfoBtnClick
           Glyph.Data = {
             DE010000424DDE01000000000000760000002800000024000000120000000100
             0400000000006801000000000000000000001000000000000000000000000000
@@ -1278,6 +1283,7 @@ object MainForm: TMainForm
         Width = 1213
         Height = 22
         Align = alTop
+        Alignment = taCenter
         Caption = 
           #1060#1086#1088#1084#1072#1090' '#1079#1072#1087#1080#1089#1080': '#1076#1072#1090#1072' '#1074#1088#1077#1084#1103';  '#1085#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1093#1074#1072#1090#1082#1080'; '#1074#1088#1077#1084#1103' '#1076#1086' '#1082#1086#1085#1094#1072' '#1089#1093 +
           #1074#1072#1090#1082#1080'; '#1076#1077#1081#1089#1090#1074#1080#1077

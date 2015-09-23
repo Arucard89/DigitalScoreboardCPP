@@ -322,6 +322,20 @@ void TMainForm::ResizeFightTimeGroupBox()
 
 void __fastcall TMainForm::AcceptPlayersNamesBtnClick(TObject *Sender)
 {
+        //проверка на пустые
+        if (Player1ComboBox->Text == "" || Player2ComboBox->Text == "")
+        {
+                ShowMessage("Поле имени не может быть пустым. Введите имя спорсмена.");
+                return;
+        }
+        //проверка на одинаковые строки(не запрежаем, потому что вдруг тезки)
+        if (Player1ComboBox->Text == Player2ComboBox->Text)
+        {
+                if (MessageDlg("Выбраны одинаковые имена участников. Продолжить?", mtInformation, mbOKCancel, 0) == mrCancel)
+                {
+                        return;
+                }
+        }
         Player1->SetName(Player1ComboBox->Text);
         Player2->SetName(Player2ComboBox->Text);
         SetPlayersNames();
@@ -372,6 +386,12 @@ void __fastcall TMainForm::MinutesSpinEditChange(TObject *Sender)
 
 void __fastcall TMainForm::AcceptInformationBtnClick(TObject *Sender)
 {
+         //проверка на пустые
+        if (AgeComboBox->Text == "" || BeltComboBox->Text == "" || WeightComboBox->Text == "")
+        {
+                ShowMessage("Все поля информации о схватке должны быть заполнены.");
+                return;
+        }
         FulfillFightInfo();
         InformationIsChanged(false, InformationGroupBox);
 }
@@ -379,6 +399,12 @@ void __fastcall TMainForm::AcceptInformationBtnClick(TObject *Sender)
 
 void __fastcall TMainForm::AcceptTimeBtnClick(TObject *Sender)
 {
+        //проверка на пустые
+        if (MinutesSpinEdit->Text == "0" && SecondsSpinEdit->Text == "0")
+        {
+                ShowMessage("Продолжительность схватки не может быть нулевой.");
+                return;
+        }
         FulfillTime();
         InformationIsChanged(false, FightTimeGroupBox);//сбрасываем флаг измененности информации
 }
@@ -571,7 +597,7 @@ void __fastcall TMainForm::StartFightBtnClick(TObject *Sender)
         if (fightState == 0)
         {
                 timerInterval = defaultInterval; //выставляем счетчик
-                if (FightHistoryMemo->Lines->Count > 200)   //если больше 200 записей, то для удобства просмотра новый файл создаем
+                if (FightHistoryMemo->Lines->Count > 1000)   //если больше 1000 записей, то для удобства просмотра новый файл создаем
                 {
                         FightHistoryMemo->Lines->SaveToFile(fightHistoryLogPath +
                                 StringReplace(TimeToStr(Now()), ":", '-', TReplaceFlags() << rfReplaceAll << rfIgnoreCase) +
@@ -632,8 +658,21 @@ void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
                 StartFightBtn->Enabled = false;//включаем кнопку
                 PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
                 StopFightBtn->Enabled = false;
-        }
-        //StartFightBtn->Caption = "СТАРТ";//
+                if (DBPathSelected == true)
+                {
+                      //пишем данные в БД
+                      int res = DataModule1->WriteResultsToDB(Player1->GetName(),Player2->GetName(),
+                              FightResultForm->WinnerBox->Text, FightResultForm->WinReasonBox->Text,
+                              TimeOfFight->getTime(true), FightInfo.age, FightInfo.belt, FightInfo.weight);
+                      WriteFightLog("Победил " + FightResultForm->WinnerBox->Text);
+                      if (res != 0 )
+                      {
+                              WriteErrLog("Ошибка записи данных о победе в файл.");
+                      };
+                };
+        };
+
+        delete FightResultForm;
 }
 //---------------------------------------------------------------------------
 
@@ -1040,7 +1079,7 @@ void __fastcall TMainForm::FormDestroy(TObject *Sender)
 
 void __fastcall TMainForm::N6Click(TObject *Sender)
 {
-        Close();        
+        Close();
 }
 //---------------------------------------------------------------------------
 
@@ -1051,7 +1090,7 @@ void __fastcall TMainForm::N6Click(TObject *Sender)
 void __fastcall TMainForm::N4Click(TObject *Sender)
 {
         DBPathForm = new TDBPathForm(this);
-        int res = DBPathForm->ShowModal();//если путь выбран, то все хороша, если нет, то флаг возвращаем в фолс
+        int res = DBPathForm->ShowModal();//если путь выбран, то все хорош, если нет, то флаг возвращаем в фолс
         if (res == mrOk)
         {
                 DBPathSelected = true;
@@ -1062,7 +1101,11 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
         {
                 DBPathSelected = false;
         };
-        DBPathForm->Free();
+        delete DBPathForm;
+        //включаем кнопки в зависимости от доступности базы
+        UpdateCategoryInfoBtn->Enabled = DBPathSelected;
+//        UpdatePlayersInfoBtn->Enabled = DBPathSelected;
+        UpdateCategoryInfoBtn->Click();
 }
 //---------------------------------------------------------------------------
 
@@ -1121,15 +1164,15 @@ void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
                 }
         };
 
-        ages->Free();
-        belts->Free();
+        delete ages;
+        delete belts;
 
 }
 //---------------------------------------------------------------------------
 
 int TMainForm::WriteErrLog(AnsiString logMes)
 {
-        logMes = logMes;
+        ShowMessage(DateTimeToStr(Now()) + " " + logMes);
 }
 void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
@@ -1150,9 +1193,6 @@ void __fastcall TMainForm::FightSettingsShow(TObject *Sender)
         {
                 FightSettings->Enabled = true;
         };
-        //включаем кнопки в зависимости от доступности базы
-        UpdateCategoryInfoBtn->Enabled = DBPathSelected;
-        UpdatePlayersInfoBtn->Enabled = DBPathSelected;
 }
 //---------------------------------------------------------------------------
 
@@ -1181,6 +1221,36 @@ void __fastcall TMainForm::WeightComboBoxDropDown(TObject *Sender)
                         WeightComboBox->Items->AddStrings(weights);
                 }
         };
+        delete weights;
 }
 //---------------------------------------------------------------------------
+
+
+void __fastcall TMainForm::UpdatePlayersInfoBtnClick(TObject *Sender)
+{
+        TStringList* players = new TStringList;
+        int res = DataModule1->GetNamesFromDB(players, AgeComboBox->Text, BeltComboBox->Text, WeightComboBox->Text);
+        if (res == 1)
+        {
+                WriteErrLog("Список полученных имен пуст");
+        }
+        else
+        {
+                if (res == 2)
+                {
+                        WriteErrLog("Ошибка подключения к БД при получении таблицы имен.");
+                }
+                else
+                {
+                        //чистим комбобокс перед добавлением
+                        Player1ComboBox->Clear();
+                        Player2ComboBox->Clear();
+                        Player1ComboBox->Items->AddStrings(players);
+                        Player2ComboBox->Items->AddStrings(players);
+                }
+        };
+        delete players;
+}
+//---------------------------------------------------------------------------
+
 

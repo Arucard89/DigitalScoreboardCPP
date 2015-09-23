@@ -66,8 +66,77 @@ int TDataModule1::GetBelts(TStringList *sl)
         return GetInfoFromDB(BeltADOQuery, "Belt", sl);
 };
 
+int TDataModule1::GetNamesFromDB(TStringList *sl, AnsiString age, AnsiString belt, AnsiString weight)
+{
+try
+{
+        ADOConnection->Open();
+        //устанавливаем параметры и запускаем запрос
+        PlayersADOQuery->Parameters->ParamValues["age"] = age;
+        PlayersADOQuery->Parameters->ParamValues["belt"] = belt;
+        PlayersADOQuery->Parameters->ParamValues["weight"] = weight;
+        PlayersADOQuery->Open();
+        if (PlayersADOQuery->IsEmpty() != true)
+        {
+                PlayersADOQuery->First();
+                while (!PlayersADOQuery->Eof)
+                {
+                        sl->Add(PlayersADOQuery->FieldByName("FIO")->AsString);
+                        PlayersADOQuery->Next();
+                }
+                ADOConnection->Close();
+                PlayersADOQuery->Close();
+                return 0;
+        }
+        else
+        {
+                ADOConnection->Close();
+                PlayersADOQuery->Close();
+                return 1;
+        }
+}
+catch(...)
+{
+        ADOConnection->Close();
+        PlayersADOQuery->Close();
+        return 2;
+}
+}
+
+int TDataModule1::WriteResultsToDB(AnsiString pl1, AnsiString pl2, AnsiString winner,
+                AnsiString winreason, AnsiString TimeToEnd,
+                AnsiString age, AnsiString belt, AnsiString weight)
+{
+try
+{
+        ADOConnection->Open();
+        //устанавливаем параметры и запускаем запрос
+        ResultsADOQuery->Parameters->ParamValues["pl1"] = pl1;
+        ResultsADOQuery->Parameters->ParamValues["pl2"] = pl2;
+        ResultsADOQuery->Parameters->ParamValues["winner"] = winner;
+        ResultsADOQuery->Parameters->ParamValues["winreason"] = winreason;
+        ResultsADOQuery->Parameters->ParamValues["TimeToEnd"] = TimeToEnd;
+        ResultsADOQuery->Parameters->ParamValues["age"] = age;
+        ResultsADOQuery->Parameters->ParamValues["belt"] = belt;
+        ResultsADOQuery->Parameters->ParamValues["weight"] = weight;
+        ResultsADOQuery->Parameters->ParamValues["time"] = Now();
+        ResultsADOQuery->ExecSQL();
+        return 0;
+}
+catch(...)
+{
+        ADOConnection->Close();
+        return 1;
+}
+}
 
 
 
 
+
+void __fastcall TDataModule1::DataModuleCreate(TObject *Sender)
+{
+        ADOConnection->Close();        
+}
+//---------------------------------------------------------------------------
 

@@ -65,7 +65,6 @@ __published:	// IDE-managed Components
         TGroupBox *Player2GroupBox;
         TLabel *Player2NameLabel;
         TGroupBox *PlayersNamesGroupBox;
-        TBitBtn *AcceptPlayersNamesBtn;
         TBitBtn *AcceptAllConfigurationBtn;
         TPanel *TimePanel;
         TPanel *CategoryPanel;
@@ -148,6 +147,7 @@ __published:	// IDE-managed Components
         TMenuItem *N5;
         TMenuItem *N6;
         TBitBtn *UpdateCategoryInfoBtn;
+        TBitBtn *AcceptPlayersNamesBtn;
         TBitBtn *UpdatePlayersInfoBtn;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
@@ -180,7 +180,8 @@ __published:	// IDE-managed Components
         void __fastcall UpdateCategoryInfoBtnClick(TObject *Sender);
         void __fastcall FormCloseQuery(TObject *Sender, bool &CanClose);
         void __fastcall FightSettingsShow(TObject *Sender);
-        void __fastcall WeightComboBoxDropDown(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall WeightComboBoxDropDown(TObject *Sender);
+        void __fastcall UpdatePlayersInfoBtnClick(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
         TFightResultForm *FightResultForm; //форма результатов схватки
         TDisplayForm *DisplayForm; //основная форма табло
@@ -232,12 +233,12 @@ public:		// User declarations
         int LoadPlayerPanelsFontParameters(TIniFile* ini, TLabel* name, TPanel* score,
                 TPanel* adv, TPanel* pen, TLabel* dispName, TPanel* dispScore,
                 TPanel* dispAdv, TPanel* dispPen, AnsiString section);
-
+        //***********************************
 
         //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.
         int WriteFightLog(AnsiString logMes); //пишем инфоромацию в лог. автоматом пишется: дата/время, категория ФИО борцов, действие
         //Логи ошибок
-        int WriteErrLog(AnsiString logMes);
+        int WriteErrLog(AnsiString logMes);  //запись лога об ошибке
 
 };
 //---------------------------------------------------------------------------
