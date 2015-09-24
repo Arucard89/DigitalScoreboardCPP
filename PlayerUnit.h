@@ -28,12 +28,13 @@ public:
 
         void PlusScore(int s);
         void PlusAdvantage(int a);
-        void PlusPenalty(int p); 
+        void PlusPenalty(int p);
 
         //void MinusScore(int s);
         //void MinusAdvantage(int a);
         //void MinusPenalty(int p);
 
-        void ResetScores();//сброс очков спортсмена 
+        void ResetScores();//сброс очков спортсмена
 
+        AnsiString GetAllScores();  //возвращает очки в виде строки: "очки преимущества штрафы"
 };

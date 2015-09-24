@@ -103,7 +103,7 @@ catch(...)
 }
 }
 
-int TDataModule1::WriteResultsToDB(AnsiString pl1, AnsiString pl2, AnsiString winner,
+int TDataModule1::WriteResultsToDB(AnsiString pl1, AnsiString scores1, AnsiString pl2, AnsiString scores2, AnsiString winner,
                 AnsiString winreason, AnsiString TimeToEnd,
                 AnsiString age, AnsiString belt, AnsiString weight)
 {
@@ -112,7 +112,9 @@ try
         ADOConnection->Open();
         //устанавливаем параметры и запускаем запрос
         ResultsADOQuery->Parameters->ParamValues["pl1"] = pl1;
+        ResultsADOQuery->Parameters->ParamValues["scores1"] = scores1;
         ResultsADOQuery->Parameters->ParamValues["pl2"] = pl2;
+        ResultsADOQuery->Parameters->ParamValues["scores2"] = scores2;
         ResultsADOQuery->Parameters->ParamValues["winner"] = winner;
         ResultsADOQuery->Parameters->ParamValues["winreason"] = winreason;
         ResultsADOQuery->Parameters->ParamValues["TimeToEnd"] = TimeToEnd;
@@ -130,13 +132,27 @@ catch(...)
 }
 }
 
-
-
-
-
 void __fastcall TDataModule1::DataModuleCreate(TObject *Sender)
 {
         ADOConnection->Close();        
 }
 //---------------------------------------------------------------------------
 
+int TDataModule1::TestDBConnection()
+{
+try
+{
+        ADOConnection->Open();
+        //устанавливаем параметры и запускаем запрос
+        TestADOQuery->Open();
+        ADOConnection->Close();
+        TestADOQuery->Close();
+        return 0;
+}
+catch(...)
+{
+        ADOConnection->Close();
+        TestADOQuery->Close();
+        return 1;
+}
+}

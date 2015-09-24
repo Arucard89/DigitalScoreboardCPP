@@ -85,6 +85,7 @@ object DBPathForm: TDBPathForm
     Top = 88
     Width = 177
     Height = 33
+    Caption = #1054#1090#1084#1077#1085#1072
     TabOrder = 3
     Kind = bkCancel
   end

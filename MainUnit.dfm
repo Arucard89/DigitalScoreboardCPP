@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 332
-  Top = 231
+  Left = 249
+  Top = 210
   Width = 1237
   Height = 713
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
@@ -24,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1221
     Height = 649
-    ActivePage = FightLogs
+    ActivePage = FightingControls
     Align = alTop
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -33,7 +33,7 @@ object MainForm: TMainForm
     Font.Style = []
     MultiLine = True
     ParentFont = False
-    TabIndex = 2
+    TabIndex = 0
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20

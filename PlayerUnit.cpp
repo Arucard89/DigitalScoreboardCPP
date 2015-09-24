@@ -97,6 +97,10 @@ void CPlayer::ResetScores()
         Penalty = 0;
 }
 
+AnsiString CPlayer::GetAllScores()
+{
+        return IntToStr(Score) + " " + IntToStr(Advantage) + " " + IntToStr(Penalty); 
+}
 
 
 

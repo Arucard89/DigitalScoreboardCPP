@@ -1,8 +1,8 @@
 object DataModule1: TDataModule1
   OldCreateOrder = False
   OnCreate = DataModuleCreate
-  Left = 1364
-  Top = 149
+  Left = 1421
+  Top = 176
   Height = 262
   Width = 224
   object ADOConnection: TADOConnection
@@ -93,12 +93,22 @@ object DataModule1: TDataModule1
         Value = Null
       end
       item
+        Name = 'scores1'
+        DataType = ftString
+        Size = -1
+        Value = Null
+      end
+      item
         Name = 'pl2'
         Attributes = [paNullable]
         DataType = ftFixedChar
         NumericScale = 255
         Precision = 255
         Size = 510
+        Value = Null
+      end
+      item
+        Name = 'scores2'
         Value = Null
       end
       item
@@ -166,11 +176,19 @@ object DataModule1: TDataModule1
       end>
     SQL.Strings = (
       
-        'INSERT INTO [t_results] ([Player1], [Player2],[Winner], [WinReas' +
-        'on], [TimeToEnd], [Weight], [Age], [Belt], [Time]) VALUES (:pl1,' +
-        ' :pl2, :winner, :winreason, :timetoend, :age, :belt, :weight, :t' +
-        'ime)')
+        'INSERT INTO [t_results] ([Player1], [Scores1], [Player2], [Score' +
+        's2], [Winner], [WinReason], [TimeToEnd], [Weight], [Age], [Belt]' +
+        ', [Time]) VALUES (:pl1, :scores1, :pl2, scores2, :winner, :winre' +
+        'ason, :timetoend, :age, :belt, :weight, :time)')
     Left = 112
     Top = 112
+  end
+  object TestADOQuery: TADOQuery
+    Connection = ADOConnection
+    Parameters = <>
+    SQL.Strings = (
+      'SELECT COUNT(*) FROM t_main')
+    Left = 90
+    Top = 170
   end
 end

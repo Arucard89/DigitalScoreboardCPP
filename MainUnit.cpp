@@ -30,6 +30,7 @@ void __fastcall TMainForm::OpenConfigurationButtonClick(TObject *Sender)
         {
                 LoadInterfaceParameters(TConfigurationForm::INI_FILE);
         }
+        delete ConfigurationForm;
 }
 //---------------------------------------------------------------------------
 
@@ -382,6 +383,10 @@ void __fastcall TMainForm::MinutesSpinEditChange(TObject *Sender)
 
 void __fastcall TMainForm::AcceptInformationBtnClick(TObject *Sender)
 {
+        if (grapplingMode == true)
+        {
+                BeltComboBox->Text = "Грэпплинг";
+        };
          //проверка на пустые
         if (AgeComboBox->Text == "" || BeltComboBox->Text == "" || WeightComboBox->Text == "")
         {
@@ -564,12 +569,13 @@ void __fastcall TMainForm::Timer1Timer(TObject *Sender)
                         TimeOfFight->minusSecond();
                         if (TimeOfFight->getZero() == 1) //если закончилось время
                         {
-                                fightState = 0;
+                                //fightState = 0;
                                 Timer1->Enabled = false;
                                 ShowTime();
                                 //выключаем второй таймер и мерцание
                                 Timer2->Enabled = false;
                                 setColorInfo();
+                                StartFightBtn->Enabled = false;
                                 StopFightBtnClick(0);//ShowMessage("Конец");  //здесь имитация нажатия на кнопку стоп
                         }
                 }
@@ -639,14 +645,15 @@ void __fastcall TMainForm::PauseFightBtnClick(TObject *Sender)
 void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
 {
         fightState = 2;
-        StartFightBtn->Enabled = true;//включаем кнопку
+        if (TimeOfFight->getTime(true) != "00:00") //если не закончилось время
+        {
+                StartFightBtn->Enabled = true;//включаем кнопку
+        };
         PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
         Timer1->Enabled = false;
         StartFightBtn->Caption = "ПРОДОЛЖИТЬ";//кнопка старт переименовывается в более правильное название(т.к. она будет продолжать схватку после паузы)
-        //тут вызываем модальную форму с причинами победы(подгрузка причин либо из БД, либо из ини файла)
-        //с вожможностью отмены нажатия кнопки (для продолжения схватки или корректировки результатов
-        //запускаем форму результатов
 
+        //запускаем форму результатов
         FightResultForm = new TFightResultForm(this);
         FightResultForm->LoadPlayerNames(Player1->GetName(),Player2->GetName());
         int res = FightResultForm->ShowModal();
@@ -657,17 +664,19 @@ void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
                 StartFightBtn->Enabled = false;//включаем кнопку
                 PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
                 StopFightBtn->Enabled = false;
+                WriteFightLog("Конец схватки. Победитель " + FightResultForm->WinnerBox->Text + " " + FightResultForm->WinReasonBox->Text);
                 if (DBPathSelected == true)
                 {
                       //пишем данные в БД
-                      int res = DataModule1->WriteResultsToDB(Player1->GetName(),Player2->GetName(),
-                              FightResultForm->WinnerBox->Text, FightResultForm->WinReasonBox->Text,
-                              TimeOfFight->getTime(true), FightInfo.age, FightInfo.belt, FightInfo.weight);
-                      WriteFightLog("Победил " + FightResultForm->WinnerBox->Text);
-                      if (res != 0 )
-                      {
-                              WriteErrLog("Ошибка записи данных о победе в файл.");
-                      };
+                        int res = DataModule1->WriteResultsToDB(Player1->GetName(), Player1->GetAllScores(),
+                                Player2->GetName(), Player2->GetAllScores(),
+                                FightResultForm->WinnerBox->Text, FightResultForm->WinReasonBox->Text,
+                                TimeOfFight->getTime(true), FightInfo.age, FightInfo.belt, FightInfo.weight);
+                        WriteFightLog("Победил " + FightResultForm->WinnerBox->Text);
+                        if (res != 0 )
+                        {
+                                WriteErrLog("Ошибка записи данных о победе в файл.");
+                        };
                 };
         };
 
@@ -1045,6 +1054,9 @@ void __fastcall TMainForm::GrapplingCheckBoxClick(TObject *Sender)
         Player1AdvantagePanel->Visible = !grapplingMode;
         Player2AdvantagePanel->Visible = !grapplingMode;
 
+        //пояс в грэпплинге не используется
+        BeltGroupBox->Enabled = !grapplingMode;
+
         //перерисовываем окна
         MainForm->FormResize(NULL);
         DisplayForm->FormResize(NULL);
@@ -1095,9 +1107,19 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
         int res = DBPathForm->ShowModal();//если путь выбран, то все хорош, если нет, то флаг возвращаем в фолс
         if (res == mrOk)
         {
-                DBPathSelected = true;
                 DataModule1->ADOConnection->ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
                 DBPathForm->DBPathEdit->Text + ";Persist Security Info=False";
+                if (DataModule1->TestDBConnection() == 0)
+                {
+                        DBPathSelected = true;
+                        //UpdatePlayersInfoBtn->Enabled = DBPathSelected;
+                        UpdateCategoryInfoBtn->Click();
+                }
+                else
+                {
+                        DBPathSelected = false;
+                        ShowMessage("Выбранный файл не является файлом базы, либо имеет неверную структуру. Выберите другой файл.");
+                }
         }
         else
         {
@@ -1106,8 +1128,7 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
         delete DBPathForm;
         //включаем кнопки в зависимости от доступности базы
         UpdateCategoryInfoBtn->Enabled = DBPathSelected;
-//        UpdatePlayersInfoBtn->Enabled = DBPathSelected;
-        UpdateCategoryInfoBtn->Click();
+
 }
 //---------------------------------------------------------------------------
 
@@ -1134,14 +1155,20 @@ void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
                 }
                 else
                 {
-                        //при добавлении смотрим, есть ли уже такие значения
+                        //чистим и ставим новые
+                        AnsiString s = AgeComboBox->Text;
+                        AgeComboBox->Clear();
+                        AgeComboBox->Text = s;
+                        AgeComboBox->Items->AddStrings(ages);
+
+                       /* //при добавлении смотрим, есть ли уже такие значения
                         for (int i = 0; i < ages->Count; i++)
                         {
                                 if (AgeComboBox->Items->IndexOf(ages->Strings[i]) == -1)
                                 {
                                         AgeComboBox->Items->Add(ages->Strings[i]);
                                 }
-                        }
+                        }*/
                 }
         };
 
@@ -1158,15 +1185,20 @@ void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
                 }
                 else
                 {
-                        //BeltComboBox->Items->AddStrings(belts);
-                        //при добавлении смотрим, есть ли уже такие значения
+                        //чистим и обновляем информацию. Текст сохраняем.
+                        AnsiString s = BeltComboBox->Text;
+                        BeltComboBox->Clear();
+                        BeltComboBox->Text = s;
+                        BeltComboBox->Items->AddStrings(belts);
+
+                       /* //при добавлении смотрим, есть ли уже такие значения
                         for (int i = 0; i < belts->Count; i++)
                         {
                                 if (BeltComboBox->Items->IndexOf(belts->Strings[i]) == -1)
                                 {
                                         BeltComboBox->Items->Add(belts->Strings[i]);
                                 }
-                        }
+                        }  */
                 }
         };
 
@@ -1185,6 +1217,7 @@ int TMainForm::WriteErrLog(AnsiString logMes)
         s = DateTimeToStr(Now()) + " " + logMes;
         out << s.c_str() << endl;
         out.close();
+        return 0;
 }
 void __fastcall TMainForm::FormCloseQuery(TObject *Sender, bool &CanClose)
 {
@@ -1276,7 +1309,7 @@ int TMainForm::UpdatePlayerNames(TComboBox *pl)
         if (res == 0)
         {
                  //чистим комбобокс перед добавлением
-                 AnsiString s = pl->Text;
+                 AnsiString s = pl->Text; //созраняем текст комбобокса
                  pl->Clear();
                  pl->Text = s;
                  pl->Items->AddStrings(players);
@@ -1315,4 +1348,5 @@ void __fastcall TMainForm::Player2ComboBoxDropDown(TObject *Sender)
         }
 }
 //---------------------------------------------------------------------------
+
 

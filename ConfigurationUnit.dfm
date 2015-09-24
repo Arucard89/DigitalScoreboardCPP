@@ -2,7 +2,7 @@ object ConfigurationForm: TConfigurationForm
   Left = 587
   Top = 130
   BorderStyle = bsToolWindow
-  Caption = 'ConfigurationForm'
+  Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
   ClientHeight = 559
   ClientWidth = 795
   Color = clSkyBlue

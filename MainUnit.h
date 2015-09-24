@@ -233,11 +233,8 @@ public:		// User declarations
                 TPanel* adv, TPanel* pen, TLabel* dispName, TPanel* dispScore,
                 TPanel* dispAdv, TPanel* dispPen, AnsiString section);
         //***********************************
-        //добавить логи на нажатие каждой кнопки: какая кнопка, время, что сделано.
         int WriteFightLog(AnsiString logMes); //пишем инфоромацию в лог. автоматом пишется: дата/время, категория ФИО борцов, действие
-        //Логи ошибок
         int WriteErrLog(AnsiString logMes);  //запись лога об ошибке
-
         int UpdatePlayerNames(TComboBox *pl); //загрузка информации в комбобокс
 
 };
