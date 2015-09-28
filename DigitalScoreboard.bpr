@@ -6,13 +6,13 @@
     <PROJECT value="DigitalScoreboard.exe"/>
     <OBJFILES value="DigitalScoreboard.obj DisplayUnit.obj ConfigurationUnit.obj MainUnit.obj 
       TimeUnit.obj PlayerUnit.obj DataModuleUnit.obj FightResultUnit.obj 
-      DBPathUnit.obj"/>
+      DBPathUnit.obj InfoUnit.obj"/>
     <RESFILES value="DigitalScoreboard.res"/>
     <IDLFILES value=""/>
     <IDLGENFILES value=""/>
     <DEFFILE value=""/>
     <RESDEPEN value="$(RESFILES) DisplayUnit.dfm ConfigurationUnit.dfm MainUnit.dfm 
-      DataModuleUnit.dfm FightResultUnit.dfm DBPathUnit.dfm"/>
+      DataModuleUnit.dfm FightResultUnit.dfm DBPathUnit.dfm InfoUnit.dfm"/>
     <LIBFILES value=""/>
     <LIBRARIES value=""/>
     <SPARELIBS value="vcl.lib rtl.lib bcbsmp.lib vclx.lib dbrtl.lib adortl.lib"/>
@@ -65,6 +65,7 @@
       <FILE FILENAME="DataModuleUnit.cpp" FORMNAME="DataModule1" UNITNAME="DataModuleUnit" CONTAINERID="CCompiler" DESIGNCLASS="TDataModule" LOCALCOMMAND=""/>
       <FILE FILENAME="FightResultUnit.cpp" FORMNAME="FightResultForm" UNITNAME="FightResultUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
       <FILE FILENAME="DBPathUnit.cpp" FORMNAME="DBPathForm" UNITNAME="DBPathUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
+      <FILE FILENAME="InfoUnit.cpp" FORMNAME="InfoForm" UNITNAME="InfoUnit" CONTAINERID="CCompiler" DESIGNCLASS="" LOCALCOMMAND=""/>
   </FILELIST>
   <BUILDTOOLS>
   </BUILDTOOLS>

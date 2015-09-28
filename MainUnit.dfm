@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 249
-  Top = 210
+  Left = 301
+  Top = 335
   Width = 1237
   Height = 713
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
@@ -1022,7 +1022,7 @@ object MainForm: TMainForm
         object CurrentTimeSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 1169
+          Width = 4
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -1196,7 +1196,7 @@ object MainForm: TMainForm
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 1213
+        Width = 720
         Height = 22
         Align = alTop
         Alignment = taCenter
@@ -1250,6 +1250,7 @@ object MainForm: TMainForm
     end
     object N5: TMenuItem
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
+      OnClick = N5Click
     end
     object N6: TMenuItem
       Caption = #1042#1099#1093#1086#1076

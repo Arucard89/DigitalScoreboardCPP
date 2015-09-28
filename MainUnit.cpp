@@ -1350,3 +1350,12 @@ void __fastcall TMainForm::Player2ComboBoxDropDown(TObject *Sender)
 //---------------------------------------------------------------------------
 
 
+
+void __fastcall TMainForm::N5Click(TObject *Sender)
+{
+        InfoForm = new TInfoForm(this);
+        InfoForm->ShowModal();
+        delete InfoForm;
+}
+//---------------------------------------------------------------------------
+

@@ -9,6 +9,7 @@ USEFORM("MainUnit.cpp", MainForm);
 USEFORM("DataModuleUnit.cpp", DataModule1); /* TDataModule: File Type */
 USEFORM("FightResultUnit.cpp", FightResultForm);
 USEFORM("DBPathUnit.cpp", DBPathForm);
+USEFORM("InfoUnit.cpp", InfoForm);
 //---------------------------------------------------------------------------
 WINAPI WinMain(HINSTANCE, HINSTANCE, LPSTR, int)
 {

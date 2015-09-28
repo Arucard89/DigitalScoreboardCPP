@@ -20,6 +20,7 @@
 #include "FightResultUnit.h"
 #include "DBPathUnit.h"
 #include "DataModuleUnit.h"
+#include "InfoUnit.h"
 //---------------------------------------------------------------------------
 //const AnsiString FIGHT_HISTORY_LOG
 
@@ -180,12 +181,14 @@ __published:	// IDE-managed Components
         void __fastcall WeightComboBoxDropDown(TObject *Sender);
         void __fastcall UpdatePlayersInfoBtnClick(TObject *Sender);
         void __fastcall Player1ComboBoxDropDown(TObject *Sender);
-        void __fastcall Player2ComboBoxDropDown(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall Player2ComboBoxDropDown(TObject *Sender);
+        void __fastcall N5Click(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
         TFightResultForm *FightResultForm; //форма результатов схватки
         TDisplayForm *DisplayForm; //основная форма табло
         TDBPathForm *DBPathForm; //форма выбора файла БД
         TConfigurationForm *ConfigurationForm; //форма файла настройки
+        TInfoForm *InfoForm; //форма информации о программе
         CTimeOfFight *TimeOfFight;
         CPlayer* Player1;
         CPlayer* Player2;
