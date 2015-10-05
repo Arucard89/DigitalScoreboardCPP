@@ -16,6 +16,12 @@ __fastcall TInfoForm::TInfoForm(TComponent* Owner)
 //---------------------------------------------------------------------------
 void __fastcall TInfoForm::FormCreate(TObject *Sender)
 {
+        //выставляем положение окна по центру
+        if (Screen->MonitorCount > 1)
+        {
+                this->Left = (Screen->Monitors[0]->Width - this->Width) / 2;
+                this->Top = (Screen->Monitors[0]->Height - this->Height) / 2;
+        };
         AnsiString s = ExtractFileDir(Application->ExeName) + "\\images\\all_emblems.jpg";
         if (FileExists(s))
         {

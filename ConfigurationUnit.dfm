@@ -1,6 +1,6 @@
 object ConfigurationForm: TConfigurationForm
-  Left = 587
-  Top = 130
+  Left = 327
+  Top = 178
   BorderStyle = bsToolWindow
   Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080
   ClientHeight = 559
@@ -28,7 +28,7 @@ object ConfigurationForm: TConfigurationForm
     Top = 0
     Width = 795
     Height = 393
-    ActivePage = LoadCustomConfigTab
+    ActivePage = PanelsFontTabSheet
     Align = alTop
     Font.Charset = RUSSIAN_CHARSET
     Font.Color = clWindowText
@@ -36,7 +36,7 @@ object ConfigurationForm: TConfigurationForm
     Font.Name = 'Arial'
     Font.Style = []
     ParentFont = False
-    TabIndex = 4
+    TabIndex = 0
     TabOrder = 0
     object PanelsFontTabSheet: TTabSheet
       Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1096#1088#1080#1092#1090#1086#1074' '#1087#1072#1085#1077#1083#1077#1081' '#1090#1072#1073#1083#1086

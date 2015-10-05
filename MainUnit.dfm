@@ -1,8 +1,8 @@
 object MainForm: TMainForm
-  Left = 301
-  Top = 335
-  Width = 1237
-  Height = 713
+  Left = 229
+  Top = 125
+  Width = 1247
+  Height = 726
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
   Color = clMoneyGreen
   DefaultMonitor = dmPrimary
@@ -22,10 +22,10 @@ object MainForm: TMainForm
   object PageControl1: TPageControl
     Left = 0
     Top = 0
-    Width = 1221
+    Width = 1231
     Height = 649
-    ActivePage = FightingControls
-    Align = alTop
+    ActivePage = FightSettings
+    Align = alClient
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
     Font.Height = -19
@@ -33,7 +33,7 @@ object MainForm: TMainForm
     Font.Style = []
     MultiLine = True
     ParentFont = False
-    TabIndex = 0
+    TabIndex = 1
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -45,12 +45,12 @@ object MainForm: TMainForm
       Font.Style = []
       ParentFont = False
       object Player1GroupBox: TGroupBox
-        Left = 628
+        Left = 638
         Top = 113
         Width = 545
         Height = 459
         Align = alRight
-        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1087#1088#1072#1074#1072
+        Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -420,10 +420,10 @@ object MainForm: TMainForm
       object Player2GroupBox: TGroupBox
         Left = 0
         Top = 113
-        Width = 628
+        Width = 638
         Height = 459
         Align = alClient
-        Caption = #1059#1095#1072#1089#1090#1085#1080#1082' '#1089#1083#1077#1074#1072
+        Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
         Font.Charset = RUSSIAN_CHARSET
         Font.Color = clWindowText
         Font.Height = -16
@@ -434,7 +434,7 @@ object MainForm: TMainForm
         object Player2NameLabel: TLabel
           Left = 2
           Top = 20
-          Width = 624
+          Width = 634
           Height = 22
           Align = alTop
           Alignment = taCenter
@@ -449,7 +449,7 @@ object MainForm: TMainForm
         object Player2ScoresPanel: TPanel
           Left = 2
           Top = 42
-          Width = 624
+          Width = 634
           Height = 74
           Align = alTop
           BevelOuter = bvNone
@@ -463,7 +463,7 @@ object MainForm: TMainForm
           TabOrder = 0
         end
         object Player2AdvantagePanel: TPanel
-          Left = 347
+          Left = 357
           Top = 116
           Width = 279
           Height = 52
@@ -481,7 +481,7 @@ object MainForm: TMainForm
         object Player2PenaltyPanel: TPanel
           Left = 2
           Top = 116
-          Width = 345
+          Width = 355
           Height = 52
           Align = alClient
           BevelOuter = bvNone
@@ -497,7 +497,7 @@ object MainForm: TMainForm
         object Player2ScoresButtonsPanel: TPanel
           Left = 2
           Top = 168
-          Width = 624
+          Width = 634
           Height = 289
           Align = alBottom
           Caption = 'Player2ScoresButtonsPanel'
@@ -506,7 +506,7 @@ object MainForm: TMainForm
           object Player2ScoresGroupBox: TGroupBox
             Left = 1
             Top = 1
-            Width = 622
+            Width = 632
             Height = 126
             Align = alTop
             Caption = 'Player2ScoresGroupBox'
@@ -600,7 +600,7 @@ object MainForm: TMainForm
             object Player2FourScorePanel: TPanel
               Left = 305
               Top = 20
-              Width = 315
+              Width = 325
               Height = 104
               Align = alClient
               BorderWidth = 20
@@ -684,7 +684,7 @@ object MainForm: TMainForm
             end
           end
           object Player2AdvantageGroupBox: TGroupBox
-            Left = 391
+            Left = 401
             Top = 127
             Width = 232
             Height = 161
@@ -738,7 +738,7 @@ object MainForm: TMainForm
           object Player2PenaltyGroupBox: TGroupBox
             Left = 1
             Top = 127
-            Width = 390
+            Width = 400
             Height = 161
             Align = alClient
             Caption = 'Player2PenaltyGroupBox'
@@ -746,7 +746,7 @@ object MainForm: TMainForm
             object Player2ChangePenaltyPanel: TPanel
               Left = 2
               Top = 20
-              Width = 386
+              Width = 396
               Height = 139
               Align = alClient
               BevelOuter = bvNone
@@ -792,7 +792,7 @@ object MainForm: TMainForm
       object TimePanel: TPanel
         Left = 0
         Top = 17
-        Width = 1173
+        Width = 1183
         Height = 41
         Align = alTop
         Caption = '00:00'
@@ -807,7 +807,7 @@ object MainForm: TMainForm
       object CategoryPanel: TPanel
         Left = 0
         Top = 0
-        Width = 1173
+        Width = 1183
         Height = 17
         Align = alTop
         Caption = 'CategoryPanel'
@@ -822,7 +822,7 @@ object MainForm: TMainForm
       object FightControlsPanel: TPanel
         Left = 0
         Top = 58
-        Width = 1173
+        Width = 1183
         Height = 55
         Align = alTop
         ParentColor = True
@@ -901,7 +901,7 @@ object MainForm: TMainForm
       object InformationGroupBox: TGroupBox
         Left = 0
         Top = 0
-        Width = 1173
+        Width = 1183
         Height = 136
         Align = alTop
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086' '#1089#1093#1074#1072#1090#1082#1077
@@ -915,7 +915,7 @@ object MainForm: TMainForm
         object CurrentInfoSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 1169
+          Width = 1179
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -936,6 +936,7 @@ object MainForm: TMainForm
             ItemHeight = 19
             TabOrder = 0
             OnChange = AgeComboBoxChange
+            OnKeyPress = AgeComboBoxKeyPress
           end
         end
         object BeltGroupBox: TGroupBox
@@ -954,6 +955,7 @@ object MainForm: TMainForm
             ItemHeight = 19
             TabOrder = 0
             OnChange = AgeComboBoxChange
+            OnKeyPress = AgeComboBoxKeyPress
           end
         end
         object WeightGroupBox: TGroupBox
@@ -974,6 +976,7 @@ object MainForm: TMainForm
             TabOrder = 0
             OnChange = AgeComboBoxChange
             OnDropDown = WeightComboBoxDropDown
+            OnKeyPress = AgeComboBoxKeyPress
           end
         end
         object UpdateCategoryInfoBtn: TBitBtn
@@ -1008,7 +1011,7 @@ object MainForm: TMainForm
       object FightTimeGroupBox: TGroupBox
         Left = 0
         Top = 337
-        Width = 1173
+        Width = 1183
         Height = 112
         Align = alTop
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086' '#1074#1088#1077#1084#1077#1085#1080' '#1087#1086#1077#1076#1080#1085#1082#1072
@@ -1022,7 +1025,7 @@ object MainForm: TMainForm
         object CurrentTimeSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 4
+          Width = 1179
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -1069,7 +1072,6 @@ object MainForm: TMainForm
           Width = 297
           Height = 41
           Caption = #1055#1088#1080#1085#1103#1090#1100
-          Default = True
           TabOrder = 2
           OnClick = AcceptTimeBtnClick
           Glyph.Data = {
@@ -1095,7 +1097,7 @@ object MainForm: TMainForm
       object PlayersNamesGroupBox: TGroupBox
         Left = 0
         Top = 136
-        Width = 1173
+        Width = 1183
         Height = 201
         Align = alTop
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1072' '#1080#1085#1092#1086#1088#1084#1072#1094#1080#1080' '#1086#1073' '#1080#1084#1077#1085#1072#1093' '#1089#1087#1086#1088#1090#1089#1084#1077#1085#1086#1074
@@ -1109,7 +1111,7 @@ object MainForm: TMainForm
         object Player1NameGroupBox: TGroupBox
           Left = 2
           Top = 21
-          Width = 1169
+          Width = 1179
           Height = 80
           Align = alTop
           Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1087#1088#1072#1074#1072
@@ -1124,14 +1126,15 @@ object MainForm: TMainForm
             TabOrder = 0
             OnChange = Player1ComboBoxChange
             OnDropDown = Player1ComboBoxDropDown
+            OnKeyPress = AgeComboBoxKeyPress
           end
         end
         object Player2NameGroupBox: TGroupBox
           Left = 2
-          Top = 105
-          Width = 1169
+          Top = 101
+          Width = 1179
           Height = 80
-          Align = alCustom
+          Align = alTop
           Caption = #1057#1087#1086#1088#1090#1089#1084#1077#1085' '#1089#1083#1077#1074#1072
           TabOrder = 1
           object Player2ComboBox: TComboBox
@@ -1144,6 +1147,7 @@ object MainForm: TMainForm
             TabOrder = 0
             OnChange = Player1ComboBoxChange
             OnDropDown = Player2ComboBoxDropDown
+            OnKeyPress = AgeComboBoxKeyPress
           end
         end
       end
@@ -1196,7 +1200,7 @@ object MainForm: TMainForm
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 720
+        Width = 1223
         Height = 22
         Align = alTop
         Alignment = taCenter
@@ -1221,6 +1225,17 @@ object MainForm: TMainForm
       end
     end
   end
+  object StatusBar1: TStatusBar
+    Left = 0
+    Top = 649
+    Width = 1231
+    Height = 19
+    Panels = <>
+    SimplePanel = True
+    SimpleText = 
+      #1057#1074#1103#1079#1100' '#1089' '#1041#1044' '#1085#1077' '#1085#1072#1089#1090#1088#1086#1077#1085#1072'. '#1053#1072#1089#1090#1088#1086#1081#1082#1091' '#1084#1086#1078#1085#1086' '#1086#1089#1091#1097#1077#1089#1090#1074#1080#1090#1100' '#1095#1077#1088#1077#1079' '#1086#1089#1085#1086#1074 +
+      #1085#1086#1077' '#1084#1077#1085#1102'.'
+  end
   object Timer1: TTimer
     OnTimer = Timer1Timer
     Left = 1024
@@ -1236,17 +1251,17 @@ object MainForm: TMainForm
     object N1: TMenuItem
       Caption = #1054#1089#1085#1086#1074#1085#1086#1077' '#1084#1077#1085#1102
       object N2: TMenuItem
-        Caption = #1054#1090#1082#1088#1099#1090#1100' '#1086#1082#1085#1086' '#1085#1072#1089#1090#1088#1086#1077#1082
+        Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1087#1088#1080#1083#1086#1078#1077#1085#1080#1103
         OnClick = OpenConfigurationButtonClick
-      end
-      object N3: TMenuItem
-        Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
-        OnClick = ShowDisplayFormBtnClick
       end
       object N4: TMenuItem
         Caption = #1053#1072#1089#1090#1088#1086#1081#1082#1080' '#1089#1086#1077#1076#1080#1085#1077#1085#1080#1103' '#1089' '#1041#1044' '#1089#1086#1088#1077#1074#1085#1086#1074#1072#1085#1080#1081
         OnClick = N4Click
       end
+    end
+    object N3: TMenuItem
+      Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
+      OnClick = ShowDisplayFormBtnClick
     end
     object N5: TMenuItem
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1087#1088#1086#1075#1088#1072#1084#1084#1077
@@ -1256,5 +1271,10 @@ object MainForm: TMainForm
       Caption = #1042#1099#1093#1086#1076
       OnClick = N6Click
     end
+  end
+  object CheckTimer: TTimer
+    Interval = 2000
+    OnTimer = CheckTimerTimer
+    Left = 1150
   end
 end

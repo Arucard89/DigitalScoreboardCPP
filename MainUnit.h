@@ -147,6 +147,8 @@ __published:	// IDE-managed Components
         TMenuItem *N5;
         TMenuItem *N6;
         TBitBtn *UpdateCategoryInfoBtn;
+        TStatusBar *StatusBar1;
+        TTimer *CheckTimer;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
@@ -182,7 +184,9 @@ __published:	// IDE-managed Components
         void __fastcall UpdatePlayersInfoBtnClick(TObject *Sender);
         void __fastcall Player1ComboBoxDropDown(TObject *Sender);
         void __fastcall Player2ComboBoxDropDown(TObject *Sender);
-        void __fastcall N5Click(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall N5Click(TObject *Sender);
+        void __fastcall CheckTimerTimer(TObject *Sender);
+        void __fastcall AgeComboBoxKeyPress(TObject *Sender, char &Key);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
         TFightResultForm *FightResultForm; //форма результатов схватки
         TDisplayForm *DisplayForm; //основная форма табло
@@ -203,6 +207,7 @@ private:	// User declarations
         AnsiString fightHistoryLogPath; //путь к файлу логов хода поединка
         bool DBPathSelected; //флаг выбора пути к бд(установлен или нет)
         AnsiString DBPath; //путь к основной БД
+        bool checkDBConnection; //флаг проверки соединения с БД
 
 public:		// User declarations
         __fastcall TMainForm(TComponent* Owner);
@@ -238,7 +243,7 @@ public:		// User declarations
         //***********************************
         int WriteFightLog(AnsiString logMes); //пишем инфоромацию в лог. автоматом пишется: дата/время, категория ФИО борцов, действие
         int WriteErrLog(AnsiString logMes);  //запись лога об ошибке
-        int UpdatePlayerNames(TComboBox *pl); //загрузка информации в комбобокс
+        int UpdatePlayerNames(TComboBox* pl); //загрузка информации в комбобокс
 
 };
 //---------------------------------------------------------------------------

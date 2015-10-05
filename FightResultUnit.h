@@ -19,6 +19,7 @@ __published:	// IDE-managed Components
         TBitBtn *OKBtn;
         TBitBtn *CancelBtn;
         void __fastcall OKBtnClick(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TFightResultForm(TComponent* Owner);

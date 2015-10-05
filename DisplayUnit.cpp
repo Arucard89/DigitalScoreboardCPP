@@ -47,3 +47,14 @@ void __fastcall TDisplayForm::FormResize(TObject *Sender)    //подстраиваем все 
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TDisplayForm::FormCreate(TObject *Sender)
+{
+        //выставляем положение окна по центру
+        if (Screen->MonitorCount > 1)
+        {
+                this->Left =Screen->Monitors[1]->Left + (Screen->Monitors[1]->Width - this->Width) / 2;
+                this->Top = Screen->Monitors[1]->Top + (Screen->Monitors[1]->Height - this->Height) / 2;
+        };
+}
+//---------------------------------------------------------------------------
+

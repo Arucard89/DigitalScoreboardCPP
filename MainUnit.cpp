@@ -664,7 +664,7 @@ void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
                 StartFightBtn->Enabled = false;//включаем кнопку
                 PauseFightBtn->Enabled = false; //не надо, еще старт не нажат
                 StopFightBtn->Enabled = false;
-                WriteFightLog("Конец схватки. Победитель " + FightResultForm->WinnerBox->Text + " " + FightResultForm->WinReasonBox->Text);
+                WriteFightLog("Конец схватки. Победитель " + FightResultForm->WinnerBox->Text + " " + FightResultForm->WinReasonBox->Text + ", Счет: " + Player1->GetAllScores() + ", " + Player2->GetAllScores());
                 if (DBPathSelected == true)
                 {
                       //пишем данные в БД
@@ -672,7 +672,6 @@ void __fastcall TMainForm::StopFightBtnClick(TObject *Sender)
                                 Player2->GetName(), Player2->GetAllScores(),
                                 FightResultForm->WinnerBox->Text, FightResultForm->WinReasonBox->Text,
                                 TimeOfFight->getTime(true), FightInfo.age, FightInfo.belt, FightInfo.weight);
-                        WriteFightLog("Победил " + FightResultForm->WinnerBox->Text);
                         if (res != 0 )
                         {
                                 WriteErrLog("Ошибка записи данных о победе в файл.");
@@ -855,8 +854,13 @@ int TMainForm::LoadPictures(TIniFile* ini)
 
 void __fastcall TMainForm::FormCreate(TObject *Sender)
 {
- //одновременно запускаем форму дисплея
-        DisplayForm = new TDisplayForm(this);
+        //выставляем положение окна по центру
+        if (Screen->MonitorCount > 1)
+        {
+                this->Left = (Screen->Monitors[0]->Width - this->Width) / 2;
+                this->Top = (Screen->Monitors[0]->Height - this->Height) / 2;
+        };
+        DisplayForm = new TDisplayForm(this);  //одновременно запускаем форму дисплея
         DisplayForm->Show();
         Timer1->Enabled = false; //таймер не нужен (при запуске программы он неактивен)
         Timer1->Interval = 500; //1000 = 1 сек. полсекунды-период мигания точек времени(обязательно чтобы 1000 нацело делилась)
@@ -872,15 +876,12 @@ void __fastcall TMainForm::FormCreate(TObject *Sender)
         Player2 = new CPlayer();
         UpdateScores();
 
-        //загружаем настройки
-        LoadInterfaceParameters(TConfigurationForm::INI_FILE);
-        //флаг грепплинга ставим в 0, т.к. по умолчанию это БДД
-        GrapplingCheckBoxClick(NULL);
 
-        //выбираем вкладку
-        PageControl1->ActivePage = FightingControls;
-        //устанавливаем флаг связи с бд в ложь
-        DBPathSelected = false;
+        LoadInterfaceParameters(TConfigurationForm::INI_FILE); //загружаем настройки
+        GrapplingCheckBoxClick(NULL); //флаг грепплинга ставим в 0, т.к. по умолчанию это БДД
+        PageControl1->ActivePage = FightingControls; //выбираем вкладку
+        DBPathSelected = false; //устанавливаем флаг связи с бд в ложь
+        checkDBConnection = false; //флаг проверки связи с БД = 0
 }
 //---------------------------------------------------------------------------
 
@@ -1054,9 +1055,6 @@ void __fastcall TMainForm::GrapplingCheckBoxClick(TObject *Sender)
         Player1AdvantagePanel->Visible = !grapplingMode;
         Player2AdvantagePanel->Visible = !grapplingMode;
 
-        //пояс в грэпплинге не используется
-        BeltGroupBox->Enabled = !grapplingMode;
-
         //перерисовываем окна
         MainForm->FormResize(NULL);
         DisplayForm->FormResize(NULL);
@@ -1105,15 +1103,22 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
 {
         DBPathForm = new TDBPathForm(this);
         int res = DBPathForm->ShowModal();//если путь выбран, то все хорош, если нет, то флаг возвращаем в фолс
+        AnsiString s = DBPathForm->DBPathEdit->Text;
+        //выключаем проверку БД
+        checkDBConnection = false;
         if (res == mrOk)
         {
                 DataModule1->ADOConnection->ConnectionString = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" +
-                DBPathForm->DBPathEdit->Text + ";Persist Security Info=False";
+                s + ";Persist Security Info=False";
                 if (DataModule1->TestDBConnection() == 0)
                 {
                         DBPathSelected = true;
                         //UpdatePlayersInfoBtn->Enabled = DBPathSelected;
                         UpdateCategoryInfoBtn->Click();
+                        //пишем строку состояния
+                        StatusBar1->SimpleText = "Связь с БД настроена. БД: " + s;
+                        checkDBConnection = DBPathForm->CheckDBConnection->Checked;
+                        
                 }
                 else
                 {
@@ -1125,10 +1130,9 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
         {
                 DBPathSelected = false;
         };
-        delete DBPathForm;
         //включаем кнопки в зависимости от доступности базы
         UpdateCategoryInfoBtn->Enabled = DBPathSelected;
-
+        delete DBPathForm;
 }
 //---------------------------------------------------------------------------
 
@@ -1356,6 +1360,53 @@ void __fastcall TMainForm::N5Click(TObject *Sender)
         InfoForm = new TInfoForm(this);
         InfoForm->ShowModal();
         delete InfoForm;
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::CheckTimerTimer(TObject *Sender)
+{
+        //переменная ошибок связи с БД. Если связь потеряна 3 раза подряд, то ошибка связи
+        static int count;
+        //если выключена проверка связи с БД, то сразу выходим
+        if (checkDBConnection == false)
+        {
+                return;
+        }
+        if (DataModule1->TestDBConnection() == 0)
+        {
+                count = 0;
+                StatusBar1->SimpleText = "БД доступна";
+        }
+        else
+        {
+                count++;
+                StatusBar1->SimpleText = "Проблемы с доступом к БД";
+                if(count > 3)
+                {
+                        StatusBar1->SimpleText = "БД недоступна. Связь прервана. Необходима настройка связи";
+                        WriteErrLog("Связь с БД прекращена по неизвестной причине");
+                        checkDBConnection = false; //снимаем флаг проверки
+                        DBPathSelected = false; //убираем флаг выбора БД
+                        UpdateCategoryInfoBtn->Enabled = false; //выключаем кнопку обновления БД
+                }
+        }
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::AgeComboBoxKeyPress(TObject *Sender, char &Key)
+{
+        if (Key == 13) //если нажат энтер
+        {
+                AnsiString s = Trim(((TComboBox*)Sender)->Text);
+                if (s != "") //если не пустая строка
+                {
+                        //Если этой строки нет в списке
+                        if (((TComboBox*)Sender)->Items->IndexOf(s) < 0)
+                        {
+                                ((TComboBox*)Sender)->Items->Add(s);
+                        };
+                }
+        }
 }
 //---------------------------------------------------------------------------
 

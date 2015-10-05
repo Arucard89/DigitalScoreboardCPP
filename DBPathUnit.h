@@ -19,8 +19,10 @@ __published:	// IDE-managed Components
         TBitBtn *OkBtn;
         TBitBtn *CancelBtn;
         TOpenDialog *OpenDialog1;
+        TCheckBox *CheckDBConnection;
         void __fastcall BrowseBtnClick(TObject *Sender);
         void __fastcall OkBtnClick(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TDBPathForm(TComponent* Owner);

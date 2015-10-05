@@ -478,6 +478,12 @@ void __fastcall TConfigurationForm::ResetToDefaultBitBtnClick(
 
 void __fastcall TConfigurationForm::FormCreate(TObject *Sender)
 {
+        //выставляем положение окна по центру
+        if (Screen->MonitorCount > 1)
+        {
+                this->Left = (Screen->Monitors[0]->Width - this->Width) / 2;
+                this->Top = (Screen->Monitors[0]->Height - this->Height) / 2;
+        };
       //  INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\DesignConfig.ini";
         DEF_INI_FILE = ExtractFileDir(Application->ExeName) + "\\Config\\Default.ini";
         LoadConfigFromFile(INI_FILE);

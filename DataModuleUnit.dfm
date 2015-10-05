@@ -109,6 +109,7 @@ object DataModule1: TDataModule1
       end
       item
         Name = 'scores2'
+        Size = -1
         Value = Null
       end
       item

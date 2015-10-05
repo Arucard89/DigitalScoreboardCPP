@@ -1,6 +1,6 @@
 object DisplayForm: TDisplayForm
-  Left = 2181
-  Top = 112
+  Left = 2092
+  Top = 138
   Width = 1360
   Height = 768
   BorderIcons = [biMinimize, biMaximize]
@@ -14,6 +14,7 @@ object DisplayForm: TDisplayForm
   Font.Name = 'MS Sans Serif'
   Font.Style = []
   OldCreateOrder = False
+  OnCreate = FormCreate
   OnResize = FormResize
   PixelsPerInch = 96
   TextHeight = 13

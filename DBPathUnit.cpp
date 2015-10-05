@@ -35,3 +35,14 @@ void __fastcall TDBPathForm::OkBtnClick(TObject *Sender)
 }
 //---------------------------------------------------------------------------
 
+void __fastcall TDBPathForm::FormCreate(TObject *Sender)
+{
+                //выставляем положение окна по центру
+        if (Screen->MonitorCount > 1)
+        {
+                this->Left = (Screen->Monitors[0]->Width - this->Width) / 2;
+                this->Top = (Screen->Monitors[0]->Height - this->Height) / 2;
+        };                
+}
+//---------------------------------------------------------------------------
+

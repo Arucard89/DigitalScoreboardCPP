@@ -37,6 +37,7 @@ __published:	// IDE-managed Components
         TImage *Image1;
         TImage *Image2;
         void __fastcall FormResize(TObject *Sender);
+        void __fastcall FormCreate(TObject *Sender);
 private:	// User declarations
 public:		// User declarations
         __fastcall TDisplayForm(TComponent* Owner);
