@@ -1,6 +1,6 @@
 object MainForm: TMainForm
-  Left = 229
-  Top = 125
+  Left = 178
+  Top = 306
   Width = 1247
   Height = 726
   Caption = #1062#1077#1085#1090#1088' '#1091#1087#1088#1072#1074#1083#1077#1085#1080#1103' '#1094#1080#1092#1088#1086#1074#1086#1081' '#1087#1072#1085#1077#1083#1100#1102
@@ -24,7 +24,7 @@ object MainForm: TMainForm
     Top = 0
     Width = 1231
     Height = 649
-    ActivePage = FightSettings
+    ActivePage = FightingControls
     Align = alClient
     Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
@@ -33,7 +33,7 @@ object MainForm: TMainForm
     Font.Style = []
     MultiLine = True
     ParentFont = False
-    TabIndex = 1
+    TabIndex = 0
     TabOrder = 0
     object FightingControls: TTabSheet
       BorderWidth = 20
@@ -915,7 +915,7 @@ object MainForm: TMainForm
         object CurrentInfoSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 1179
+          Width = 4
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -933,7 +933,7 @@ object MainForm: TMainForm
             Top = 48
             Width = 153
             Height = 27
-            ItemHeight = 19
+            ItemHeight = 0
             TabOrder = 0
             OnChange = AgeComboBoxChange
             OnKeyPress = AgeComboBoxKeyPress
@@ -952,7 +952,7 @@ object MainForm: TMainForm
             Top = 48
             Width = 137
             Height = 27
-            ItemHeight = 19
+            ItemHeight = 0
             TabOrder = 0
             OnChange = AgeComboBoxChange
             OnKeyPress = AgeComboBoxKeyPress
@@ -971,7 +971,7 @@ object MainForm: TMainForm
             Top = 48
             Width = 153
             Height = 27
-            ItemHeight = 19
+            ItemHeight = 0
             Sorted = True
             TabOrder = 0
             OnChange = AgeComboBoxChange
@@ -1025,7 +1025,7 @@ object MainForm: TMainForm
         object CurrentTimeSetupLabel: TLabel
           Left = 2
           Top = 21
-          Width = 1179
+          Width = 4
           Height = 19
           Align = alTop
           Alignment = taCenter
@@ -1121,7 +1121,7 @@ object MainForm: TMainForm
             Top = 40
             Width = 1137
             Height = 27
-            ItemHeight = 19
+            ItemHeight = 0
             Sorted = True
             TabOrder = 0
             OnChange = Player1ComboBoxChange
@@ -1142,7 +1142,7 @@ object MainForm: TMainForm
             Top = 40
             Width = 1137
             Height = 27
-            ItemHeight = 19
+            ItemHeight = 0
             Sorted = True
             TabOrder = 0
             OnChange = Player1ComboBoxChange
@@ -1200,7 +1200,7 @@ object MainForm: TMainForm
       object Label1: TLabel
         Left = 0
         Top = 0
-        Width = 1223
+        Width = 720
         Height = 22
         Align = alTop
         Alignment = taCenter
@@ -1230,8 +1230,17 @@ object MainForm: TMainForm
     Top = 649
     Width = 1231
     Height = 19
-    Panels = <>
-    SimplePanel = True
+    Panels = <
+      item
+        Text = 
+          #1057#1074#1103#1079#1100' '#1089' '#1041#1044' '#1085#1077' '#1085#1072#1089#1090#1088#1086#1077#1085#1072'. '#1053#1072#1089#1090#1088#1086#1081#1082#1091' '#1084#1086#1078#1085#1086' '#1086#1089#1091#1097#1077#1089#1090#1074#1080#1090#1100' '#1095#1077#1088#1077#1079' '#1086#1089#1085#1086#1074 +
+          #1085#1086#1077' '#1084#1077#1085#1102'.'
+        Width = 200
+      end
+      item
+        Width = 50
+      end>
+    SimplePanel = False
     SimpleText = 
       #1057#1074#1103#1079#1100' '#1089' '#1041#1044' '#1085#1077' '#1085#1072#1089#1090#1088#1086#1077#1085#1072'. '#1053#1072#1089#1090#1088#1086#1081#1082#1091' '#1084#1086#1078#1085#1086' '#1086#1089#1091#1097#1077#1089#1090#1074#1080#1090#1100' '#1095#1077#1088#1077#1079' '#1086#1089#1085#1086#1074 +
       #1085#1086#1077' '#1084#1077#1085#1102'.'
@@ -1259,9 +1268,20 @@ object MainForm: TMainForm
         OnClick = N4Click
       end
     end
-    object N3: TMenuItem
-      Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
-      OnClick = ShowDisplayFormBtnClick
+    object N7: TMenuItem
+      Caption = #1052#1077#1085#1102' '#1090#1072#1073#1083#1086
+      object N3: TMenuItem
+        Caption = #1055#1086#1082#1072#1079#1072#1090#1100' '#1090#1072#1073#1083#1086
+        OnClick = ShowDisplayFormBtnClick
+      end
+      object N8: TMenuItem
+        Caption = #1056#1072#1079#1074#1077#1088#1085#1091#1090#1100' '#1090#1072#1073#1083#1086
+        OnClick = N8Click
+      end
+      object N9: TMenuItem
+        Caption = #1057#1074#1077#1088#1085#1091#1090#1100' '#1090#1072#1073#1083#1086
+        OnClick = N9Click
+      end
     end
     object N5: TMenuItem
       Caption = #1048#1085#1092#1086#1088#1084#1072#1094#1080#1103' '#1086' '#1087#1088#1086#1075#1088#1072#1084#1084#1077

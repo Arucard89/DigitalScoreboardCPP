@@ -21,7 +21,13 @@ void __fastcall TInfoForm::FormCreate(TObject *Sender)
         {
                 this->Left = (Screen->Monitors[0]->Width - this->Width) / 2;
                 this->Top = (Screen->Monitors[0]->Height - this->Height) / 2;
-        };
+        }
+        else
+        {
+                this->Left = (Screen->Width - this->Width) / 2;
+                this->Top = (Screen->Height - this->Height) / 2;
+        }
+
         AnsiString s = ExtractFileDir(Application->ExeName) + "\\images\\all_emblems.jpg";
         if (FileExists(s))
         {

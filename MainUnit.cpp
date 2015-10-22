@@ -94,6 +94,8 @@ void __fastcall TMainForm::FormResize(TObject *Sender)
 //вкладка хронология поединка
         FightHistoryMemo->Height = FightLogs->Height - FightHistoryMemo->Top * 2;
         FightHistoryMemo->Width = FightLogs->Width - FightHistoryMemo->Left * 2;
+//ширина панельки статуса
+        StatusBar1->Panels->Items[0]->Width = MainForm->Width/2;
 }
 //---------------------------------------------------------------------------
 
@@ -319,24 +321,7 @@ void TMainForm::ResizeFightTimeGroupBox()
 
 void __fastcall TMainForm::AcceptPlayersNamesBtnClick(TObject *Sender)
 {
-        //проверка на пустые
-        if (Player1ComboBox->Text == "" || Player2ComboBox->Text == "")
-        {
-                ShowMessage("Поле имени не может быть пустым. Введите имя спорсмена.");
-                return;
-        }
-        //проверка на одинаковые строки(не запрежаем, потому что вдруг тезки)
-        if (Player1ComboBox->Text == Player2ComboBox->Text)
-        {
-                if (MessageDlg("Выбраны одинаковые имена участников. Продолжить?", mtInformation, mbOKCancel, 0) == mrCancel)
-                {
-                        return;
-                }
-        }
-        Player1->SetName(Player1ComboBox->Text);
-        Player2->SetName(Player2ComboBox->Text);
-        SetPlayersNames();
-        InformationIsChanged(false, PlayersNamesGroupBox);  //сбрасываем флаг измененности инфы
+       AcceptPlayersNames();
 }
 //---------------------------------------------------------------------------
 void TMainForm::SetPlayersNames()
@@ -383,40 +368,23 @@ void __fastcall TMainForm::MinutesSpinEditChange(TObject *Sender)
 
 void __fastcall TMainForm::AcceptInformationBtnClick(TObject *Sender)
 {
-        if (grapplingMode == true)
-        {
-                BeltComboBox->Text = "Грэпплинг";
-        };
-         //проверка на пустые
-        if (AgeComboBox->Text == "" || BeltComboBox->Text == "" || WeightComboBox->Text == "")
-        {
-                ShowMessage("Все поля информации о схватке должны быть заполнены.");
-                return;
-        }
-        FulfillFightInfo();
-        InformationIsChanged(false, InformationGroupBox);
+        AcceptInformation();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::AcceptTimeBtnClick(TObject *Sender)
 {
-        //проверка на пустые
-        if (MinutesSpinEdit->Text == "0" && SecondsSpinEdit->Text == "0")
-        {
-                ShowMessage("Продолжительность схватки не может быть нулевой.");
-                return;
-        }
-        FulfillTime();
-        InformationIsChanged(false, FightTimeGroupBox);//сбрасываем флаг измененности информации
+        AcceptTime();
 }
 //---------------------------------------------------------------------------
 
 void __fastcall TMainForm::AcceptAllConfigurationBtnClick(TObject *Sender)
 {
-        AcceptPlayersNamesBtnClick(0);
-        AcceptInformationBtnClick(0);
-        AcceptTimeBtnClick(0);
-        ResetBtn->Click();
+        int res = AcceptPlayersNames() + AcceptInformation() + AcceptTime();
+        if (res == 0)
+        {
+                ResetBtn->Click();
+        }
 }
 //---------------------------------------------------------------------------
 
@@ -1116,7 +1084,7 @@ void __fastcall TMainForm::N4Click(TObject *Sender)
                         //UpdatePlayersInfoBtn->Enabled = DBPathSelected;
                         UpdateCategoryInfoBtn->Click();
                         //пишем строку состояния
-                        StatusBar1->SimpleText = "Связь с БД настроена. БД: " + s;
+                        StatusBar1->Panels->Items[0]->Text = "Связь с БД настроена. БД: " + s;
                         checkDBConnection = DBPathForm->CheckDBConnection->Checked;
                         
                 }
@@ -1214,10 +1182,13 @@ void __fastcall TMainForm::UpdateCategoryInfoBtnClick(TObject *Sender)
 
 int TMainForm::WriteErrLog(AnsiString logMes)
 {
+        //выводим в панельку ошибок
+        StatusBar1->Panels->Items[1]->Text = logMes;
+        //выводим в файл
         AnsiString s = ExtractFileDir(Application->ExeName) + "\\err_log_"+ DateToStr(Date()) + ".log";
-        //ShowMessage(DateTimeToStr(Now()) + " " + logMes);
         ofstream out;
         out.open(s.c_str() , ios::app);
+
         s = DateTimeToStr(Now()) + " " + logMes;
         out << s.c_str() << endl;
         out.close();
@@ -1375,15 +1346,15 @@ void __fastcall TMainForm::CheckTimerTimer(TObject *Sender)
         if (DataModule1->TestDBConnection() == 0)
         {
                 count = 0;
-                StatusBar1->SimpleText = "БД доступна";
+                StatusBar1->Panels->Items[0]->Text = "БД доступна";
         }
         else
         {
                 count++;
-                StatusBar1->SimpleText = "Проблемы с доступом к БД";
+                StatusBar1->Panels->Items[0]->Text = "Проблемы с доступом к БД";
                 if(count > 3)
                 {
-                        StatusBar1->SimpleText = "БД недоступна. Связь прервана. Необходима настройка связи";
+                        StatusBar1->Panels->Items[0]->Text = "БД недоступна. Связь прервана. Необходима настройка связи";
                         WriteErrLog("Связь с БД прекращена по неизвестной причине");
                         checkDBConnection = false; //снимаем флаг проверки
                         DBPathSelected = false; //убираем флаг выбора БД
@@ -1409,4 +1380,72 @@ void __fastcall TMainForm::AgeComboBoxKeyPress(TObject *Sender, char &Key)
         }
 }
 //---------------------------------------------------------------------------
+
+void __fastcall TMainForm::N8Click(TObject *Sender)
+{
+        DisplayForm->WindowState = wsMaximized;
+        this->SetFocus();//возвращаем фокус
+}
+//---------------------------------------------------------------------------
+
+void __fastcall TMainForm::N9Click(TObject *Sender)
+{
+        DisplayForm->WindowState = wsNormal;
+        this->SetFocus();//возвращаем фокус
+}
+//---------------------------------------------------------------------------
+
+int TMainForm::AcceptPlayersNames()
+{
+        //проверка на пустые
+        if (Player1ComboBox->Text == "" || Player2ComboBox->Text == "")
+        {
+                ShowMessage("Поле имени спортсмена пустое.");
+                return 1;
+        }
+        //проверка на одинаковые строки(не запрежаем, потому что вдруг тезки)
+        if (Player1ComboBox->Text == Player2ComboBox->Text)
+        {
+                if (MessageDlg("Выбраны одинаковые имена участников. Продолжить?", mtInformation, mbOKCancel, 0) == mrCancel)
+                {
+                        return 2;
+                }
+        }
+        Player1->SetName(Player1ComboBox->Text);
+        Player2->SetName(Player2ComboBox->Text);
+        SetPlayersNames();
+        InformationIsChanged(false, PlayersNamesGroupBox);  //сбрасываем флаг измененности инфы
+        return 0;
+}
+
+int TMainForm::AcceptInformation()
+{
+        /*if (grapplingMode == true)
+        {
+                BeltComboBox->Text = "Грэпплинг";
+        };                   */
+         //проверка на пустые
+        if (AgeComboBox->Text == "" || BeltComboBox->Text == "" || WeightComboBox->Text == "")
+        {
+                ShowMessage("Заполнены не все поля информации о схватке.");
+                return 1;
+        }
+        FulfillFightInfo();
+        InformationIsChanged(false, InformationGroupBox);
+
+        return 0;
+}
+
+int TMainForm::AcceptTime()
+{
+        //проверка на пустые
+        if (MinutesSpinEdit->Text == "0" && SecondsSpinEdit->Text == "0")
+        {
+                ShowMessage("Продолжительность схватки не может быть нулевой.");
+                return 1;
+        }
+        FulfillTime();
+        InformationIsChanged(false, FightTimeGroupBox);//сбрасываем флаг измененности информации
+        return 0;
+}
 

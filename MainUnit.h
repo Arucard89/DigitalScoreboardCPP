@@ -149,6 +149,9 @@ __published:	// IDE-managed Components
         TBitBtn *UpdateCategoryInfoBtn;
         TStatusBar *StatusBar1;
         TTimer *CheckTimer;
+        TMenuItem *N7;
+        TMenuItem *N8;
+        TMenuItem *N9;
         void __fastcall OpenConfigurationButtonClick(TObject *Sender);
         void __fastcall FormResize(TObject *Sender);
         void __fastcall Player1OneScorePanelResize(TObject *Sender);
@@ -186,7 +189,9 @@ __published:	// IDE-managed Components
         void __fastcall Player2ComboBoxDropDown(TObject *Sender);
         void __fastcall N5Click(TObject *Sender);
         void __fastcall CheckTimerTimer(TObject *Sender);
-        void __fastcall AgeComboBoxKeyPress(TObject *Sender, char &Key);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
+        void __fastcall AgeComboBoxKeyPress(TObject *Sender, char &Key);
+        void __fastcall N8Click(TObject *Sender);
+        void __fastcall N9Click(TObject *Sender);//общая процедура для отклика на нажатия кнопок очеков для первого игрока
 private:	// User declarations
         TFightResultForm *FightResultForm; //форма результатов схватки
         TDisplayForm *DisplayForm; //основная форма табло
@@ -244,6 +249,10 @@ public:		// User declarations
         int WriteFightLog(AnsiString logMes); //пишем инфоромацию в лог. автоматом пишется: дата/время, категория ФИО борцов, действие
         int WriteErrLog(AnsiString logMes);  //запись лога об ошибке
         int UpdatePlayerNames(TComboBox* pl); //загрузка информации в комбобокс
+
+        int AcceptPlayersNames(); //установка имен спортсменов
+        int AcceptInformation(); //установка информации о схватке
+        int AcceptTime(); //установка времени
 
 };
 //---------------------------------------------------------------------------

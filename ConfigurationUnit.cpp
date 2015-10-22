@@ -1101,8 +1101,8 @@ int TConfigurationForm::LoadConfigFromFileWithChange(AnsiString iniFile)
         SetButtonPressed(PanelsFontTabSheet, SetPlayer1PanelFontBitBtn, Player1PanelFontChanged, "Внесены изменения в шрифты панелей справа");
 
         SetButtonPressed(PanelsColorTabSheet, SetCentralPanelColorBitBtn, CentralPanelsColorChanged, "Внесены изенения цвета центральных панелей");
-        SetButtonPressed(PanelsColorTabSheet, SetPlayer2PanelColorBitBtn, Player2PointsLabelsChanged, "Внесены изенения цвета панелей слева");
-        SetButtonPressed(PanelsColorTabSheet, SetPlayer1PanelColorBitBtn, Player2PointsLabelsChanged, "Внесены изенения цвета панелей справа");
+        SetButtonPressed(PanelsColorTabSheet, SetPlayer2PanelColorBitBtn, Player2PanelColorChanged, "Внесены изенения цвета панелей слева");
+        SetButtonPressed(PanelsColorTabSheet, SetPlayer1PanelColorBitBtn, Player1PanelColorChanged, "Внесены изенения цвета панелей справа");
 
         SetButtonPressed(InfoLabelsSheet, Player2ScoresLabelsBtn, Player2PointsLabelsChanged, "Внесены изенения для подписей окон очков слева");
         SetButtonPressed(InfoLabelsSheet, Player1ScoresLabelsBtn, Player1PointsLabelsChanged, "Внесены изенения для подписей окон очков справа");

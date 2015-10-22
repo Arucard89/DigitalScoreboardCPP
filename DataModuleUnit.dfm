@@ -6,11 +6,10 @@ object DataModule1: TDataModule1
   Height = 262
   Width = 224
   object ADOConnection: TADOConnection
-    Connected = True
     ConnectionString = 
       'Provider=Microsoft.Jet.OLEDB.4.0;Data Source=D:\Working\MyProgra' +
       'ms\Delphi\'#1056#1077#1075#1080#1089#1090#1088#1072#1094#1080#1103' '#1091#1095#1072#1089#1090#1085#1080#1082#1086#1074'\DB\BASE.mdb;Persist Security In' +
-      'fo=False'
+      'fo=False;'
     LoginPrompt = False
     Mode = cmShareDenyNone
     Provider = 'Microsoft.Jet.OLEDB.4.0'

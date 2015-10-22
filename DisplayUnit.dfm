@@ -1,6 +1,6 @@
 object DisplayForm: TDisplayForm
-  Left = 2092
-  Top = 138
+  Left = 252
+  Top = 314
   Width = 1360
   Height = 768
   BorderIcons = [biMinimize, biMaximize]
@@ -36,7 +36,6 @@ object DisplayForm: TDisplayForm
       Align = alLeft
       Alignment = taCenter
       AutoSize = False
-      Caption = 'Player1Label'
       Color = clSkyBlue
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -56,7 +55,6 @@ object DisplayForm: TDisplayForm
       Align = alRight
       Alignment = taCenter
       AutoSize = False
-      Caption = 'Player2Label'
       Color = clSkyBlue
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -93,7 +91,6 @@ object DisplayForm: TDisplayForm
       Height = 57
       Align = alTop
       BevelOuter = bvNone
-      Caption = 'CategoryPanel'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
       Font.Height = -48
@@ -119,7 +116,7 @@ object DisplayForm: TDisplayForm
       Width = 513
       Height = 305
       Align = alTop
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
       Caption = 'Player1Scores'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -129,9 +126,9 @@ object DisplayForm: TDisplayForm
       ParentFont = False
       TabOrder = 0
       object Player1ScoresLabel: TLabel
-        Left = 1
-        Top = 1
-        Width = 511
+        Left = 0
+        Top = 0
+        Width = 513
         Height = 32
         Align = alTop
         Caption = 'Player1ScoresLabel'
@@ -149,7 +146,7 @@ object DisplayForm: TDisplayForm
       Width = 305
       Height = 196
       Align = alRight
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
       Caption = 'Player1Advantage'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -159,9 +156,9 @@ object DisplayForm: TDisplayForm
       ParentFont = False
       TabOrder = 1
       object Player1AdvantageLabel: TLabel
-        Left = 1
-        Top = 1
-        Width = 303
+        Left = 0
+        Top = 0
+        Width = 305
         Height = 32
         Align = alTop
         Caption = 'Player1AdvantageLabel'
@@ -179,7 +176,7 @@ object DisplayForm: TDisplayForm
       Width = 208
       Height = 196
       Align = alClient
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
       Caption = 'Player1Penalty'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -189,9 +186,9 @@ object DisplayForm: TDisplayForm
       ParentFont = False
       TabOrder = 2
       object Player1PenaltyLabel: TLabel
-        Left = 1
-        Top = 1
-        Width = 206
+        Left = 0
+        Top = 0
+        Width = 208
         Height = 32
         Align = alTop
         Caption = 'Player1PenaltyLabel'
@@ -220,7 +217,7 @@ object DisplayForm: TDisplayForm
       Width = 473
       Height = 305
       Align = alTop
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
       Caption = 'Player2Scores'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -230,9 +227,9 @@ object DisplayForm: TDisplayForm
       ParentFont = False
       TabOrder = 0
       object Player2ScoresLabel: TLabel
-        Left = 1
-        Top = 1
-        Width = 471
+        Left = 0
+        Top = 0
+        Width = 473
         Height = 32
         Align = alTop
         Alignment = taRightJustify
@@ -251,7 +248,7 @@ object DisplayForm: TDisplayForm
       Width = 297
       Height = 196
       Align = alLeft
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
       Caption = 'Player2Advantage'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -261,9 +258,9 @@ object DisplayForm: TDisplayForm
       ParentFont = False
       TabOrder = 1
       object Player2AdvantageLabel: TLabel
-        Left = 1
-        Top = 1
-        Width = 295
+        Left = 0
+        Top = 0
+        Width = 297
         Height = 32
         Align = alTop
         Alignment = taRightJustify
@@ -282,7 +279,7 @@ object DisplayForm: TDisplayForm
       Width = 176
       Height = 196
       Align = alClient
-      BevelOuter = bvLowered
+      BevelOuter = bvNone
       Caption = 'Player2Penalty'
       Font.Charset = RUSSIAN_CHARSET
       Font.Color = clWindowText
@@ -292,9 +289,9 @@ object DisplayForm: TDisplayForm
       ParentFont = False
       TabOrder = 2
       object Player2PenaltyLabel: TLabel
-        Left = 1
-        Top = 1
-        Width = 174
+        Left = 0
+        Top = 0
+        Width = 176
         Height = 32
         Align = alTop
         Alignment = taRightJustify
